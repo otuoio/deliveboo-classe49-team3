@@ -20,10 +20,10 @@ class CreateDishesTable extends Migration
             $table->text('description')->nullable();
             $table->float('price', 6, 2);
             $table->string('slug', 255)->unique();
-            $table->boolean('visible');
-            $table->boolean('vegan');
-            $table->boolean('spicy');
-            $table->unsignedBigInteger('user_id')->after('id');
+            $table->boolean('visible')->nullable();
+            $table->boolean('vegan')->nullable();
+            $table->boolean('spicy')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 
