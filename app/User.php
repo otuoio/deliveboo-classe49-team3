@@ -25,7 +25,7 @@ class User extends Authenticatable
         'p_iva',
         'phone_number',
         'shipment_price',
-        'minimum order',
+        'minimum_order',
         'image'
     ];
 
