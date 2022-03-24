@@ -55,6 +55,11 @@ class User extends Authenticatable
         return (empty($newSlug)) ? $slug : $newSlug;
     }
 
+    public function dishes()
+    {
+        return $this->hasMany('App\Model\Dish');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
