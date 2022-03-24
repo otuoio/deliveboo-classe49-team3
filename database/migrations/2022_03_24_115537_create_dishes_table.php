@@ -26,6 +26,8 @@ class CreateDishesTable extends Migration
             $table->unsignedBigInteger('user_id')->after('id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+
+            //test
         });
     }
 
