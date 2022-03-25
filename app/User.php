@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Model\Dish');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\Model\Category')->withTimestamps();
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

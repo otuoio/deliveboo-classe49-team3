@@ -79,13 +79,13 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="{{route('admin.home')}}">
                                         <i class="bi bi-house"></i>
-                                        Dashboard
+                                        Statistiche
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('admin.dishes.index')}}">
                                         <i class="bi bi-cup-straw"></i>
-                                        All dishes
+                                        Tutti i piatti
                                     </a>
                                 </li>
                             </ul>

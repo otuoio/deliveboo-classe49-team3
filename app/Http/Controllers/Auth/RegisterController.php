@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Model\Category;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -60,6 +61,7 @@ class RegisterController extends Controller
             'phone_number' => ['required', 'string', 'max:20'],
             'shipment_price' => ['numeric', 'min:0.00', 'nullable'],
             'minimum_order' => ['numeric', 'min:0.00', 'nullable'],
+            'categories.*' => ['required', 'exists:App\Model\Category,id'],
             'image' => ['image', 'nullable'],
         ]);
     }
@@ -94,7 +96,7 @@ class RegisterController extends Controller
             $data['image'] = 'uploads/default.jpg';
         }
         
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'slug' => $newSlug,
             'email' => $data['email'],
@@ -106,5 +108,18 @@ class RegisterController extends Controller
             'minimum_order' => $data['minimum_order'],
             'image' => $data['image'],
         ]);
+
+        if (!empty($data['categories'])) {
+            $user->categories()->attach($data['categories']);
+        }
+
+        // $user->save();
+        return $user;
+    }
+
+    protected function showRegistrationForm()
+    {
+        $categories = Category::all();
+        return view('auth.register', ['categories' => $categories]);
     }
 }

@@ -10,9 +10,21 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
+                        <fieldset class="mb-3">
+                            <legend>Seleziona una o più categorie per il tuo ristorante</legend>
+                            @foreach ($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}" name="categories[]"
+                                        {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ $category->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </fieldset>
 
                         <div class="form-group row mb-2">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome attività') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
