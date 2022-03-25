@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -53,6 +55,12 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address' => ['required', 'string', 'max:255'],
+            'p_iva' => ['required', 'string', 'min:11', 'max:15'],
+            'phone_number' => ['required', 'string', 'max:20'],
+            'shipment_price' => ['numeric', 'min:0.00', 'nullable'],
+            'minimum_order' => ['numeric', 'min:0.00', 'nullable'],
+            'image' => ['image', 'nullable'],
         ]);
     }
 
@@ -64,10 +72,39 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $slug = Str::slug($data['name'], '-');
+
+        $oldUser = User::where('slug', $slug)->first();
+
+        if (!$oldUser) {
+            $newSlug = $slug;
+        } else {
+            $counter = 0;
+            while ($oldUser) {
+                $newSlug = $slug . '-' . $counter;
+                $oldUser = User::where('slug', $newSlug)->first();
+                $counter++;
+            }
+        }
+
+        if (!empty($data['image'])) {
+            $img_path = Storage::put('uploads', $data['image']);
+            $data['image'] = $img_path;
+        }else{
+            $data['image'] = 'uploads/default.jpg';
+        }
+        
         return User::create([
             'name' => $data['name'],
+            'slug' => $newSlug,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'address' => $data['address'],
+            'p_iva' => $data['p_iva'],
+            'phone_number' => $data['phone_number'],
+            'shipment_price' => $data['shipment_price'],
+            'minimum_order' => $data['minimum_order'],
+            'image' => $data['image'],
         ]);
     }
 }
