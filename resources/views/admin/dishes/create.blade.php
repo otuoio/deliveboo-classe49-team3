@@ -55,7 +55,7 @@
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" >
+                    <input type="text" class="form-control" id="name" name="name" required value="{{ old('name') }}" >
                     @error('name')
                         <div class="alert alert-danger">
                             {{ $message }}
@@ -93,7 +93,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Prezzo</label>
-                    <input type="number" step="0.01"  class="form-control" id="price" name="price" value="{{ old('price') }}" required min="0.01" max="2000">
+                    <input type="number" step="0.01"  class="form-control" id="price" name="price" value="{{ old('price') }}" required min="0.01">
                     @error('price')
                         <div class="alert alert-danger">
                             {{ $message }}

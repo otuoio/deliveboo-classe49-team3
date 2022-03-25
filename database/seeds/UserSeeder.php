@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'phone_number' => '0810031567',
                 'shipment_price' => 2.50,
                 'minimum_order' => 13.00,
-                'image' => 'lunarossa.png',
+                'image' => 'lunarossa.jpg',
             ],
             [
                 'name' => 'Perla Nera',
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
                 'phone_number' => '0810034567',
                 'shipment_price' => 1.50,
                 'minimum_order' => 7.00,
-                'image' => 'perlanera.png',
+                'image' => 'perlanera.jpg',
             ],
             [
                 'name' => "O Cuopp' E Ciruzz",
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
                 'phone_number' => '0810013675',
                 'shipment_price' => 0.50,
                 'minimum_order' => 5.00,
-                'image' => 'ocuoppeciruzz.png',
+                'image' => 'ocuoppeciruzz.jpg',
             ],
         ];
 
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             $newUser->phone_number = $user['phone_number'];
             $newUser->shipment_price = $user['shipment_price'];
             $newUser->minimum_order = $user['minimum_order'];
-            $newUser->image = $user['image'];
+            $newUser->image = 'uploads/' . $user['image'];
             $newUser->save();
         }
     }

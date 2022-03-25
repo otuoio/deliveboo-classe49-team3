@@ -49,7 +49,7 @@ class DishController extends Controller
             'visible' => 'nullable|boolean',
             'vegan' => 'nullable|boolean',
             'spicy' => 'nullable|boolean',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0.01',
         ]);
 
         $data = $request->all();
@@ -85,7 +85,12 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        dd($dish);
+        $data = [
+            'dish' => $dish,
+            'name' => $dish->name,
+        ];
+
+        return view('admin.dishes.show', $data);
     }
 
     /**

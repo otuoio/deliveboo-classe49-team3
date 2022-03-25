@@ -16,7 +16,7 @@ class DishSeeder extends Seeder
         $dishes = [
             [
                 'name' => 'Salsiccia e friarielli',
-                'image' => 'salsiccia_friarielli.png',
+                'image' => 'salsiccia_friarielli.jpg',
                 'description' => 'Mozzarella, salsiccia a punta di coltello, friarielli',
                 'price' => 6.50,
                 'visible' => 1,
@@ -26,7 +26,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Marinara',
-                'image' => 'marinara.png',
+                'image' => 'marinara.jpg',
                 'description' => 'Pomodoro, aglio, origano',
                 'price' => 4.50,
                 'visible' => 1,
@@ -36,7 +36,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Mascarella',
-                'image' => 'mascarella.png',
+                'image' => 'mascarella.jpg',
                 'description' => 'Birra session IPA 10% da 40cl',
                 'price' => 4.50,
                 'visible' => 1,
@@ -46,7 +46,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Big Joe',
-                'image' => 'big_joe.png',
+                'image' => 'big_joe.jpg',
                 'description' => "200 grammi di scottona, cheddar, bacon, pomodoro confit, salsa Jack Daniel's",
                 'price' => 10.00,
                 'visible' => 1,
@@ -56,7 +56,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Kraken',
-                'image' => 'kraken.png',
+                'image' => 'kraken.jpg',
                 'description' => "pan brioche artigianale, 5 hamburger (750gr in totale) di scottona grass feed allevata esclusivamente a erba, 10 fette di bacon affumicato, 5 fette di cheddar inglese e maionese al bacon fatta in casa",
                 'price' => 27.00,
                 'visible' => 1,
@@ -66,7 +66,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Veggie burger',
-                'image' => 'veggie_burger.png',
+                'image' => 'veggie_burger.jpg',
                 'description' => "Hamburger di soia, pomodoro, lattuga, fungo fritto, maionese vegana",
                 'price' => 13.00,
                 'visible' => 1,
@@ -76,7 +76,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Le alici di Annunziata',
-                'image' => 'alici_annunziata.png',
+                'image' => 'alici_annunziata.jpg',
                 'description' => 'Puntarelle e colatura di alici',
                 'price' => 8.00,
                 'visible' => 1,
@@ -86,7 +86,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Spaghetti allo scoglio',
-                'image' => 'spaghetti_scoglio.png',
+                'image' => 'spaghetti_scoglio.jpg',
                 'description' => 'Spaghetti con misto pesce e crostacei',
                 'price' => 13.00,
                 'visible' => 1,
@@ -96,7 +96,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Martinelli di lago',
-                'image' => 'martinelli_lago.png',
+                'image' => 'martinelli_lago.jpg',
                 'description' => 'Martinelli con carciofi e menta',
                 'price' => 14.00,
                 'visible' => 1,
@@ -116,7 +116,7 @@ class DishSeeder extends Seeder
             $newDish->vegan = $dish['vegan'];
             $newDish->spicy = $dish['spicy'];
             $newDish->user_id = $dish['user_id'];
-            $newDish->image = $dish['image'];
+            $newDish->image = 'uploads/'. $dish['image'];
             $newDish->save();
         }
     }

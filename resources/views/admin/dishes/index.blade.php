@@ -44,9 +44,9 @@
                             <td>{{ number_format($dish->price, 2, ',', '.') }} €</td>
                             <td>
                                 @if ($dish->visible == 1)
-                                    Vero
+                                    Si
                                 @else
-                                    Falso
+                                    No
                                 @endif
                             </td>
                             <td><a class="btn btn-primary" href="{{ route('admin.dishes.show', $dish->slug) }}">Visualizza</a>
