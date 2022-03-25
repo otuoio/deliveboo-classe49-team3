@@ -1,7 +1,9 @@
 @extends('layouts.admin')
+
 @section('documentTitle')
-    Tutti i piatti
+    {{$name}}
 @endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -59,7 +61,7 @@
                             </td>
                             <td>
                                 @if (Auth::user()->id === $dish->user_id)
-                                <form action="{{ route('admin.dishes.destroy', $dish) }}" method="dish">
+                                <form action="{{ route('admin.dishes.destroy', $dish) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <input class="btn btn-danger" type="submit" value="Elimina">

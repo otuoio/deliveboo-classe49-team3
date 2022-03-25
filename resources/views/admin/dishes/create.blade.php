@@ -1,4 +1,9 @@
 @extends('layouts.admin')
+
+@section('documentTitle')
+    {{$name}}
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -6,7 +11,7 @@
                 <form action="{{route('admin.dishes.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
-                {{-- select nel caso in cui volessimo aggiungere le categorie dei piatti --}}
+                <!-- {{-- select nel caso in cui volessimo aggiungere le categorie dei piatti --}}
                 {{-- <div class="mb-3">
                     <select class="form-select" name="category_id">
                         <option value="">Select a category</option>
@@ -20,7 +25,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div> --}}
+                </div> --}} -->
                 <fieldset class="mb-3">
                     <label for="name" class="form-label">Tag</label>
                         Vegan
@@ -50,7 +55,7 @@
                                 No
                             </label>
                         </div>
-{{-- {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} --}}
+<!-- {{-- {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} --}} -->
                 </fieldset>
 
                 <div class="mb-3">
@@ -75,21 +80,7 @@
                             <label class="form-check-label" for="visible2">
                                 No
                             </label>
-                        </div>
-
-                        {{-- <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="visible" value="">
-                            <label class="form-check-label" for="visible">Visibilità</label>
-                        </div> --}}
-
-
-
-                        {{-- <input class="form-check-input" type="checkbox" value="{{ old('visible') }}" name="visible">
-                        {{-- {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} --}}
-                        {{-- <label class="form-check-label" for="flexCheckDefault">
-                            Visibile
-                        </label> --}}
-                    
+                        </div>                   
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Prezzo</label>

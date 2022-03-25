@@ -20,8 +20,11 @@ class DishController extends Controller
     public function index()
     {
         $dishes = Dish::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(20);
-
-        return view('admin.dishes.index', ['dishes' => $dishes]);
+        $data=[
+            'dishes' => $dishes,
+            'name' => 'Tutti i piatti'
+        ];
+        return view('admin.dishes.index', $data);
     }
 
     /**
@@ -31,7 +34,10 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('admin.dishes.create');
+        $data=[
+            'name' => 'Crea nuovo piatto'
+        ];
+        return view('admin.dishes.create', $data);
     }
 
     /**
@@ -59,13 +65,7 @@ class DishController extends Controller
             $img_path = Storage::put('uploads', $data['image']);
             $data['image'] = $img_path;
         }else{
-            $data['image'] = 'default.png';
-        }
-
-        if(isset($data['visible']) && $data['visible'] == 'visible'){
-            $data['visible'] = 1;
-        }else{
-            $data['visible'] = 0;
+            $data['image'] = 'uploads/default.jpg';
         }
 
         $newDish = new Dish();
@@ -99,9 +99,17 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        if (Auth::user()->id != $dish->user_id) {
+            abort('403');
+        }
+
+        $data = [
+            'dish' => $dish,
+            'name' => 'Modifica ' . $dish->name,
+        ];
+        return view('admin.dishes.edit', $data);
     }
 
     /**
@@ -111,9 +119,49 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish)
     {
-        //
+        $data = $request->all();
+        if (Auth::user()->id != $dish->user_id) {
+            abort('403');
+        }
+        $validateData = $request->validate([
+            'name' => 'required|max:200',
+            'image' => 'nullable|image',
+            'description' => 'nullable',
+            'visible' => 'nullable|boolean',
+            'vegan' => 'nullable|boolean',
+            'spicy' => 'nullable|boolean',
+            'price' => 'required|numeric|min:0.01',
+        ]);
+        if ($data['name'] != $dish->name) {
+            $dish->name = $data['name'];
+            $dish->slug = $dish->createSlug($data['name']);
+        }
+        if ($data['description'] != $dish->description) {
+            $dish->description = $data['description'];
+        }
+        if ($data['price'] != $dish->price) {
+            $dish->price = $data['price'];
+        }
+        if ($data['vegan'] != $dish->vegan) {
+            $dish->vegan = $data['vegan'];
+        }
+        if ($data['spicy'] != $dish->spicy) {
+            $dish->spicy = $data['spicy'];
+        }
+        if ($data['visible'] != $dish->visible) {
+            $dish->visible = $data['visible'];
+        }
+        if (!empty($data['image'])) {
+            Storage::delete($dish->image);
+            $image_path = Storage::put('uploads', $data['image']);
+            $dish->image = $image_path;
+        }
+        
+        $dish->update();
+
+        return redirect()->route('admin.dishes.show', $dish);
     }
 
     /**
@@ -122,8 +170,13 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dish $dish)
     {
-        //
+        if (Auth::user()->id != $dish->user_id) {
+            abort('403');
+        }
+        $dish->delete();
+
+        return redirect()->route('admin.dishes.index')->with('status', "$dish->name eliminato");
     }
 }

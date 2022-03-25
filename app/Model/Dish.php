@@ -49,7 +49,7 @@ class Dish extends Model
 
         return (empty($newSlug)) ? $slug : $newSlug;
     }
-
+    
 
     public function user()
     {
