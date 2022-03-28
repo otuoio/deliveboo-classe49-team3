@@ -26,6 +26,50 @@
                         </div>
                     @enderror
                 </div> --}} -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" name="name" required value="{{ old('name', $dish->name) }}" >
+                    @error('name')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Prezzo</label>
+                    <input type="number" step="0.01"  class="form-control" id="price" name="price" value="{{ old('price', $dish->price) }}" required min="0.01" placeholder="&euro;">
+                    @error('price')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Descrizione</label>
+                    <textarea class="form-control" id="description" rows="3"
+                        name="description">{{ old('description', $dish->description) }}</textarea>
+                    @error('description')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                        @if (!empty($dish->image))
+                            <img src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
+                        @else
+                            <img class="img-fluid" src="{{ asset('storage/uploads/default/default_dish.jpg')}}" alt="{{ $dish->name }}">
+                        @endif
+                    </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Inserisci l'immagine</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                    @error('image')
+                        <div class="alert alert-danger mt-3">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <fieldset class="mb-3">
                     <label for="name" class="form-label">Tag</label>
                         Vegan
@@ -57,16 +101,6 @@
                         </div>
 <!-- {{-- {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} --}} -->
                 </fieldset>
-
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" name="name" required value="{{ old('name', $dish->name) }}" >
-                    @error('name')
-                        <div class="alert alert-danger">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
                 <div class="mb-3">
                         Visibile
                         <div class="form-check">
@@ -95,39 +129,6 @@
                             Visibile
                         </label> --}} -->
                     
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Prezzo</label>
-                    <input type="number" step="0.01"  class="form-control" id="price" name="price" value="{{ old('price', $dish->price) }}" required min="0.01">
-                    @error('price')
-                        <div class="alert alert-danger">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="content" class="form-label">Descrizione</label>
-                    <textarea class="form-control" id="description" rows="3"
-                        name="description">{{ old('description', $dish->description) }}</textarea>
-                    @error('description')
-                        <div class="alert alert-danger">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                @if (!empty($dish->image))
-                    <div class="mb-3">
-                        <img src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
-                    </div>
-                @endif
-                <div class="mb-3">
-                    <label for="image" class="form-label">Inserisci l'immagine</label>
-                    <input class="form-control" type="file" id="image" name="image">
-                    @error('image')
-                        <div class="alert alert-danger mt-3">
-                            {{ $message }}
-                        </div>
-                    @enderror
                 </div>
           
                 <!-- passare l'id dell'user in modalità nascosta -->

@@ -34,7 +34,7 @@
                         <th scope="col">Ultima modifica</th>
                         <th scope="col">Prezzo</th>
                         <th scope="col">Visibile</th>
-                        <th colspan="3" scope="col">Actions</th>
+                        <th colspan="3" scope="col">Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@
                             <td>{{ $dish->id }}</td>
                             <td class="text-capitalize">{{ $dish->name }}</td>
                             <td>{{ $dish->updated_at }}</td>
-                            <td>{{ number_format($dish->price, 2, ',', '.') }} €</td>
+                            <td>{{ number_format($dish->price, 2, ',', '.') }} &euro;</td>
                             <td>
                                 @if ($dish->visible == 1)
                                     Si
