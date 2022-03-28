@@ -51,7 +51,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    { 
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -61,7 +61,7 @@ class RegisterController extends Controller
             'phone_number' => ['required', 'string', 'max:20'],
             'shipment_price' => ['numeric', 'min:0.00', 'nullable'],
             'minimum_order' => ['numeric', 'min:0.00', 'nullable'],
-            'categories.*' => ['required', 'exists:App\Model\Category,id'],
+            'categories' => ['required', 'min:1'],
             'image' => ['image', 'nullable'],
         ]);
     }
