@@ -54,11 +54,13 @@
                         </div>
                     @enderror
                 </div>
-                @if (!empty($dish->image))
-                    <div class="mb-3">
-                        <img src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
+                <div class="mb-3">
+                        @if (!empty($dish->image))
+                            <img src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
+                        @else
+                            <img class="img-fluid" src="{{ asset('storage/uploads/default/default_dish.jpg')}}" alt="{{ $dish->name }}">
+                        @endif
                     </div>
-                @endif
                 <div class="mb-3">
                     <label for="image" class="form-label">Inserisci l'immagine</label>
                     <input class="form-control" type="file" id="image" name="image">

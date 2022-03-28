@@ -64,8 +64,6 @@ class DishController extends Controller
         if (!empty($data['image'])) {
             $img_path = Storage::put('uploads', $data['image']);
             $data['image'] = $img_path;
-        }else{
-            $data['image'] = 'uploads/default.jpg';
         }
 
         $newDish = new Dish();

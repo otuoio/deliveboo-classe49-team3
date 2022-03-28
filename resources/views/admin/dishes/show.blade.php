@@ -46,7 +46,11 @@
                 <div>{{ number_format($dish->price, 2, ',', '.') }} &euro;</div>
             </div>
             <div class="col">
-                <img class="img-fluid" src="{{ asset('storage/' . $dish->image)}}" alt="{{ $dish->name }}">
+                @if ($dish->image)
+                    <img class="img-fluid" src="{{ asset('storage/' . $dish->image)}}" alt="{{ $dish->name }}">
+                @else
+                    <img class="img-fluid" src="{{ asset('storage/uploads/default/default_dish.jpg')}}" alt="{{ $dish->name }}">
+                @endif
             </div>
         </div>
         <div class="row">
