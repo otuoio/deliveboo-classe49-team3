@@ -43,6 +43,7 @@
                     @endif 
                     </span>
                 </div>
+                <div>{{ number_format($dish->price, 2, ',', '.') }} &euro;</div>
             </div>
             <div class="col">
                 <img class="img-fluid" src="{{ asset('storage/' . $dish->image)}}" alt="{{ $dish->name }}">
