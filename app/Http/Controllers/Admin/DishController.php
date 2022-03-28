@@ -168,6 +168,7 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Dish $dish)
     {
         if (Auth::user()->id != $dish->user_id) {
@@ -177,4 +178,5 @@ class DishController extends Controller
 
         return redirect()->route('admin.dishes.index')->with('status', "$dish->name eliminato");
     }
+
 }

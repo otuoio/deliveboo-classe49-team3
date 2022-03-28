@@ -61,18 +61,14 @@
                             </td>
                             <td>
                                 @if (Auth::user()->id === $dish->user_id)
-                                <form action="{{ route('admin.dishes.destroy', $dish) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input class="btn btn-danger" type="submit" value="Elimina">
-                                </form>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalDelete{{$dish->id}}" class="btn btn-danger">
+                                    {{__('Elimina')}}
+                                </a>
                                 @endif
-
                             </td>
+                            @include('partials.delete')
                         </tr>
                     @endforeach
-
-
                 </tbody>
             </table>
         </div>
