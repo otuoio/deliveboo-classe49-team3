@@ -22,6 +22,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 0,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 1,
             ],
             [
@@ -32,6 +33,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 1,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 1,
             ],
             [
@@ -42,6 +44,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 0,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 1,
             ],
             [
@@ -52,6 +55,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 0,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 2,
             ],
             [
@@ -62,6 +66,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 0,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 2,
             ],
             [
@@ -72,6 +77,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 1,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 2,
             ],
             [
@@ -82,6 +88,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 0,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 3,
             ],
             [
@@ -92,6 +99,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 0,
                 'spicy' => 0,
+                'show' => 1,
                 'user_id' => 3,
             ],
             [
@@ -102,6 +110,7 @@ class DishSeeder extends Seeder
                 'visible' => 1,
                 'vegan' => 0,
                 'spicy' => 1,
+                'show' => 1,
                 'user_id' => 3,
             ],
         ];
@@ -115,6 +124,7 @@ class DishSeeder extends Seeder
             $newDish->visible = $dish['visible'];
             $newDish->vegan = $dish['vegan'];
             $newDish->spicy = $dish['spicy'];
+            $newDish->show = $dish['show'];
             $newDish->user_id = $dish['user_id'];
             $newDish->image = 'uploads/'. $dish['image'];
             $newDish->save();

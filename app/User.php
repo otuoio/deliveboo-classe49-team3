@@ -26,7 +26,8 @@ class User extends Authenticatable
         'phone_number',
         'shipment_price',
         'minimum_order',
-        'image'
+        'image',
+        'show'
     ];
 
     /**
