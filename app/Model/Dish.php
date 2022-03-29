@@ -58,6 +58,6 @@ class Dish extends Model
 
     public function orders()
     {
-        return $this->belongsToMany('App\Model\Order')->withTimestamps();
+        return $this->belongsToMany('App\Model\Order')->withPivot('qty')->withTimestamps();
     }
 }

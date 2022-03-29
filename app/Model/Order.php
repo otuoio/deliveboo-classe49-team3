@@ -18,6 +18,6 @@ class Order extends Model
     
     public function dishes()
     {
-        return $this->belongsToMany('App\Model\Dish')->withTimestamps();
+        return $this->belongsToMany('App\Model\Dish')->withPivot('qty')->withTimestamps();
     }
 }
