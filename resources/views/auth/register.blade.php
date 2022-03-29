@@ -1,10 +1,16 @@
 @extends('layouts.app')
 
-@push('script')
+@section('script')
+    <script src="{{ asset('js/admin.js') }}" defer></script>
     <script src="{{ asset('js/checkboxValidation.js') }}" defer></script>
-@endpush
+@endsection
+
+@section('documentTitle')
+    Registrazione
+@endsection
 
 @section('content')
+@include('partials.navbarAdmin')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

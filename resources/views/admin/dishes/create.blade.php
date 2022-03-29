@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('script')
+    <script src="{{ asset('js/admin.js') }}" defer></script>
+@endsection
+
 @section('documentTitle')
     {{$name}}
 @endsection

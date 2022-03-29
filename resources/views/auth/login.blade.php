@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
+@section('script')
+    <script src="{{ asset('js/admin.js') }}" defer></script>
+@endsection
+
+@section('documentTitle')
+    Accedi
+@endsection
+
 @section('content')
+@include('partials.navbarAdmin')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
