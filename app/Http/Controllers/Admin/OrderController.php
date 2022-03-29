@@ -18,10 +18,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::join('dish_order', 'orders.id', '=', 'dish_order.order_id')
-            ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
-            ->where('user_id', Auth::user()->id)->orderBy('orders.updated_at', 'desc')->paginate(20);
-        // where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(20);
+        $orders = Order::select('orders.id', 'orders.date', 'orders.time', 'orders.customer_name', 'orders.updated_at', 'orders.total')
+            ->distinct()
+            ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
+            ->join('dishes', 'dishes.id', '=', 'dish_order.dish_id')
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('orders.updated_at', 'desc')
+            ->paginate(20);
         $data=[
             'orders' => $orders,
             'name' => 'Tutti gli ordini'
