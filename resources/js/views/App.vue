@@ -1,7 +1,14 @@
 <template>
     <div>
-        <Header :cards="cards"></Header>
-        <router-view :cards="cards"></router-view>
+        <Header 
+        :cards="cards"
+        @search="find($event)"
+        />
+        <router-view 
+        :cards="cards"
+        :inputSearch="inputSearch"
+        >
+        </router-view>
         <Footer></Footer>
     </div>
 </template>
@@ -17,19 +24,24 @@ export default {
         Header,
         Footer
     },
+    emits: ['searchRestaurant'],
     data() {
         return {
             cards: {
                 users: [],
                 // next_page_url: null,
                 // prev_page_url: null
-            }
+            },
+            inputSearch: "",
         }
     },
     created(){
         this.getUsers('http://127.0.0.1:8000/api/v1/');
     },
     methods: {
+        find(value) {
+            this.inputSearch = value;
+        },
         // changePage(vs) {
         //     let url = this.cards[vs];
         //     if(url) {
