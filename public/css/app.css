@@ -18930,3 +18930,20 @@ fieldset:disabled .btn {
   content: "\F793";
 }
 
+.checkboxs-wrapper {
+  position: relative;
+}
+
+.checkboxs-wrapper input[name=radio-for-required-checkboxes] {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  pointer-events: none;
+  border: none;
+  background: none;
+}
+

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('script')
+    <script src="{{ asset('js/checkboxValidation.js') }}" defer></script>
+@endpush
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -17,15 +21,19 @@
                         @enderror
                         <fieldset class="mb-3">
                             <legend>Seleziona una o più categorie per il tuo ristorante</legend>
-                            @foreach ($categories as $category)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"  value="{{ $category->id }}" name="categories[]"
-                                {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
-                                <label class="form-check-label text-capitalize" for="flexCheckDefault">
-                                    {{ $category->name }}
-                                </label>
+                            <div class="checkboxs-wrapper">
+                                <input id="radio-for-checkboxes" type="radio" name="radio-for-required-checkboxes" required/>
+                                @foreach ($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input validationCB" id="{{ $category->id }}" type="checkbox"  value="{{ $category->id }}" name="categories[]"
+                                    {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                                        {{ $category->name }}
+                                    </label>
+                                </div>
+                                @endforeach
+
                             </div>
-                            @endforeach
                         </fieldset>
 
                         <div class="form-group row mb-2">
