@@ -55,7 +55,9 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'count' =>  $users->count(),
-            'results' => $users
+            'results' => [
+                'data' => $users
+            ]
         ]);
     }
 }
