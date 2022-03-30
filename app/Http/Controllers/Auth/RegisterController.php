@@ -92,6 +92,8 @@ class RegisterController extends Controller
         if (!empty($data['image'])) {
             $img_path = Storage::put('uploads', $data['image']);
             $data['image'] = $img_path;
+        } else {
+            $data['image'] = null;
         }
         
         $user = User::create([
@@ -105,6 +107,7 @@ class RegisterController extends Controller
             'shipment_price' => $data['shipment_price'],
             'minimum_order' => $data['minimum_order'],
             'image' => $data['image'],
+            'show' => 1,
         ]);
 
         if (!empty($data['categories'])) {

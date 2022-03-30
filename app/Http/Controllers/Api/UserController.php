@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserController extends Controller
 {
@@ -22,14 +23,39 @@ class UserController extends Controller
 
     // public function show($id)
     // {
-    //     $post = Post::find($id);
+    //     $user = User::find($id);
 
     //     return response()->json([
     //         'response' => true,
-    //         'count' => $post ? 1 : 0,
+    //         'count' => $user ? 1 : 0,
     //         'results' => [
-    //             'data' => $post
+    //             'data' => $user
     //         ],
     //     ]);
     // }
+
+    public function search(Request $request)
+    {
+        $data = $request->all();
+
+        //apriamo una chiamata eloquent senza chiuderla
+        $users = User::where('id', '>=', 1);
+
+        if (array_key_exists('categories', $data)) {
+
+            foreach ($data['categories'] as $category) {
+            $users->whereHas('categories', function (Builder $query) use ($category) {
+                    $query->where('name', '=', $category);
+                });
+            }
+        }
+        
+        $users = $users->with(['categories'])->get();
+
+        return response()->json([
+            'success' => true,
+            'count' =>  $users->count(),
+            'results' => $users
+        ]);
+    }
 }
