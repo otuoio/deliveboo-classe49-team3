@@ -39,6 +39,12 @@
                                         Tutti i piatti
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('admin.orders.index')}}">
+                                        <i class="bi bi-cart"></i>
+                                        Tutti gli ordini
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </nav>

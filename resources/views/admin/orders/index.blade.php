@@ -30,39 +30,31 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Data</th>
-                        <th scope="col">Ora</th>
-                        <th scope="col">Nome Cliente</th>
-                        <th scope="col">Totale</th>
-                        {{-- <th colspan="3" scope="col">Azioni</th> --}}
+                        <th >Num ordine</th>
+                        <th >Data</th>
+                        <th >Ora</th>
+                        <th >Nome Cliente</th>
+                        <th >Totale</th>
+                        <th class="d-flex justify-content-center">Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($orders as $order)
                         <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->date }}</td>
-                            <td>{{ $order->time }}</td>
-                            <td>{{ $order->customer_name }}</td>
-                            <td>{{ number_format($order->total, 2, ',', '.') }} &euro;</td>
-                           
-                            {{-- <td><a class="btn btn-primary" href="{{ route('admin.dishes.show', $dish->slug) }}">Visualizza</a>
-                            </td>
-                            <td>
-                                @if (Auth::user()->id === $dish->user_id)
-                                    <a class="btn btn-info"
-                                        href="{{ route('admin.dishes.edit', $dish->slug) }}">Modifica</a>
-                                @endif
-                            </td>
-                            <td>
-                                @if (Auth::user()->id === $dish->user_id)
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalDelete{{$dish->id}}" class="btn btn-danger">
-                                    {{__('Elimina')}}
+                            <td class="align-middle">{{ $order->id }}</td>
+                            <td class="align-middle">{{ $order->date }}</td>
+                            <td class="align-middle">{{ $order->time }}</td>
+                            <td class="align-middle">{{ $order->customer_name }}</td>
+                            <td class="align-middle">{{ number_format($order->total, 2, ',', '.') }} &euro;</td>
+                            <td class="d-flex justify-content-center">
+                                {{-- @if (Auth::user()->id === $dish->user_id) --}}
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#ModalDelete{{$order->id}}" class="btn btn-primary">
+                                    {{__('Visualizza')}}
                                 </a>
-                                @endif
+                                {{-- @endif --}}
                             </td>
-                            @include('partials.dishDeletePopup') --}}
+                            @include('partials.orderShowPopup')
+                            
                         </tr>
                     @endforeach
                 </tbody>
