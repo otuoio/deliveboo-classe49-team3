@@ -28,7 +28,7 @@
                         <fieldset class="mb-3">
                             <legend>Seleziona una o più categorie per il tuo ristorante</legend>
                             <div class="checkboxs-wrapper">
-                                <input id="radio-for-checkboxes" type="radio" name="radio-for-required-checkboxes" required/>
+                                <input id="radio-for-checkboxes" type="radio" name="radio-for-required-checkboxes" {{ (old('radio-for-required-checkboxes') ? 'checked' : '') }} required/>
                                 @foreach ($categories as $category)
                                 <div class="form-check">
                                     <input class="form-check-input validationCB" id="{{ $category->id }}" type="checkbox"  value="{{ $category->id }}" name="categories[]"
@@ -110,7 +110,7 @@
                             <label for="p_iva" class="col-md-4 col-form-label text-md-right">{{ __('Partita Iva') }}</label>
 
                             <div class="col-md-6">
-                                <input id="p_iva" type="text" class="form-control @error('p_iva') is-invalid @enderror" name="p_iva" value="{{ old('p_iva') }}" required autocomplete="p_iva" autofocus>
+                                <input id="p_iva" type="text" minlength="11" class="form-control @error('p_iva') is-invalid @enderror" name="p_iva" value="{{ old('p_iva') }}" required autocomplete="p_iva" autofocus>
 
                                 @error('p_iva')
                                     <span class="invalid-feedback" role="alert">
@@ -124,7 +124,7 @@
                             <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
+                                <input id="phone_number" type="text" minlength="8" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
 
                                 @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
@@ -138,7 +138,7 @@
                             <label for="shipment_price" class="col-md-4 col-form-label text-md-right">{{ __('Costo consegna') }}</label>
 
                             <div class="col-md-6">
-                                <input id="shipment_price" type="text" class="form-control @error('shipment_price') is-invalid @enderror" name="shipment_price" value="{{ old('shipment_price') }}" required autocomplete="shipment_price" autofocus>
+                                <input id="shipment_price" type="number" step="0.01" class="form-control @error('shipment_price') is-invalid @enderror" name="shipment_price" value="{{ old('shipment_price') }}" required autocomplete="shipment_price" autofocus>
 
                                 @error('shipment_price')
                                     <span class="invalid-feedback" role="alert">
@@ -152,7 +152,7 @@
                             <label for="minimum_order" class="col-md-4 col-form-label text-md-right">{{ __('Ordine minimo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="minimum_order" type="text" class="form-control @error('minimum_order') is-invalid @enderror" name="minimum_order" value="{{ old('minimum_order') }}" required autocomplete="minimum_order" autofocus>
+                                <input id="minimum_order" type="number" step="0.01" class="form-control @error('minimum_order') is-invalid @enderror" name="minimum_order" value="{{ old('minimum_order') }}" required autocomplete="minimum_order" autofocus>
 
                                 @error('minimum_order')
                                     <span class="invalid-feedback" role="alert">
