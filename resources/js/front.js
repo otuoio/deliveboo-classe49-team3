@@ -21,7 +21,8 @@ const router = new VueRouter({
         {
             path: '/:id',
             name: 'restaurant',
-            component: Restaurant
+            component: Restaurant,
+            props: true,
         }
     ]
 })

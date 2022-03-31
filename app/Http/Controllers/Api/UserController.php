@@ -21,18 +21,18 @@ class UserController extends Controller
         ]);
     }
 
-    // public function show($id)
-    // {
-    //     $user = User::find($id);
+    public function show($id)
+    {
+        $user = User::find($id);
 
-    //     return response()->json([
-    //         'response' => true,
-    //         'count' => $user ? 1 : 0,
-    //         'results' => [
-    //             'data' => $user
-    //         ],
-    //     ]);
-    // }
+        return response()->json([
+            'response' => true,
+            'count' => $user ? 1 : 0,
+            'results' => [
+                'data' => $user
+            ],
+        ]);
+    }
 
     public function search(Request $request)
     {
