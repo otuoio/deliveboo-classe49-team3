@@ -116,7 +116,11 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\boolean\php\deliveboo-classe49-team3\node_modules\popper.js\dist\popper.js */"./node_modules/popper.js/dist/popper.js");
+=======
+module.exports = __webpack_require__(/*! /Users/mariocoppola/boolean/php/deliveboo-classe49-team3/node_modules/popper.js/dist/popper.js */"./node_modules/popper.js/dist/popper.js");
+>>>>>>> 49562e110b3d7e6f11ee44d7c85b6a20b19694fe
 
 
 /***/ })

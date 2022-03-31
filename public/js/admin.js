@@ -1212,8 +1212,13 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\boolean\php\deliveboo-classe49-team3\resources\js\admin.js */"./resources/js/admin.js");
 module.exports = __webpack_require__(/*! C:\boolean\php\deliveboo-classe49-team3\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/mariocoppola/boolean/php/deliveboo-classe49-team3/resources/js/admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! /Users/mariocoppola/boolean/php/deliveboo-classe49-team3/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> 49562e110b3d7e6f11ee44d7c85b6a20b19694fe
 
 
 /***/ })

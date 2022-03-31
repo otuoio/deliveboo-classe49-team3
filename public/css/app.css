@@ -18947,8 +18947,3 @@ fieldset:disabled .btn {
   background: none;
 }
 
-body {
-  height: 100vh;
-  background: linear-gradient(180deg, rgba(245, 245, 245, 0.8) 0%, rgba(213, 213, 213, 0.8) 49%, rgba(189, 189, 189, 0.8) 100%);
-}
-
