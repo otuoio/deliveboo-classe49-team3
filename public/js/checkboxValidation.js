@@ -104,7 +104,7 @@ eval("var inputs = document.querySelectorAll('.validationCB');\nvar radioForChec
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/saragrigolin/Boolean/Esercizi_php/deliveboo-classe49-team3/resources/js/checkboxValidation.js */"./resources/js/checkboxValidation.js");
+module.exports = __webpack_require__(/*! /Users/mariocoppola/boolean/php/deliveboo-classe49-team3/resources/js/checkboxValidation.js */"./resources/js/checkboxValidation.js");
 
 
 /***/ })

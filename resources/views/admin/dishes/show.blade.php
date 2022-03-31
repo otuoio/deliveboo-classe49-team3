@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <a class="btn btn-primary mt-3" href="{{ route('admin.dishes.index') }}">Go Back</a>
+                <a class="btn btn-primary mt-3" href="{{ route('admin.dishes.index') }}">Torna Indietro</a>
             </div>
         </div>
     </div>

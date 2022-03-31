@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row row-cols-1">
+        <div class="row row-cols-1 py-2">
             <div class="col">
                 <form action="">
                     <div v-for="(category, index) in categories" :key="'category-'+index" class="form-check d-inline-block">
