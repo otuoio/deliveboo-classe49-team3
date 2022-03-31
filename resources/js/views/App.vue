@@ -2,7 +2,7 @@
     <div>
         <Header 
         :cards="cards"
-        @search="find($event)"
+        @searchName="find($event)"
         />
         <router-view 
         :cards="cards"

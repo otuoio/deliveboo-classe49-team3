@@ -77,14 +77,27 @@ export default {
     },
     watch: {
         inputSearch:function(value) {
-            this.cards.users.forEach((user) => {
-            if (user.name.toLowerCase().includes(value.toLowerCase())) {
-                user.show = 1;
-                console.log(user.show);
-            } else {
-                user.show = 0;
-                console.log(user.show);
-            }
+            // let url = "";
+            // if(this.form.categories.length == 0){
+            //     url = "http://127.0.0.1:8000/api/v1/"
+            // } else if (this.form.categories.length == 1) {
+            //     url = 'http://127.0.0.1:8000/api/v1/search?categories[]='+this.form.categories;
+            // } else {
+            //     url = 'http://127.0.0.1:8000/api/v1/search?categories[]='+this.form.categories[0];
+            //     for (let index = 1; index < (this.form.categories.length); index++) {
+            //         url += '&categories[]='+this.form.categories[index];
+            //     }
+            // };
+            let url='http://127.0.0.1:8000/api/v1/searchName';
+            axios
+            .get(url, {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}, {params: {value}}, 
+            )
+            .then((result) => {
+
+                this.cards.users = result.data.results.data;
+                // this.cards.prevPage = result.data.results.prev_page_url;
+                // this.cards.nextPage = result.data.results.next_page_url;
+                // console.log(this.cards.users);
             });
         },
     }
