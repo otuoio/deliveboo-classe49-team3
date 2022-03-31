@@ -3,10 +3,13 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+
 
 class Dish extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *

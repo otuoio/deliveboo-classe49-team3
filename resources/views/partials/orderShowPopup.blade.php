@@ -15,7 +15,7 @@
                         <li>Numero di telefono: {{$order->phone_number}}</li>
                         <li>Dettaglio piatti:</li>
                         <ul>
-                            @foreach ($order->dishes()->get() as $dish)
+                            @foreach ($order->dishes()->withTrashed()->get() as $dish)
                             <li>{{$dish->name}}: {{ number_format($dish->price, 2, ',', '.') }} &euro;</li>
                             <li>Quantità: {{$dish->pivot->qty}}</li>
                             @endforeach
