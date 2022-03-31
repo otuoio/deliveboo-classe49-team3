@@ -70,6 +70,7 @@ class DishController extends Controller
 
         $newDish->fill($data);
         $newDish->slug = $newDish->createSlug($data['name']);
+        $newDish->show = 1;
         $newDish->save();
 
         return redirect()->route('admin.dishes.show', $newDish->slug);
