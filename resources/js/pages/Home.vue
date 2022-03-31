@@ -38,7 +38,10 @@ export default {
                 },
         }
     },
-    props: ['cards', 'inputSearch'],
+    props: [
+        'cards', 
+    // 'inputSearch' -- SEARCHBAR
+    ],
     created() {
         this.getCategories('http://127.0.0.1:8000/api/v1/categories');
         
@@ -69,37 +72,21 @@ export default {
             .then((result) => {
 
                 this.cards.users = result.data.results.data;
-                // this.cards.prevPage = result.data.results.prev_page_url;
-                // this.cards.nextPage = result.data.results.next_page_url;
-                // console.log(this.cards.users);
             });
         }
     },
     watch: {
-        inputSearch:function(value) {
-            // let url = "";
-            // if(this.form.categories.length == 0){
-            //     url = "http://127.0.0.1:8000/api/v1/"
-            // } else if (this.form.categories.length == 1) {
-            //     url = 'http://127.0.0.1:8000/api/v1/search?categories[]='+this.form.categories;
-            // } else {
-            //     url = 'http://127.0.0.1:8000/api/v1/search?categories[]='+this.form.categories[0];
-            //     for (let index = 1; index < (this.form.categories.length); index++) {
-            //         url += '&categories[]='+this.form.categories[index];
-            //     }
-            // };
-            let url='http://127.0.0.1:8000/api/v1/searchName';
-            axios
-            .get(url, {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}, {params: {value}}, 
-            )
-            .then((result) => {
-
-                this.cards.users = result.data.results.data;
-                // this.cards.prevPage = result.data.results.prev_page_url;
-                // this.cards.nextPage = result.data.results.next_page_url;
-                // console.log(this.cards.users);
-            });
-        },
+        // inputSearch:function(value) {
+        //     let url='http://127.0.0.1:8000/api/v1/searchName?inputSearch='+ value;
+        //     axios
+        //     .get(url, {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}, 
+        //     )
+        //     .then((result) => {
+        //         console.log(url);
+        //         this.cards.users = result.data.results.data;
+        //         console.log(this.cards.users);
+        //     });
+        // },
     }
 
 }

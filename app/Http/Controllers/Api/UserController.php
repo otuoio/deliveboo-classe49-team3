@@ -61,23 +61,24 @@ class UserController extends Controller
         ]);
     }
 
-    public function searchName(Request $request)
-    {
-        $data = $request->all();
+    // SEARCHBAR
+    // public function searchName(Request $request)
+    // {
+    //     $data = $request->all();
 
-        //apriamo una chiamata eloquent senza chiuderla
-        $users = User::where('id', '>=', 1);
+    //     //apriamo una chiamata eloquent senza chiuderla
+    //     $users = User::where('id', '>=', 1);
 
-        if (array_key_exists('inputSearch', $data)) {
-            $users->where('name','like','%'. $data['inputSearch'].'%');
-        }
+    //     if (array_key_exists('inputSearch', $data)) {
+    //         $users->where('name','like','%'. $data['inputSearch'].'%');
+    //     }
 
-        return response()->json([
-            'success' => true,
-            'count' =>  $users->count(),
-            'results' => [
-                'data' => $users->get()
-            ]
-        ]);
-    }
+    //     return response()->json([
+    //         'success' => true,
+    //         'count' =>  $users->count(),
+    //         'results' => [
+    //             'data' => $users->get()
+    //         ]
+    //     ]);
+    // }
 }
