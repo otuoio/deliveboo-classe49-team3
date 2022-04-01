@@ -14,7 +14,6 @@
         </div>
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <RestaurantCard :user="user"
-            :class="(user.show !== 1)? 'd-none' : '' "
             v-for="(user, index) in cards.users" 
             :key="index"/>
         </div>

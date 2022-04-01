@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="container">
+    <div class="container">
         <div class="row g-4">
             <div class="col">
                 <div class="card d-flex flex-row">
@@ -54,8 +54,8 @@
                             <h1 class="postcard__title red"><a href="#">Carrello</a></h1>
                         </div>
                         <div class="postcard__bar"></div>
-                        <div v-if="cartDishes.length == 0" class="postcard__preview-txt">Il carrello &egrave; vuoto</div>
-                        <div v-else class="postcard__preview-txt">
+                        <div v-if="cartTotal == 0" class="postcard__preview-txt">Il carrello &egrave; vuoto</div>
+                        <div v-else class="postcard__preview-txt overflow-visible">
                             <div v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
                                 <span>{{ cartDish.name }}</span>
                                 <span>{{ cartDish.quantity }}</span>
@@ -67,6 +67,7 @@
                 </div>
             </div>
         </div>
+        <!-- <button @click="showCart()" class="btn btn-primary">Test BELLISSIMO</button> -->
         <router-link class="btn btn-info mt-2" :to="{ name: 'home' }">Torna alla home</router-link>
     </div>
 </div>
@@ -88,8 +89,7 @@ export default {
             dishes: [],
             cartTotal: 0,
             quantity: 0,
-            cartDishes: [
-            ],
+            cartDishes: [],
             name: '',
             price: 0,
         }
@@ -98,6 +98,12 @@ export default {
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
+        if (localStorage.length != 0) {
+                this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
+                this.cartDishes.forEach(element => {
+                this.cartTotal += element.price;
+            });
+        }
     },
     methods: {
         setQuantity(value) {
@@ -112,14 +118,20 @@ export default {
             this.price = value;
             console.log(value.toFixed(2));
         },
-        addDishestoArray(){
-            let obj = {};
-            obj['name'] = this.name;
-            obj['price'] = this.price;
-            obj['quantity'] = this.quantity;
-            this.cartDishes.push(obj);
-            console.log(this.cartDishes);
+        addDishestoArray(){             
             this.cartTotal += this.price;
+            this.cartDishes.push({
+                name: this.name,
+                price: this.price,
+                quantity: this.quantity
+            });
+            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+
+            // if(!localStorage.getItem('cartDishes') || JSON.parse(localStorage.getItem('cartDishes')).length === 0){
+            //     $window.localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+            // }
+            // this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
+            console.log(this.cartDishes);
         },
         shortDescription(string) {
             if (string.length > 60) {

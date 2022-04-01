@@ -58,16 +58,27 @@ export default {
             cartPrice: 0,
             oneMore: false,
             enough: false,
+            // list:[]
         }
     },
     methods: {
         toCart(price, quantity, name) {
+            // let obj = {};
+            // obj['name'] = this.name;
+            // obj['price'] = this.price;
+            // obj['quantity'] = this.quantity;
+            // localStorage.setItem(key, JSON.stringify(obj));
+            // localStorage.setItem('name', name);
+            // localStorage.setItem('quantity', quantity);
+            // localStorage.setItem('price', price);
+            // this.doShowAll();
             this.$emit('setQuantity', quantity);
             this.$emit('setName', name);
             setTimeout(() => {
                 this.qty = 1;
             }, 500);
             price = price * quantity;
+            // console.log(localStorage);
             this.$emit('setPrice', price);
             this.$emit('addDishestoArray');
         },
@@ -135,7 +146,19 @@ export default {
                         this.oneMore = false;
                     }, 1000);
                 }
-            }
+            },
+
+            // doShowAll() {
+            //     let key = "";
+            //     let i = 0;
+            //     //for more advance feature, you can set cap on max items in the cart
+            //     for (i = 0; i <= localStorage.length-1; i++) {
+            //         key = localStorage.key(i);
+            //         // console.log(key);
+            //         this.list.push(JSON.parse(localStorage.getItem(key)));
+            //     }
+            // }
+
     }
 }
 </script>
