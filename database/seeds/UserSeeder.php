@@ -25,7 +25,6 @@ class UserSeeder extends Seeder
                 'shipment_price' => 2.50,
                 'minimum_order' => 13.00,
                 'image' => 'lunarossa.jpg',
-                'show' => 1,
             ],
             [
                 'name' => 'Perla Nera',
@@ -37,7 +36,6 @@ class UserSeeder extends Seeder
                 'shipment_price' => 1.50,
                 'minimum_order' => 7.00,
                 'image' => 'perlanera.jpg',
-                'show' => 1,
             ],
             [
                 'name' => "O Cuopp' E Ciruzz",
@@ -49,7 +47,6 @@ class UserSeeder extends Seeder
                 'shipment_price' => 0.50,
                 'minimum_order' => 5.00,
                 'image' => 'ocuoppeciruzz.jpg',
-                'show' => 1,
             ],
         ];
 
@@ -65,7 +62,6 @@ class UserSeeder extends Seeder
             $newUser->shipment_price = $user['shipment_price'];
             $newUser->minimum_order = $user['minimum_order'];
             $newUser->image = 'uploads/' . $user['image'];
-            $newUser->show = $user['show'];
             $newUser->save();
         }
     }

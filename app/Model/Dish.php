@@ -24,7 +24,6 @@ class Dish extends Model
         'visible',
         'vegan',
         'spicy',
-        'show',
         'user_id',
     ];
 

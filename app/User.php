@@ -27,7 +27,6 @@ class User extends Authenticatable
         'shipment_price',
         'minimum_order',
         'image',
-        'show'
     ];
 
     /**

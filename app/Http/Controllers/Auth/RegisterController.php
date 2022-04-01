@@ -107,7 +107,6 @@ class RegisterController extends Controller
             'shipment_price' => $data['shipment_price'],
             'minimum_order' => $data['minimum_order'],
             'image' => $data['image'],
-            'show' => 1,
         ]);
 
         if (!empty($data['categories'])) {

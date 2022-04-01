@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->float('shipment_price', 4, 2)->nullable();
             $table->float('minimum_order', 4, 2)->nullable();
             $table->string('image', 255)->nullable();
-            $table->boolean('show');
             $table->rememberToken();
             $table->timestamps();
         });
