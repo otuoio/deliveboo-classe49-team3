@@ -1,9 +1,9 @@
 <template>
 <div class="modal fade" :id="`exampleModal${dish.id}`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- <div class=" d-flex justify-content-center h-100 w-100"> -->
-                <figure class="card card-product-grid card-lg overflow-hidden">
+                <figure class="card card-product-grid card-lg overflow-hidden m-0">
                     <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="img-fluid" :alt="dish.name">
                     <img v-else src="/storage/uploads/default/default_dish.jpg" class="img-fluid" :alt="dish.name">
                     <figcaption class="info-wrap">
@@ -36,8 +36,8 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h3>{{cartP(dish.price.toFixed(2))}} &euro;</h3>
-                                <button class="btn btn-light" @click="toCart(cartPrice)" data-bs-dismiss="modal">Aggiungi al carrello</button>
+                                <h3>{{cartP(dish.price.toFixed(2), qty)}} &euro;</h3>
+                                <button class="btn btn-primary" @click="toCart(dish.price.toFixed(2), qty, dish.name)" data-bs-dismiss="modal">Aggiungi al carrello</button>
                             </div>
                         </div>
                     </div>
@@ -61,14 +61,19 @@ export default {
         }
     },
     methods: {
-        toCart(price) {
+        toCart(price, quantity, name) {
+            this.$emit('setQuantity', quantity);
+            this.$emit('setName', name);
             setTimeout(() => {
                 this.qty = 1;
             }, 500);
-            this.$emit('setCartPrice', price);
+            price = price * quantity;
+            this.$emit('setPrice', price);
+            this.$emit('addDishestoArray');
         },
-        cartP(price) {
-            return this.cartPrice = (price * this.qty);
+        cartP(price, quantity) {
+            console.log(price, quantity);
+            return this.cartPrice = (price * quantity);
             
         },
         addItem(price) {
@@ -287,5 +292,7 @@ a {
     color: #FF5722
 }
 
-
+.modal-content {
+    border-radius: 23px;
+}
 </style>

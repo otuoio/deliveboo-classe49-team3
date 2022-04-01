@@ -15,27 +15,31 @@
         </div>
         <div class="row g-4">
             <div class="col col-md-8">
-                <div class="postcard light red" v-for="(dish, index) in dishes" :key="index">
-                    <a class="postcard__img_link" href="#">
-                        <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
-                        <img v-else src="/storage/uploads/default/default_dish.jpg" class="postcard__img" :alt="dish.name">
-                    </a>
-                    <div class="postcard__text t-dark">
-                        <div class="d-flex align-items-center">
-                            <h1 class="postcard__title red"><a href="#" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">{{ dish.name }}</a></h1>
-
-                            <AddDish
-                            :dish="dish"
-                            @setCartPrice="addToCart($event)"/>
-                            
-                            <div class="postcard__tagbox ms-2">
-                                <div v-if="dish.vegan" class="tag__item"><i class="fa-solid fa-leaf mr-2"></i></div>
-                                <div v-if="dish.spicy" class="tag__item"><i class="fa-solid fa-pepper-hot mr-2"></i></div>
+                <div v-for="(dish, index) in dishes" :key="index">
+                    <AddDish
+                                :dish="dish"
+                                @setPrice="setPrice($event)"
+                                @setQuantity="setQuantity($event)"
+                                @setName="setName($event)"
+                                @addDishestoArray="addDishestoArray"/>
+                    <div class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
+                        <a class="postcard__img_link" href="#">
+                            <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
+                            <img v-else src="/storage/uploads/default/default_dish.jpg" class="postcard__img" :alt="dish.name">
+                        </a>
+                        <div class="postcard__text t-dark">
+                            <div class="d-flex align-items-center">
+                                <h1 class="postcard__title red">{{ dish.name }}</h1>
+                                
+                                <div class="postcard__tagbox ms-2">
+                                    <div v-if="dish.vegan" class="tag__item"><i class="fa-solid fa-leaf mr-2"></i></div>
+                                    <div v-if="dish.spicy" class="tag__item"><i class="fa-solid fa-pepper-hot mr-2"></i></div>
+                                </div>
                             </div>
+                            <div class="postcard__bar"></div>
+                            <div class="postcard__preview-txt">{{ shortDescription(dish.description) }}</div>
+                            <div class="postcard__preview-txt">{{ dish.price.toFixed(2) }} &euro;</div>
                         </div>
-                        <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt">{{ shortDescription(dish.description) }}</div>
-                        <div class="postcard__preview-txt">{{ dish.price.toFixed(2) }} &euro;</div>
                     </div>
                 </div>
             </div>
@@ -50,8 +54,15 @@
                             <h1 class="postcard__title red"><a href="#">Carrello</a></h1>
                         </div>
                         <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt">Il carrello &egrave; vuoto</div>
-                        <div class="postcard__preview-txt">{{cartTotal}} &euro;</div>
+                        <div v-if="cartDishes.length == 0" class="postcard__preview-txt">Il carrello &egrave; vuoto</div>
+                        <div v-else class="postcard__preview-txt">
+                            <div v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
+                                <span>{{ cartDish.name }}</span>
+                                <span>{{ cartDish.quantity }}</span>
+                                <span>{{ cartDish.price.toFixed(2) }}</span>
+                            </div>
+                        </div>
+                        <div class="postcard__preview-txt">{{cartTotal.toFixed(2)}} &euro;</div>
                     </div>
                 </div>
             </div>
@@ -75,7 +86,12 @@ export default {
         return {
             user: [],
             dishes: [],
-            cartTotal: 0
+            cartTotal: 0,
+            quantity: 0,
+            cartDishes: [
+            ],
+            name: '',
+            price: 0,
         }
     },
     created(){
@@ -84,12 +100,32 @@ export default {
         this.getDishes(url);
     },
     methods: {
-        addToCart(value) {
-            this.cartTotal += value;
+        setQuantity(value) {
+            this.quantity = value;
+            console.log(value);
+        },
+        setName(value) {
+            this.name = value;
+            console.log(value);
+        },
+        setPrice(value) {
+            this.price = value;
+            console.log(value.toFixed(2));
+        },
+        addDishestoArray(){
+            let obj = {};
+            obj['name'] = this.name;
+            obj['price'] = this.price;
+            obj['quantity'] = this.quantity;
+            this.cartDishes.push(obj);
+            console.log(this.cartDishes);
+            this.cartTotal += this.price;
         },
         shortDescription(string) {
             if (string.length > 60) {
-               return string.substring(0, 60) + '...';
+                return string.substring(0, 60) + '...';
+            } else {
+                return string;
             }
         },
         getUser(url){
@@ -97,7 +133,6 @@ export default {
             {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}
             ).then(
                 (result) => {
-                    console.log(result);
                     this.user = result.data.results.data;
                 }
             );
@@ -107,9 +142,7 @@ export default {
             {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}
             ).then(
                 (result) => {
-                    console.log(result);
                     this.dishes = result.data.results.data;
-                    console.log(result.data.results.data);
                 }
             );
         },
