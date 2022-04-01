@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+<div>
+  <div class="container">
         <div class="row g-4">
             <div class="col">
                 <div class="card d-flex flex-row">
@@ -21,33 +22,60 @@
                     </a>
                     <div class="postcard__text t-dark">
                         <div class="d-flex align-items-center">
-                            <h1 class="postcard__title red"><a href="#">{{ dish.name }}</a></h1>
+                            <h1 class="postcard__title red"><a href="#" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">{{ dish.name }}</a></h1>
+
+                            <AddDish
+                            :dish="dish"
+                            @setCartPrice="addToCart($event)"/>
+                            
                             <div class="postcard__tagbox ms-2">
                                 <div v-if="dish.vegan" class="tag__item"><i class="fa-solid fa-leaf mr-2"></i></div>
                                 <div v-if="dish.spicy" class="tag__item"><i class="fa-solid fa-pepper-hot mr-2"></i></div>
                             </div>
                         </div>
                         <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt">{{ dish.description }}</div>
+                        <div class="postcard__preview-txt">{{ shortDescription(dish.description) }}</div>
                         <div class="postcard__preview-txt">{{ dish.price.toFixed(2) }} &euro;</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <div class="postcard light red">
+                    <!-- <a class="postcard__img_link" href="#">
+                        <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
+                        <img v-else src="/storage/uploads/default/default_dish.jpg" class="postcard__img" :alt="dish.name">
+                    </a> -->
+                    <div class="postcard__text t-dark">
+                        <div class="d-flex align-items-center">
+                            <h1 class="postcard__title red"><a href="#">Carrello</a></h1>
+                        </div>
+                        <div class="postcard__bar"></div>
+                        <div class="postcard__preview-txt">Il carrello &egrave; vuoto</div>
+                        <div class="postcard__preview-txt">{{cartTotal}} &euro;</div>
                     </div>
                 </div>
             </div>
         </div>
         <router-link class="btn btn-info mt-2" :to="{ name: 'home' }">Torna alla home</router-link>
     </div>
+</div>
 </template>
 
 <script>
 import Axios from "axios";
+import AddDish from '../components/AddDish';
 
 export default {
     name: "Home",
     props: ['id'],
+    components: {
+        AddDish
+    },
     data(){
         return {
             user: [],
             dishes: [],
+            cartTotal: 0
         }
     },
     created(){
@@ -56,6 +84,14 @@ export default {
         this.getDishes(url);
     },
     methods: {
+        addToCart(value) {
+            this.cartTotal += value;
+        },
+        shortDescription(string) {
+            if (string.length > 60) {
+               return string.substring(0, 60) + '...';
+            }
+        },
         getUser(url){
             Axios.get(url + this.id,
             {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}
@@ -73,9 +109,69 @@ export default {
                 (result) => {
                     console.log(result);
                     this.dishes = result.data.results.data;
+                    console.log(result.data.results.data);
                 }
             );
-        }
+        },
+        addItem() {
+                // aggiunge una quantità
+                if (this.qty < 9) {
+                    this.qty++;
+                    // annimazione mangia coin
+                    // const timeline = gsap.timeline({defaults: {duration: 1}});
+    
+                    // timeline
+                    // .to('.addItem', {x: '500%', ease: 'power2'})
+                    // .to('.face_up', {rotate: '45' }, '-=1')
+                    // .to('.face_down', {rotate: '-45' }, '-=1')
+                    // .to('.face_up', {rotate: '0', ease: 'power2'}, '-=0.4')
+                    // .to('.face_down', {rotate: '0', ease: 'power2'}, '-=1')
+                    // .eventCallback("onComplete", function() {
+                    // timeline.pause(0);});
+    
+                    // const smileFace = gsap.timeline({defaults: {duration: 1, delay: 2.3}});
+    
+                    // smileFace
+                    // .to('.eye', {opacity: 1, ease: 'power3'}, '-=1')
+                    // // .to('.smile', {opacity: 1, ease: 'power3'}, '-=3.3')
+                    // .eventCallback("onComplete", function() {
+                    // smileFace.pause(0);});
+                } else {
+                    this.enough = true;
+                    setTimeout(() => {
+                        this.enough = false;
+                    }, 1000);
+                }
+
+
+            },
+            removeItem() {
+                if (this.qty > 0) {
+                    this.qty--;
+
+                    // const sadFace = gsap.timeline({defaults: {duration: 0.1}});
+    
+                    // sadFace
+                    // .to('.face', {x: '5%', ease: 'bounce'})
+                    // .to('.face', {x: '-5%', ease: 'bounce'})
+                    // .to('.face', {x: '5%', ease: 'bounce'})
+                    // .to('.face', {x: '-5%', ease: 'bounce'})
+                    // .to('.face', {x: '5%', ease: 'bounce'})
+                    // .to('.face', {x: '-5%', ease: 'bounce'})
+                    // .to('.face', {x: '5%', ease: 'bounce'})
+                    // .to('.face', {x: '-5%', ease: 'bounce'})
+                    // .to('.face', {x: '5%', ease: 'bounce'})
+                    // .to('.eye_down', 1, {opacity: 1}, '-=1')
+                    // // .to('.smile_down', {opacity: 1, ease: 'inOut'}, '-=1')
+                    // .eventCallback("onComplete", function() {
+                    // sadFace.pause(0);});
+                } else {
+                    this.oneMore = true;
+                    setTimeout(() => {
+                        this.oneMore = false;
+                    }, 1000);
+                }
+            }
     }
 
 }
@@ -262,6 +358,7 @@ a, a:hover {
       transform: rotate(-4deg);
     }
   }
+   
 }
 @media screen and (min-width: 1024px){
 		.postcard__text {
@@ -318,5 +415,4 @@ a, a:hover {
 	// }
 	
 }
-
 </style>
