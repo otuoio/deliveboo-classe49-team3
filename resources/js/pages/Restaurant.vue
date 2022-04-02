@@ -61,6 +61,9 @@
                                 <span>{{ cartDish.quantity }}</span>
                                 <span>{{ cartDish.price.toFixed(2) }}</span>
                             </div>
+                            <div v-if="user.shipment_price != null">
+                                Costo di consegna: {{ user.shipment_price.toFixed(2) }} &euro;
+                            </div>
                         </div>
                         <div class="postcard__preview-txt">{{cartTotal.toFixed(2)}} &euro;</div>
                     </div>
@@ -118,7 +121,7 @@ export default {
             this.price = value;
             console.log(value.toFixed(2));
         },
-        addDishestoArray(){             
+        addDishestoArray(){     
             this.cartTotal += this.price;
             this.cartDishes.push({
                 name: this.name,

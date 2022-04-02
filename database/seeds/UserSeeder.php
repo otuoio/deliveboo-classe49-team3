@@ -48,6 +48,17 @@ class UserSeeder extends Seeder
                 'minimum_order' => 5.00,
                 'image' => 'ocuoppeciruzz.jpg',
             ],
+            [
+                'name' => "I Tre Scugnizzi",
+                'email' => 'info@itrescugnizzi.it',
+                'password' => '12345678',
+                'address' => 'Corso Roma, 2',
+                'p_iva' => '10215433655',
+                'phone_number' => '0810435675',
+                'shipment_price' => 1.50,
+                'minimum_order' => 5.00,
+                'image' => 'itrescugnizzi.jpg',
+            ],
         ];
 
         foreach ($users as $user){
