@@ -1,5 +1,5 @@
 <template>
-    <div class="col">
+    <div class="col" @click="refreshStorage">
         <router-link class="text-decoration-none text-black" :to="{ name: 'restaurant', params: { id: user.id }}">
             <div class="card h-100">
                 <img v-if="user.image" :src="'/storage/'+user.image" class="card-img-top" :alt="user.name">
@@ -15,7 +15,16 @@
 <script>
 export default {
     name: 'RestaurantCard',
-    props: ['user']
+    props: ['user'],
+    methods: {
+        refreshStorage() {
+            if(localStorage.getItem('RestaurantID') != this.user.id){
+                alert('Scegliendo un altro ristorante, il carrello esistente si svuoterà');
+                localStorage.clear();
+                console.log('ciao');
+            }
+        }
+    }
 }
 </script>
 

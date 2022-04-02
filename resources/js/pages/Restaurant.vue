@@ -101,40 +101,42 @@ export default {
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
-        if (localStorage.length != 0) {
-                this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
-                this.cartDishes.forEach(element => {
-                this.cartTotal += element.price;
-            });
-        }
+        console.log(localStorage);
     },
     methods: {
         setQuantity(value) {
             this.quantity = value;
-            console.log(value);
         },
         setName(value) {
             this.name = value;
-            console.log(value);
         },
         setPrice(value) {
             this.price = value;
-            console.log(value.toFixed(2));
         },
-        addDishestoArray(){     
-            this.cartTotal += this.price;
-            this.cartDishes.push({
+        addDishestoArray(){
+            let obj = {
                 name: this.name,
                 price: this.price,
                 quantity: this.quantity
-            });
-            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+            };
+            if(this.cartDishes.length == 0){
+                this.cartTotal = this.price + this.user.shipment_price;
+                this.cartDishes.push(obj);
+            }else{
+                this.cartTotal += this.price;
+                this.cartDishes.forEach((dish, index) => {
+                    if(dish.name == obj.name){
+                        obj['price'] = dish.price + this.price;
+                        obj['quantity'] = dish.quantity + this.quantity;
+                        // console.log(obj['quantity']);
+                        this.cartDishes.splice(index, 1);
+                    }
+                });
+                this.cartDishes.push(obj);
+            };
 
-            // if(!localStorage.getItem('cartDishes') || JSON.parse(localStorage.getItem('cartDishes')).length === 0){
-            //     $window.localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
-            // }
-            // this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
             console.log(this.cartDishes);
+            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
         },
         shortDescription(string) {
             if (string.length > 60) {
@@ -149,6 +151,14 @@ export default {
             ).then(
                 (result) => {
                     this.user = result.data.results.data;
+                    if (localStorage.length > 1) {
+                        this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
+                        this.cartTotal = this.user.shipment_price;
+                        this.cartDishes.forEach(element => {
+                            this.cartTotal += element.price;
+                        })
+                    };
+                    localStorage.setItem('RestaurantID', this.user.id);
                 }
             );
         },

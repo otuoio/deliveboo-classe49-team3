@@ -14,7 +14,7 @@
         </div>
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <RestaurantCard :user="user"
-            v-for="(user, index) in cards.users" 
+            v-for="(user, index) in cards.users"
             :key="index"/>
         </div>
     </div>

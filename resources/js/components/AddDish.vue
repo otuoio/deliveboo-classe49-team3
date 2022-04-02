@@ -58,32 +58,20 @@ export default {
             cartPrice: 0,
             oneMore: false,
             enough: false,
-            // list:[]
         }
     },
     methods: {
         toCart(price, quantity, name) {
-            // let obj = {};
-            // obj['name'] = this.name;
-            // obj['price'] = this.price;
-            // obj['quantity'] = this.quantity;
-            // localStorage.setItem(key, JSON.stringify(obj));
-            // localStorage.setItem('name', name);
-            // localStorage.setItem('quantity', quantity);
-            // localStorage.setItem('price', price);
-            // this.doShowAll();
             this.$emit('setQuantity', quantity);
             this.$emit('setName', name);
             setTimeout(() => {
                 this.qty = 1;
             }, 500);
             price = price * quantity;
-            // console.log(localStorage);
             this.$emit('setPrice', price);
             this.$emit('addDishestoArray');
         },
         cartP(price, quantity) {
-            console.log(price, quantity);
             return this.cartPrice = (price * quantity);
             
         },
