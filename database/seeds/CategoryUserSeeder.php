@@ -19,7 +19,14 @@ class CategoryUserSeeder extends Seeder
         $users[0]->categories()->attach($categories[0]);
         $users[1]->categories()->attach($categories[5]);
         $users[2]->categories()->attach($categories[7]);
-        $users[3]->categories()->attach($categories[1]);
+        $users[3]->categories()->attach($categories[0]);
         $users[3]->categories()->attach($categories[7]);
+        $users[4]->categories()->attach($categories[1]);
+        $users[5]->categories()->attach($categories[2]);
+        $users[6]->categories()->attach($categories[3]);
+        $users[7]->categories()->attach($categories[2]);
+        $users[7]->categories()->attach($categories[4]);
+        $users[8]->categories()->attach($categories[6]);
+        $users[9]->categories()->attach($categories[8]);
     }
 }
