@@ -25,13 +25,13 @@
                     <div class="bottom-wrap">
                         <div class="row">
                             <div class="col col-md-2">
-                                <a type="a" href="#" class="btn btn-primary rounded-circle" @click="removeItem(dish.price.toFixed(2))">&minus;</a>
+                                <div class="btn btn-primary rounded-circle" @click="removeItem(dish.price.toFixed(2))">&minus;</div>
                             </div>
                             <div class="col col-md-2">
                                 <div class="">{{ qty }}</div>
                             </div>
                             <div class="col col-md-2">
-                                <a href="#" class="btn btn-primary rounded-circle" @click="addItem(dish.price.toFixed(2))">&plus;</a>
+                                <div class="btn btn-primary rounded-circle" @click="addItem(dish.price.toFixed(2))">&plus;</div>
                             </div>
                         </div>
                         <div class="row">
