@@ -50,8 +50,9 @@
                         <div class="col-md-12 cart">
                             <div class="title">
                                 <div class="row">
-                                    <div class="col">
-                                        <h4><b>Carrello</b></h4>
+                                    <div class="col d-flex justify-content-between align-items-center">
+                                        <h4 class="cart-title"><b>Carrello</b></h4>
+                                        <span @click="emptyCart" role="button"><i class="fa-solid fa-trash"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -68,8 +69,14 @@
                                         <div class="col">
                                             <div class="row">{{ cartDish.name }}</div>
                                         </div>
-                                        <div class="col"> <a @click="removeItem(cartDish)">-</a><a href="#" class="border">{{ cartDish.quantity }}</a><a @click="addItem(cartDish)">+</a> </div>
-                                        <div class="col">&euro; {{ cartDish.price.toFixed(2) }} <span class="close ms-3">&#10005;</span></div>
+                                        <div class="col">
+                                            <span @click="removeItem(cartDish)" role="button">-</span>
+                                            <span class="d-inline-block border">{{ cartDish.quantity }}</span>
+                                            <span @click="addItem(cartDish)" role="button">+</span>
+                                        </div>
+                                        <div class="col">&euro; {{ cartDish.price.toFixed(2) }}
+                                            <span class="close ms-3 align-middle" @click="removeDish(index)"><i class="fa-solid fa-xmark"></i></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
@@ -85,32 +92,8 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!-- <div class="postcard light red">
-                    <div class="postcard__text t-dark">
-                        <div class="d-flex align-items-center">
-                            <h1 class="postcard__title red"><a href="#">Carrello</a></h1>
-                        </div>
-                        <div class="postcard__bar"></div>
-                        <div v-if="cartTotal == 0" class="postcard__preview-txt">Il carrello &egrave; vuoto</div>
-                        <div v-else class="postcard__preview-txt overflow-visible">
-                            <div v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
-                                <span>{{ cartDish.name }}</span>
-                                <span>{{ cartDish.quantity }}</span>
-                                <span>{{ cartDish.price.toFixed(2) }}</span>
-                            </div>
-                            <div v-if="user.shipment_price != null">
-                                Costo di consegna: {{ user.shipment_price.toFixed(2) }} &euro;
-                            </div>
-                        </div>
-                        <div class="postcard__preview-txt">{{cartTotal.toFixed(2)}} &euro;</div>
-                    </div>
-                </div> -->
             </div>
         </div>
-        <!-- <button @click="showCart()" class="btn btn-primary">Test BELLISSIMO</button> -->
-        <router-link class="btn btn-info mt-2" :to="{ name: 'home' }">Torna alla home</router-link>
     </div>
 </div>
 </template>
@@ -144,7 +127,7 @@ export default {
         this.getUser(url);
         this.getDishes(url);
         this.storage = JSON.parse(localStorage.getItem('cartDishes'));
-        if(this.storage != null){
+        if(this.storage != null && this.cartDishes != null){
             if(this.id != (this.storage[0]['userID']).toString()){
                 alert('Il carrello è stato svuotato');
                 localStorage.clear();
@@ -171,7 +154,6 @@ export default {
                 quantity: this.quantity,
                 userID: this.userID,
             };
-            // console.log(obj);
             if(this.cartDishes.length == 0){
                 this.cartTotal = this.price + this.user.shipment_price;
                 this.cartDishes.push(obj);
@@ -181,7 +163,6 @@ export default {
                     if(dish.name == obj.name){
                         obj['price'] = dish.price + this.price;
                         obj['quantity'] = dish.quantity + this.quantity;
-                        // console.log(obj['quantity']);
                         this.cartDishes.splice(index, 1);
                     }
                 });
@@ -225,41 +206,49 @@ export default {
         },
         addItem(obj) {
             // aggiunge una quantità
-                this.quantity++;
+                obj.quantity++;
                 this.cartTotal += this.dishPrice;
-                // obj['price'] = this.dishPrice + this.price;
                 this.cartDishes.forEach((dish, index) => {
                     if(dish.name == obj.name){
                         obj['price'] = obj.price + this.dishPrice;
-                        obj['quantity'] = this.quantity;
-                        // console.log(obj['quantity']);
+                        obj['quantity'] = obj.quantity;
                         this.cartDishes.splice(index, 1);
                     }
                 });
                 this.cartDishes.push(obj);
-            // };
             console.log(this.dishPrice);
-            // console.log(this.cartDishes);
             localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
         },
         removeItem(obj) {
-            this.quantity--;
+            obj.quantity--;
                 this.cartTotal -= this.dishPrice;
-                // obj['price'] = this.dishPrice + this.price;
                 this.cartDishes.forEach((dish, index) => {
                     if(dish.name == obj.name){
                         obj['price'] = obj.price - this.dishPrice;
-                        obj['quantity'] = this.quantity;
-                        // console.log(obj['quantity']);
+                        obj['quantity'] = obj.quantity;
                         this.cartDishes.splice(index, 1);
                     }
                 });
                 this.cartDishes.push(obj);
-            // };
-            console.log(this.dishPrice);
-            // console.log(this.cartDishes);
             localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
-        }
+        },
+        removeDish(obj){
+            this.cartDishes.splice(obj, 1);
+            if (this.cartDishes.length > 0) {
+                this.cartTotal = this.user.shipment_price;
+                this.cartDishes.forEach(element => {
+                    this.cartTotal += element.price;
+                })
+                localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+            }else{
+                this.emptyCart();
+            };
+        },
+        emptyCart(){
+            this.cartTotal = 0;
+            localStorage.removeItem('cartDishes');
+            this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
+        },
     }
 
 }
@@ -676,5 +665,19 @@ a:hover {
     background-repeat: no-repeat;
     background-position-x: 95%;
     background-position-y: center
+}
+
+.fa-xmark {
+    color: rgb(163, 0, 0);
+    cursor: pointer;
+    font-size: 1.5em;
+}
+.fa-trash {
+    font-size: 1.5em;
+}
+
+.cart-title {
+    line-height: 0.8em;
+    margin: 0;
 }
 </style>
