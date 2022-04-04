@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row g-4">
             <div class="col">
                 <div class="card d-flex flex-row">
@@ -45,11 +45,49 @@
                 </div>
             </div>
             <div class="col col-md-4">
-                <div class="postcard light red">
-                    <!-- <a class="postcard__img_link" href="#">
-                        <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
-                        <img v-else src="/storage/uploads/default/default_dish.jpg" class="postcard__img" :alt="dish.name">
-                    </a> -->
+                <div class="card m-0 ms-4">
+                    <div class="row">
+                        <div class="col-md-12 cart">
+                            <div class="title">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4><b>Carrello</b></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="cartTotal == 0">
+                                <div class="row border-top border-bottom">
+                                    <div class="row main align-items-center">
+                                        Il carrello &egrave; vuoto
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="row border-top border-bottom" v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
+                                    <div class="row main align-items-center">
+                                        <div class="col">
+                                            <div class="row">{{ cartDish.name }}</div>
+                                        </div>
+                                        <div class="col"> <a @click="removeItem(cartDish)">-</a><a href="#" class="border">{{ cartDish.quantity }}</a><a @click="addItem(cartDish)">+</a> </div>
+                                        <div class="col">&euro; {{ cartDish.price.toFixed(2) }} <span class="close ms-3">&#10005;</span></div>
+                                    </div>
+                                </div>
+                                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                    <div class="col">Costo di consegna</div>
+                                    <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div>
+                                </div>
+                                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                    <div class="col">TOTALE</div>
+                                    <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div>
+                                </div>
+                                <button class="btn">CHECKOUT</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div class="postcard light red">
                     <div class="postcard__text t-dark">
                         <div class="d-flex align-items-center">
                             <h1 class="postcard__title red"><a href="#">Carrello</a></h1>
@@ -68,7 +106,7 @@
                         </div>
                         <div class="postcard__preview-txt">{{cartTotal.toFixed(2)}} &euro;</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- <button @click="showCart()" class="btn btn-primary">Test BELLISSIMO</button> -->
@@ -97,12 +135,21 @@ export default {
             name: '',
             price: 0,
             userID: '',
+            dishPrice: 0,
+            storage: '',
         }
     },
     created(){
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
+        this.storage = JSON.parse(localStorage.getItem('cartDishes'));
+        if(this.storage != null){
+            if(this.id != (this.storage[0]['userID']).toString()){
+                alert('Il carrello è stato svuotato');
+                localStorage.clear();
+            }
+        }
     },
     methods: {
         setQuantity(value) {
@@ -140,9 +187,9 @@ export default {
                 });
                 this.cartDishes.push(obj);
             };
-
-            console.log(this.cartDishes);
+            this.dishPrice = (obj['price'] / obj['quantity']);
             localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+            console.log(this.dishPrice);
         },
         shortDescription(string) {
             if (string.length > 60) {
@@ -176,65 +223,43 @@ export default {
                 }
             );
         },
-        addItem() {
-                // aggiunge una quantità
-                if (this.qty < 9) {
-                    this.qty++;
-                    // annimazione mangia coin
-                    // const timeline = gsap.timeline({defaults: {duration: 1}});
-    
-                    // timeline
-                    // .to('.addItem', {x: '500%', ease: 'power2'})
-                    // .to('.face_up', {rotate: '45' }, '-=1')
-                    // .to('.face_down', {rotate: '-45' }, '-=1')
-                    // .to('.face_up', {rotate: '0', ease: 'power2'}, '-=0.4')
-                    // .to('.face_down', {rotate: '0', ease: 'power2'}, '-=1')
-                    // .eventCallback("onComplete", function() {
-                    // timeline.pause(0);});
-    
-                    // const smileFace = gsap.timeline({defaults: {duration: 1, delay: 2.3}});
-    
-                    // smileFace
-                    // .to('.eye', {opacity: 1, ease: 'power3'}, '-=1')
-                    // // .to('.smile', {opacity: 1, ease: 'power3'}, '-=3.3')
-                    // .eventCallback("onComplete", function() {
-                    // smileFace.pause(0);});
-                } else {
-                    this.enough = true;
-                    setTimeout(() => {
-                        this.enough = false;
-                    }, 1000);
-                }
-
-
-            },
-            removeItem() {
-                if (this.qty > 0) {
-                    this.qty--;
-
-                    // const sadFace = gsap.timeline({defaults: {duration: 0.1}});
-    
-                    // sadFace
-                    // .to('.face', {x: '5%', ease: 'bounce'})
-                    // .to('.face', {x: '-5%', ease: 'bounce'})
-                    // .to('.face', {x: '5%', ease: 'bounce'})
-                    // .to('.face', {x: '-5%', ease: 'bounce'})
-                    // .to('.face', {x: '5%', ease: 'bounce'})
-                    // .to('.face', {x: '-5%', ease: 'bounce'})
-                    // .to('.face', {x: '5%', ease: 'bounce'})
-                    // .to('.face', {x: '-5%', ease: 'bounce'})
-                    // .to('.face', {x: '5%', ease: 'bounce'})
-                    // .to('.eye_down', 1, {opacity: 1}, '-=1')
-                    // // .to('.smile_down', {opacity: 1, ease: 'inOut'}, '-=1')
-                    // .eventCallback("onComplete", function() {
-                    // sadFace.pause(0);});
-                } else {
-                    this.oneMore = true;
-                    setTimeout(() => {
-                        this.oneMore = false;
-                    }, 1000);
-                }
-            }
+        addItem(obj) {
+            // aggiunge una quantità
+                this.quantity++;
+                this.cartTotal += this.dishPrice;
+                // obj['price'] = this.dishPrice + this.price;
+                this.cartDishes.forEach((dish, index) => {
+                    if(dish.name == obj.name){
+                        obj['price'] = obj.price + this.dishPrice;
+                        obj['quantity'] = this.quantity;
+                        // console.log(obj['quantity']);
+                        this.cartDishes.splice(index, 1);
+                    }
+                });
+                this.cartDishes.push(obj);
+            // };
+            console.log(this.dishPrice);
+            // console.log(this.cartDishes);
+            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+        },
+        removeItem(obj) {
+            this.quantity--;
+                this.cartTotal -= this.dishPrice;
+                // obj['price'] = this.dishPrice + this.price;
+                this.cartDishes.forEach((dish, index) => {
+                    if(dish.name == obj.name){
+                        obj['price'] = obj.price - this.dishPrice;
+                        obj['quantity'] = this.quantity;
+                        // console.log(obj['quantity']);
+                        this.cartDishes.splice(index, 1);
+                    }
+                });
+                this.cartDishes.push(obj);
+            // };
+            console.log(this.dishPrice);
+            // console.log(this.cartDishes);
+            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+        }
     }
 
 }
@@ -477,5 +502,179 @@ a, a:hover {
 	// 	background-image: linear-gradient(80deg, $main-red-rgb-015, transparent 50%);
 	// }
 	
+}
+
+// CARRELLO
+body {
+    background: #ddd;
+    min-height: 100vh;
+    vertical-align: middle;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold
+}
+
+.title {
+    margin-bottom: 5vh
+}
+
+.card {
+    margin: auto;
+    max-width: 950px;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent
+}
+
+@media(max-width:767px) {
+    .card {
+        margin: 3vh auto
+    }
+}
+
+.cart {
+    background-color: #fff;
+    padding: 4vh 5vh;
+}
+
+@media(max-width:767px) {
+    .cart {
+        padding: 4vh;
+    }
+}
+
+.summary {
+    background-color: #ddd;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    color: rgb(65, 65, 65)
+}
+
+@media(max-width:767px) {
+    .summary {
+        border-top-right-radius: unset;
+        border-bottom-left-radius: 1rem
+    }
+}
+
+.summary .col-2 {
+    padding: 0
+}
+
+.summary .col-10 {
+    padding: 0
+}
+
+.row {
+    margin: 0
+}
+
+.title b {
+    font-size: 1.5rem
+}
+
+.main {
+    margin: 0;
+    padding: 2vh 0;
+    width: 100%
+}
+
+.col-2,
+.col {
+    padding: 0 1vh
+}
+
+a {
+    padding: 0 1vh
+}
+
+.close {
+    margin-left: auto;
+    font-size: 0.7rem
+}
+
+img {
+    width: 3.5rem
+}
+
+.back-to-shop {
+    margin-top: 4.5rem
+}
+
+h5 {
+    margin-top: 4vh
+}
+
+hr {
+    margin-top: 1.25rem
+}
+
+form {
+    padding: 2vh 0
+}
+
+select {
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1.5vh 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247)
+}
+
+input {
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247)
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent
+}
+
+.btn {
+    background-color: #000;
+    border-color: #000;
+    color: white;
+    width: 100%;
+    font-size: 0.7rem;
+    margin-top: 4vh;
+    padding: 1vh;
+    border-radius: 0
+}
+
+.btn:focus {
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    color: white;
+    -webkit-box-shadow: none;
+    -webkit-user-select: none;
+    transition: none
+}
+
+.btn:hover {
+    color: white
+}
+
+a {
+    color: black
+}
+
+a:hover {
+    color: black;
+    text-decoration: none
+}
+
+#code {
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center
 }
 </style>

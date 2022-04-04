@@ -106,8 +106,6 @@ export default {
                         this.enough = false;
                     }, 1000);
                 }
-
-
             },
             removeItem(price) {
                 if (this.qty > 1) {
