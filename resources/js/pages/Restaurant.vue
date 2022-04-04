@@ -103,7 +103,6 @@ export default {
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
-        // console.log(localStorage);
     },
     methods: {
         setQuantity(value) {
@@ -158,7 +157,7 @@ export default {
             ).then(
                 (result) => {
                     this.user = result.data.results.data;
-                    if (localStorage.length > 1) {
+                    if (localStorage.length > 0) {
                         this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
                         this.cartTotal = this.user.shipment_price;
                         this.cartDishes.forEach(element => {
