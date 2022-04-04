@@ -1366,7 +1366,11 @@ class DishSeeder extends Seeder
             $newDish->vegan = $dish['vegan'];
             $newDish->spicy = $dish['spicy'];
             $newDish->user_id = $dish['user_id'];
-            $newDish->image = 'uploads/'. $dish['image'];
+            if (!$dish['image']) {
+                $newDish->image = $dish['image'];
+            } else {
+                $newDish->image = 'uploads/'. $dish['image'];
+            }
             $newDish->save();
         }
     }
