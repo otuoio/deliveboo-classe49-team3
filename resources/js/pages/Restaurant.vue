@@ -21,6 +21,7 @@
                                 @setPrice="setPrice($event)"
                                 @setQuantity="setQuantity($event)"
                                 @setName="setName($event)"
+                                @setUserID="setUserID($event)"
                                 @addDishestoArray="addDishestoArray"/>
                     <div class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
                         <a class="postcard__img_link" href="#">
@@ -95,13 +96,14 @@ export default {
             cartDishes: [],
             name: '',
             price: 0,
+            userID: '',
         }
     },
     created(){
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
-        console.log(localStorage);
+        // console.log(localStorage);
     },
     methods: {
         setQuantity(value) {
@@ -113,12 +115,17 @@ export default {
         setPrice(value) {
             this.price = value;
         },
+        setUserID(value){
+            this.userID = value;
+        },
         addDishestoArray(){
             let obj = {
                 name: this.name,
                 price: this.price,
-                quantity: this.quantity
+                quantity: this.quantity,
+                userID: this.userID,
             };
+            // console.log(obj);
             if(this.cartDishes.length == 0){
                 this.cartTotal = this.price + this.user.shipment_price;
                 this.cartDishes.push(obj);
@@ -158,7 +165,6 @@ export default {
                             this.cartTotal += element.price;
                         })
                     };
-                    localStorage.setItem('RestaurantID', this.user.id);
                 }
             );
         },
