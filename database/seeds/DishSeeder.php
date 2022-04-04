@@ -226,7 +226,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Patate fritte',
-                'image' => '',
+                'image' => null,
                 'description' => "Servite con salsa dedicata o mayonese vegan",
                 'price' => 3.00,
                 'visible' => 1,
@@ -236,7 +236,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Patate dolci',
-                'image' => '',
+                'image' => null,
                 'description' => "Servite con salsa dedicata o mayonese vegan",
                 'price' => 3.50,
                 'visible' => 1,
@@ -1156,7 +1156,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Pollo con mandorle',
-                'image' => 'antra.jpg',
+                'image' => 'anatra.jpg',
                 'description' => '',
                 'price' => 6.30,
                 'visible' => 1,
@@ -1166,7 +1166,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Pollo con gamberi e funghi',
-                'image' => 'antra.jpg',
+                'image' => 'anatra.jpg',
                 'description' => '',
                 'price' => 6.30,
                 'visible' => 1,
@@ -1176,7 +1176,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Pollo in salsa agrodolce',
-                'image' => 'antra.jpg',
+                'image' => 'anatra.jpg',
                 'description' => '',
                 'price' => 6.30,
                 'visible' => 1,
@@ -1186,7 +1186,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Anatra alla piastra',
-                'image' => 'antra.jpg',
+                'image' => 'anatra.jpg',
                 'description' => '',
                 'price' => 6.30,
                 'visible' => 1,
@@ -1196,7 +1196,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Anatra alla cantonese',
-                'image' => 'antra.jpg',
+                'image' => 'anatra.jpg',
                 'description' => '',
                 'price' => 6.30,
                 'visible' => 1,
@@ -1206,7 +1206,7 @@ class DishSeeder extends Seeder
             ],
             [
                 'name' => 'Anatra alla cantonese',
-                'image' => 'antra.jpg',
+                'image' => 'anatra.jpg',
                 'description' => '',
                 'price' => 6.30,
                 'visible' => 1,
