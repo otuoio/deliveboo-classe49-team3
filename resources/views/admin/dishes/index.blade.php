@@ -64,7 +64,7 @@
                                                 No
                                             @endif
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center d-flex">
                                             <div class="d-inline-block table-div">
                                                 <a class="btn btn-primary" href="{{ route('admin.dishes.show', $dish->slug) }}">Visualizza</a>
                                             </div>
