@@ -22,7 +22,8 @@
                                 @setQuantity="setQuantity($event)"
                                 @setName="setName($event)"
                                 @setUserID="setUserID($event)"
-                                @setItem="setItem"/>
+                                @setItem="setItem"
+                                @setDishID="setDishID"/>
                     <div class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
                         <a class="postcard__img_link" href="#">
                             <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
@@ -87,7 +88,9 @@
                                     <div class="col">TOTALE</div>
                                     <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div>
                                 </div>
-                                <button class="btn">CHECKOUT</button>
+                                <router-link class="btn" :to="{ name: 'checkout'}"> 
+                                    CHECKOUT
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -120,7 +123,8 @@ export default {
             userID: '',
             dishPrice: 0,
             storage: '',
-            showC: false
+            showC: false,
+            dish_id:''
         }
     },
     created(){
@@ -135,6 +139,9 @@ export default {
     methods: {
         setQuantity(value) {
             this.quantity = value;
+        },
+        setDishID(value) {
+            this.dish_id = value;
         },
         setName(value) {
             this.name = value;
@@ -183,13 +190,6 @@ export default {
             ).then(
                 (result) => {
                     this.user = result.data.results.data;
-                    // if (localStorage.length > 0) {
-                    //     this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
-                    //     this.cartTotal = this.user.shipment_price;
-                    //     this.cartDishes.forEach(element => {
-                    //         this.cartTotal += element.price;
-                    //     })
-                    // };
                     if (localStorage.length > 0) {
                         let key = localStorage.key(0);
                         this.userID = JSON.parse(localStorage.getItem(key)).userID;
@@ -240,6 +240,7 @@ export default {
             let name = this.name;
             let dish = {
                 name: this.name,
+                id: this.dish_id,
                 price: this.price,
                 quantity: this.quantity,
                 userID: this.userID
@@ -249,6 +250,7 @@ export default {
                 // se c'è aggiorno il value per la key esistente
                 dish = {
                     name: this.name,
+                    id: this.dish_id,
                     price: JSON.parse(localStorage.getItem(name)).price + this.price,
                     quantity: JSON.parse(localStorage.getItem(name)).quantity + this.quantity,
                     userID: this.userID
@@ -274,6 +276,7 @@ export default {
             let name = obj.name;
             let dish = {
                 name: obj.name,
+                id: obj.id,
                 price: JSON.parse(localStorage.getItem(name)).price + this.dishPrice,
                 quantity: JSON.parse(localStorage.getItem(name)).quantity + 1,
                 userID: obj.userID
@@ -299,6 +302,7 @@ export default {
                 // aggiorno l'oggetto da salvare nello storage
                 let dish = {
                     name: obj.name,
+                    id: obj.id,
                     price: JSON.parse(localStorage.getItem(name)).price - this.dishPrice,
                     quantity: JSON.parse(localStorage.getItem(name)).quantity - 1,
                     userID: obj.userID

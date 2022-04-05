@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col">
                                 <h3>{{cartP(dish.price.toFixed(2), qty)}} &euro;</h3>
-                                <button class="btn btn-primary" @click="toCart(dish.price.toFixed(2), qty, dish.name, dish.user_id)" data-bs-dismiss="modal">Aggiungi al carrello</button>
+                                <button class="btn btn-primary" @click="toCart(dish.price.toFixed(2), qty, dish.name, dish.user_id, dish.id)" data-bs-dismiss="modal">Aggiungi al carrello</button>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@ export default {
         }
     },
     methods: {
-        toCart(price, quantity, name, userID) {
+        toCart(price, quantity, name, userID, dish_id) {
             this.$emit('setQuantity', quantity);
             this.$emit('setName', name);
             setTimeout(() => {
@@ -69,6 +69,7 @@ export default {
             }, 500);
             price = price * quantity;
             this.$emit('setPrice', price);
+            this.$emit('setDishID', dish_id);
             this.$emit('setUserID', userID);
             // this.$emit('addDishestoArray');
             this.$emit('setItem');

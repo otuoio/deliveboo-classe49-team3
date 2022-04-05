@@ -16,4 +16,12 @@ class OrderController extends Controller
             "results" => $orders,
         ]);
     }
+    public function sendOrder(Request $request) {
+        $data = $request->params['info'];
+        // return view('guest.success', ['data'=>$data]);
+        return response()->json([
+            "success" => true,
+            "results" => $data,
+        ]);
+    }
 }

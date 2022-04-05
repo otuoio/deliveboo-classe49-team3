@@ -16,7 +16,7 @@
             <div v-for="(user, index) in cards.users"
                 :key="index">
                 <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
-                <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
             </div>
         </div>
     </div>
