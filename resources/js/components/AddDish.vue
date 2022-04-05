@@ -74,7 +74,7 @@ export default {
             this.$emit('setItem');
         },
         cartP(price, quantity) {
-            return this.cartPrice = (price * quantity);
+            return this.cartPrice = (price * quantity).toFixed(2);
             
         },
         addItem(price) {

@@ -56,14 +56,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div v-if="cartTotal == 0">
+                            <div v-if="cartTotal == user.shipment_price || cartTotal == 0">
                                 <div class="row border-top border-bottom">
                                     <div class="row main align-items-center">
                                         Il carrello &egrave; vuoto
                                     </div>
                                 </div>
-                            </div> -->
-                            <div v-if="showC">
+                            </div>
+                            <div v-else>
                                 <div class="row border-top border-bottom" v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
                                     <div class="row main align-items-center">
                                         <div class="col">
@@ -81,11 +81,11 @@
                                 </div>
                                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                     <div class="col">Costo di consegna</div>
-                                    <!-- <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div> -->
+                                    <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div>
                                 </div>
                                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                     <div class="col">TOTALE</div>
-                                    <!-- <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div> -->
+                                    <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div>
                                 </div>
                                 <button class="btn">CHECKOUT</button>
                             </div>
@@ -127,7 +127,10 @@ export default {
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
-        this.showCart();
+        // setTimeout(() => {
+            
+        // }, 500);
+
     },
     methods: {
         setQuantity(value) {
@@ -142,31 +145,31 @@ export default {
         setUserID(value){
             this.userID = value;
         },
-        addDishestoArray(){
-            let obj = {
-                name: this.name,
-                price: this.price,
-                quantity: this.quantity,
-                userID: this.userID,
-            };
-            if(this.cartDishes.length == 0){
-                this.cartTotal = this.price + this.user.shipment_price;
-                this.cartDishes.push(obj);
-            }else{
-                this.cartTotal += this.price;
-                this.cartDishes.forEach((dish, index) => {
-                    if(dish.name == obj.name){
-                        obj['price'] = dish.price + this.price;
-                        obj['quantity'] = dish.quantity + this.quantity;
-                        this.cartDishes.splice(index, 1);
-                    }
-                });
-                this.cartDishes.push(obj);
-            };
-            this.dishPrice = (obj['price'] / obj['quantity']);
-            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
-            console.log(this.dishPrice);
-        },
+        // addDishestoArray(){
+        //     let obj = {
+        //         name: this.name,
+        //         price: this.price,
+        //         quantity: this.quantity,
+        //         userID: this.userID,
+        //     };
+        //     if(this.cartDishes.length == 0){
+        //         this.cartTotal = this.price + this.user.shipment_price;
+        //         this.cartDishes.push(obj);
+        //     }else{
+        //         this.cartTotal += this.price;
+        //         this.cartDishes.forEach((dish, index) => {
+        //             if(dish.name == obj.name){
+        //                 obj['price'] = dish.price + this.price;
+        //                 obj['quantity'] = dish.quantity + this.quantity;
+        //                 this.cartDishes.splice(index, 1);
+        //             }
+        //         });
+        //         this.cartDishes.push(obj);
+        //     };
+        //     this.dishPrice = (obj['price'] / obj['quantity']);
+        //     localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+        //     console.log(this.dishPrice);
+        // },
         shortDescription(string) {
             if (string.length > 60) {
                 return string.substring(0, 60) + '...';
@@ -187,6 +190,22 @@ export default {
                     //         this.cartTotal += element.price;
                     //     })
                     // };
+                    if (localStorage.length > 0) {
+                        let key = localStorage.key(0);
+                        this.userID = JSON.parse(localStorage.getItem(key)).userID;
+                        if(this.userID != (this.user.id)){
+                            alert('Il carrello è stato svuotato');
+                            localStorage.clear();
+                        }
+                    };
+
+                    this.showCart();
+                    this.cartTotal = this.user.shipment_price;
+                    for (let i = 0; i < localStorage.length; i++) {
+                        let key = localStorage.key(i);
+                        let cartPrice = JSON.parse(localStorage.getItem(key)).price;
+                        this.cartTotal += cartPrice;
+                    };
                 }
             );
         },
@@ -214,6 +233,7 @@ export default {
             console.log(localStorage);
             // assegno l'array temporaneo al cartDishes array che stampa i piatti nel carrello
             this.cartDishes = array;
+            console.log(this.cartTotal);
         },
         setItem() {
             // creo key e value per il local storage
@@ -239,8 +259,14 @@ export default {
                 // se non c'è salvo key e value in un nuovo item del local storage
                 localStorage.setItem(name, JSON.stringify(dish));
             }
-            console.log('ciao');
+            this.cartTotal = this.user.shipment_price;
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let cartPrice = JSON.parse(localStorage.getItem(key)).price;
+                this.cartTotal += cartPrice;
+            };
             this.showCart();
+            
         },
         addItem(obj) {
             this.dishPrice = obj.price / obj.quantity;
@@ -256,12 +282,19 @@ export default {
             // salvo il nuovo oggetto nello storage
             localStorage.setItem(name, JSON.stringify(dish));
 
+            
+            this.cartTotal = this.user.shipment_price;
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let cartPrice = JSON.parse(localStorage.getItem(key)).price;
+                this.cartTotal += cartPrice;
+            };
             this.showCart();
         },
         removeItem(obj) {
             let name = obj.name;
+            this.dishPrice = obj.price / obj.quantity;
             if (obj.quantity > 1) {
-                this.dishPrice = obj.price / obj.quantity;
 
                 // aggiorno l'oggetto da salvare nello storage
                 let dish = {
@@ -276,16 +309,21 @@ export default {
             } else {
                 localStorage.removeItem(name);
             }
+            this.cartTotal -= this.dishPrice;
             this.showCart();
         },
         removeDish(obj){
             let name = obj.name;
             localStorage.removeItem(name);
+            this.cartTotal -= obj.price;
             this.showCart();
+
         },
         emptyCart(){
             localStorage.clear();
+            this.cartTotal = this.user.shipment_price;
             this.showCart();
+
         },
     }
 
