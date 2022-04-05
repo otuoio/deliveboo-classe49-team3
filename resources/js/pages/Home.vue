@@ -15,7 +15,7 @@
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <div v-for="(user, index) in cards.users"
                 :key="index">
-                <RestaurantCard v-if="storageBoh.length == 0 || storage[0].userID == user.id" :user="user"/>
+                <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
                 <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
             </div>
         </div>
@@ -42,6 +42,7 @@ export default {
             differentUserID: false,
             storage: '',
             storageBoh: '',
+            userID: ''
         }
     },
     props: [
@@ -50,9 +51,18 @@ export default {
     ],
     created() {
         this.getCategories('http://127.0.0.1:8000/api/v1/categories');
-        this.storage = JSON.parse(localStorage.getItem('cartDishes'));
-        this.storageBoh = localStorage;
-        console.log(this.storageBoh);
+        // this.storage = JSON.parse(localStorage.getItem('cartDishes'));
+        // this.storageBoh = localStorage;
+        // console.log(this.storageBoh);
+        // for (let i = 0; i < localStorage.length; i++) {
+        //     const element = array[i];
+            
+        // }
+        this.storage = localStorage;
+        if (localStorage.length > 0) {
+            let key = localStorage.key(0);
+            this.userID = JSON.parse(localStorage.getItem(key)).userID;
+        }
     },
     methods: {
         getCategories(url) {

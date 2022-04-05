@@ -22,7 +22,7 @@
                                 @setQuantity="setQuantity($event)"
                                 @setName="setName($event)"
                                 @setUserID="setUserID($event)"
-                                @addDishestoArray="addDishestoArray"/>
+                                @setItem="setItem"/>
                     <div class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
                         <a class="postcard__img_link" href="#">
                             <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
@@ -56,14 +56,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="cartTotal == 0">
+                            <!-- <div v-if="cartTotal == 0">
                                 <div class="row border-top border-bottom">
                                     <div class="row main align-items-center">
                                         Il carrello &egrave; vuoto
                                     </div>
                                 </div>
-                            </div>
-                            <div v-else>
+                            </div> -->
+                            <div v-if="showC">
                                 <div class="row border-top border-bottom" v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
                                     <div class="row main align-items-center">
                                         <div class="col">
@@ -75,17 +75,17 @@
                                             <span @click="addItem(cartDish)" role="button">+</span>
                                         </div>
                                         <div class="col">&euro; {{ cartDish.price.toFixed(2) }}
-                                            <span class="close ms-3 align-middle" @click="removeDish(index)"><i class="fa-solid fa-xmark"></i></span>
+                                            <span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                     <div class="col">Costo di consegna</div>
-                                    <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div>
+                                    <!-- <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div> -->
                                 </div>
                                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                     <div class="col">TOTALE</div>
-                                    <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div>
+                                    <!-- <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div> -->
                                 </div>
                                 <button class="btn">CHECKOUT</button>
                             </div>
@@ -120,19 +120,14 @@ export default {
             userID: '',
             dishPrice: 0,
             storage: '',
+            showC: false
         }
     },
     created(){
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
-        this.storage = JSON.parse(localStorage.getItem('cartDishes'));
-        if(this.storage != null && this.cartDishes != null){
-            if(this.id != (this.storage[0]['userID']).toString()){
-                alert('Il carrello è stato svuotato');
-                localStorage.clear();
-            }
-        }
+        this.showCart();
     },
     methods: {
         setQuantity(value) {
@@ -185,13 +180,13 @@ export default {
             ).then(
                 (result) => {
                     this.user = result.data.results.data;
-                    if (localStorage.length > 0) {
-                        this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
-                        this.cartTotal = this.user.shipment_price;
-                        this.cartDishes.forEach(element => {
-                            this.cartTotal += element.price;
-                        })
-                    };
+                    // if (localStorage.length > 0) {
+                    //     this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
+                    //     this.cartTotal = this.user.shipment_price;
+                    //     this.cartDishes.forEach(element => {
+                    //         this.cartTotal += element.price;
+                    //     })
+                    // };
                 }
             );
         },
@@ -204,50 +199,93 @@ export default {
                 }
             );
         },
+        showCart() {
+            // variabile per mostrare il carrello (da modificare)
+            this.showC = true;
+            // dichiaro un array temporaneo in cui pushare ciclicamente gli array salvati nello storage
+            let array = [];
+
+            // ciclo su storage per pushare i singoli obj nell'array temporaneo
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let obj = JSON.parse(localStorage.getItem(key));
+                array.push(obj);
+            };
+            console.log(localStorage);
+            // assegno l'array temporaneo al cartDishes array che stampa i piatti nel carrello
+            this.cartDishes = array;
+        },
+        setItem() {
+            // creo key e value per il local storage
+            let name = this.name;
+            let dish = {
+                name: this.name,
+                price: this.price,
+                quantity: this.quantity,
+                userID: this.userID
+            }
+            // controllo se il piatto ancora non è nello storage
+            if (localStorage.getItem(name) != null) {
+                // se c'è aggiorno il value per la key esistente
+                dish = {
+                    name: this.name,
+                    price: JSON.parse(localStorage.getItem(name)).price + this.price,
+                    quantity: JSON.parse(localStorage.getItem(name)).quantity + this.quantity,
+                    userID: this.userID
+                };
+                localStorage.setItem(name, JSON.stringify(dish));
+
+            } else {
+                // se non c'è salvo key e value in un nuovo item del local storage
+                localStorage.setItem(name, JSON.stringify(dish));
+            }
+            console.log('ciao');
+            this.showCart();
+        },
         addItem(obj) {
-            // aggiunge una quantità
-                obj.quantity++;
-                this.cartTotal += this.dishPrice;
-                this.cartDishes.forEach((dish, index) => {
-                    if(dish.name == obj.name){
-                        obj['price'] = obj.price + this.dishPrice;
-                        obj['quantity'] = obj.quantity;
-                        this.cartDishes.splice(index, 1);
-                    }
-                });
-                this.cartDishes.push(obj);
-            console.log(this.dishPrice);
-            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+            this.dishPrice = obj.price / obj.quantity;
+            // aggiorno l'oggetto da salvare nello storage
+            let name = obj.name;
+            let dish = {
+                name: obj.name,
+                price: JSON.parse(localStorage.getItem(name)).price + this.dishPrice,
+                quantity: JSON.parse(localStorage.getItem(name)).quantity + 1,
+                userID: obj.userID
+            }
+
+            // salvo il nuovo oggetto nello storage
+            localStorage.setItem(name, JSON.stringify(dish));
+
+            this.showCart();
         },
         removeItem(obj) {
-            obj.quantity--;
-                this.cartTotal -= this.dishPrice;
-                this.cartDishes.forEach((dish, index) => {
-                    if(dish.name == obj.name){
-                        obj['price'] = obj.price - this.dishPrice;
-                        obj['quantity'] = obj.quantity;
-                        this.cartDishes.splice(index, 1);
-                    }
-                });
-                this.cartDishes.push(obj);
-            localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
+            let name = obj.name;
+            if (obj.quantity > 1) {
+                this.dishPrice = obj.price / obj.quantity;
+
+                // aggiorno l'oggetto da salvare nello storage
+                let dish = {
+                    name: obj.name,
+                    price: JSON.parse(localStorage.getItem(name)).price - this.dishPrice,
+                    quantity: JSON.parse(localStorage.getItem(name)).quantity - 1,
+                    userID: obj.userID
+                }
+
+                // salvo il nuovo oggetto nello storage
+                localStorage.setItem(name, JSON.stringify(dish));
+            } else {
+                localStorage.removeItem(name);
+            }
+            this.showCart();
         },
         removeDish(obj){
-            this.cartDishes.splice(obj, 1);
-            if (this.cartDishes.length > 0) {
-                this.cartTotal = this.user.shipment_price;
-                this.cartDishes.forEach(element => {
-                    this.cartTotal += element.price;
-                })
-                localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
-            }else{
-                this.emptyCart();
-            };
+            let name = obj.name;
+            localStorage.removeItem(name);
+            this.showCart();
         },
         emptyCart(){
-            this.cartTotal = 0;
-            localStorage.removeItem('cartDishes');
-            this.cartDishes = JSON.parse(localStorage.getItem('cartDishes'));
+            localStorage.clear();
+            this.showCart();
         },
     }
 

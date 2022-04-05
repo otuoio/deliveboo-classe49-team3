@@ -70,7 +70,8 @@ export default {
             price = price * quantity;
             this.$emit('setPrice', price);
             this.$emit('setUserID', userID);
-            this.$emit('addDishestoArray');
+            // this.$emit('addDishestoArray');
+            this.$emit('setItem');
         },
         cartP(price, quantity) {
             return this.cartPrice = (price * quantity);
