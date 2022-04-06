@@ -125,6 +125,28 @@ class UserSeeder extends Seeder
                 'minimum_order' => 8.00,
                 'image' => 'elhombredelatorre.jpeg',
             ],
+            [
+                'name' => "Elk Bakery",
+                'email' => 'info@elkbakery.it',
+                'password' => '12345678',
+                'address' => 'Via Tal dei Tali',
+                'p_iva' => '14284292409',
+                'phone_number' => '3315762346',
+                'shipment_price' => 1.50,
+                'minimum_order' => 5.00,
+                'image' => 'elkbakery.jpg',
+            ],
+            [
+                'name' => "Aniello's street food",
+                'email' => 'info@aniellos.it',
+                'password' => '12345678',
+                'address' => 'Corso del Popolo, 1',
+                'p_iva' => '15825820242',
+                'phone_number' => '3356678981',
+                'shipment_price' => 2.50,
+                'minimum_order' => 10.00,
+                'image' => 'aniellos.jpg',
+            ],
         ];
 
         foreach ($users as $user){
