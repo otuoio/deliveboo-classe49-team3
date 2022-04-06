@@ -1,22 +1,72 @@
 <template>
-    <div class="container">
-        <div class="row row-cols-1 py-2">
-            <div class="col">
-                <form action="">
-                    <div v-for="(category, index) in categories" :key="'category-'+index" class="form-check d-inline-block">
-                        <input class="form-check-input mx-1" type="checkbox" name="categories[]" :value="category.name" :id="category.name" v-model="form.categories" @change="search">
-                        <label class="form-check-label" :for="category.name">
-                            {{ category.name }}
-                        </label>
-                    </div>
-                </form>
+    <div class="app-main">
+        <div class="header__pane">
+            <div>
+                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" @click="getSelector()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div v-for="(user, index) in cards.users"
-                :key="index">
-                <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
-                <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
+        <!-- Sidebar -->
+        <div class="app-sidebar sidebar-shadow">
+            <div class="app-header__logo">
+                <div class="logo-src"></div>
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                    </button>
+                </span>
+            </div> 
+            <div class="scrollbar-sidebar ps">
+                <div class="app-sidebar__inner">
+                    <ul class="vertical-nav-menu metismenu">
+                        <li class="app-sidebar__heading">Categorie</li>
+                        <li v-for="(category, index) in categories" :key="'category-'+index" class="form-check p-0">
+                            <input class="form-check-input mx-1" type="checkbox" name="categories[]" :value="category.name" :id="category.name" v-model="form.categories" @change="search">
+                                <label class="form-check-label text-capitalize" :for="category.name">
+                                    {{ category.name }}
+                                </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                </div>
+                <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /sidebar -->
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+                    <RestaurantCard :user="user"
+                    v-for="(user, index) in cards.users" 
+                    :key="index"/>
+                </div>
             </div>
         </div>
     </div>
@@ -30,9 +80,9 @@ import axios from 'axios';
 export default {
     name: "Home",
     components: {
-        RestaurantCard,
-        RestaurantCardModal,
-    },
+    RestaurantCard,
+    RestaurantCardModal,
+},
     data() {
         return {
             categories: [],

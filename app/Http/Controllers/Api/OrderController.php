@@ -36,6 +36,8 @@ class OrderController extends Controller
 
         $todayIstance = new Carbon();
         $today = $todayIstance->now()->setTimezone('Europe/Rome');
+        $arrivalTime = $todayIstance->addMinutes(30);
+        $arrivalTimeFormat = $arrivalTime->format('H:i');
         $todayDate = $today->format('Y-m-d');
         $todayTime = $today->format('H:i:s');
         
@@ -64,7 +66,7 @@ class OrderController extends Controller
         $dataCustomer = [
             'orderInfo' => $orderInfo,
             'restaurantName' => $restaurant->name,
-            'arrivalTime' => $arrivalTime,
+            'arrivalTime' => $arrivalTimeFormat,
         ];
 
         Mail::to($orderInfo['email'])->send(new SendNewMail($dataCustomer));

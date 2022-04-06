@@ -1,57 +1,69 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col col-md-8">
-        <div v-if="paymentForm" class="main-card mb-3 card">
-          <div class="card-body">
-            <form>
-              <div class="position-relative row form-group">
-                <label for="customer_name" class="col-sm-2 col-form-label">Nome</label>
-                <div class="col-sm-10">
-                  <input id="customer_name" name="customer_name" placeholder="Inserisci il nome completo" required type="text" class="form-control" v-model="form.customer_name">
-                </div>
+      <div class="col col-ms-12 col-lg-8">
+        <div v-if="loading">
+          <div class="main-card mb-3 card">
+            <div class="card-body">
+              <div class="confirmation p-4">
+                <i class="fas fa-circle-notch fa-spin fs-7"></i>
+                <h4 class="header-title mb-3">Pagamento in corso</h4>
               </div>
-              <div class="position-relative row form-group">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                  <input id="email" name="email" placeholder="Inserisci la tua mail" required type="email" class="form-control" v-model="form.email">
-                </div>
-              </div>
-              <div class="position-relative row form-group">
-                <label for="phone_number" class="col-sm-2 col-form-label">Numero di telefono</label>
-                <div class="col-sm-10">
-                  <input id="phone_number" type="text" minlength="8" class="form-control" name="phone_number" value="" required autocomplete="phone_number" autofocus v-model="form.phone_number">
-                </div>
-              </div>
-              <div class="position-relative row form-group">
-                <label for="address" class="col-sm-2 col-form-label">Indirizzo di consegna</label>
-                <div class="col-sm-10">
-                  <input id="address" type="text" class="form-control" name="address" value="" required autocomplete="address" autofocus v-model="form.address">
-                </div>
-              </div>
-            </form>
-            <v-braintree 
-              authorization="sandbox_x6p9dcjd_7nfbkpdgq66q9h4g"
-              @success="onSuccess"
-              @error="onError"
-            >
-            </v-braintree>
+            </div>
           </div>
         </div>
-        <div v-else class="main-card mb-3 card">
-          <div class="card-body">
-            <div class="confirmation">
-              <img class="img-fluid" src="../../img/orderConfirmed.gif" alt="">
-              <h4 class="header-title mb-3">Il tuo ordine arriver&agrave; per le {{ getDate() }}</h4>
+        <div v-else>
+          <div v-if="paymentForm" class="main-card mb-3 card">
+            <div class="card-body">
+              <form>
+                <div class="position-relative row form-group">
+                  <label for="customer_name" class="col-sm-2 col-form-label">Nome</label>
+                  <div class="col-sm-10">
+                    <input id="customer_name" name="customer_name" placeholder="Inserisci il nome completo" required type="text" class="form-control" autofocus v-model="form.customer_name">
+                  </div>
+                </div>
+                <div class="position-relative row form-group">
+                  <label for="email" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input id="email" name="email" placeholder="Inserisci la tua mail" required type="email" class="form-control" v-model="form.email">
+                  </div>
+                </div>
+                <div class="position-relative row form-group">
+                  <label for="phone_number" class="col-sm-2 col-form-label">Numero di telefono</label>
+                  <div class="col-sm-10">
+                    <input id="phone_number" type="text" minlength="8" class="form-control" name="phone_number" value="" required autocomplete="phone_number" v-model="form.phone_number">
+                  </div>
+                </div>
+                <div class="position-relative row form-group">
+                  <label for="address" class="col-sm-2 col-form-label">Indirizzo di consegna</label>
+                  <div class="col-sm-10">
+                    <input id="address" type="text" class="form-control" name="address" value="" required autocomplete="address" autofocus v-model="form.address">
+                  </div>
+                </div>
+              </form>
+              <v-braintree 
+                authorization="sandbox_x6p9dcjd_7nfbkpdgq66q9h4g"
+                @success="onSuccess"
+                @error="onError"
+              >
+              </v-braintree>
             </div>
-            <div class="mt-5">
-              <h3>Ottime notizie! {{ user.name }} ha confermato il tuo ordine.</h3>
-              <p>Ti &egrave; appena arrivata una mail all'indirizzo {{ form.email }}.</p>
+          </div>
+          <div v-else class="main-card mb-3 card">
+            <div class="card-body">
+              <div class="confirmation">
+                <img class="img-fluid" src="../../img/orderConfirmed.gif" alt="">
+                <h4 class="header-title mb-3">Il tuo ordine arriver&agrave; per le {{ getDate() }}</h4>
+              </div>
+              <div class="mt-5">
+                <h3>Ottime notizie! {{ user.name }} ha confermato il tuo ordine.</h3>
+                <p>Ti &egrave; appena arrivata una mail all'indirizzo {{ form.email }}.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col col-md-4">
+      <div class="col col-ms-12 col-lg-4">
           <div class="card m-0 ms-4">
               <div class="row">
                   <div class="col-md-12 cart">
@@ -103,6 +115,7 @@ export default {
       user: [],
       userID: 0,
       paymentForm: true,
+      loading: false,
       form: {
         customer_name:'',
         email:'',
@@ -158,12 +171,13 @@ export default {
         'Authorization': 'Bearer dkfsajksdfj432dskj',
       };
       const url = "http://127.0.0.1:8000/api/v1/orders/checkout";
-
+      this.loading = true;
       Axios.post(url, {params: {
         info: this.form 
       }})
         .then((result) => {
           console.log(result.data, result.status );
+          this.loading = false;
         })
       .catch(error => console.log(error));
     },
@@ -174,17 +188,6 @@ export default {
       return newDateObj.getHours() + ":" + (newDateObj.getMinutes()<10?'0':'') + newDateObj.getMinutes();
       
     },
-    // sendMail(){
-    //   const url = "http://127.0.0.1:8000/api/v1/mail";
-
-    //   Axios.post(url, {params: {
-    //     info: this.form 
-    //   }})
-    //     .then((result) => {
-    //       console.log(result);
-    //     })
-    //   .catch(error => console.log(error));
-    // }
   }
 }
 </script>
@@ -371,6 +374,10 @@ a:hover {
 }
 .fa-trash {
     font-size: 1.5em;
+}
+
+.fs-7 {
+  font-size: 7em;
 }
 
 .cart-title {
