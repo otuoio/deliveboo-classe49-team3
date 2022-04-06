@@ -1,96 +1,99 @@
 <template>
-<div>
-    <div class="container-fluid">
-        <div class="row g-4">
-            <div class="col">
-                <div class="card d-flex flex-row">
-                    <img v-if="user.image != null" :src="'/storage/'+user.image" class="card-img-top w-25" :alt="user.name">
-                    <img v-else src="/storage/uploads/default/default_user.jpg" class="card-img-top w-25" :alt="user.name">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ user.name }}</h5>
-                        <!-- <p class="card-text">{{ user.category.name }}</p> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col col-md-8">
-                <div v-for="(dish, index) in dishes" :key="index">
-                    <AddDish
-                                :dish="dish"
-                                @setPrice="setPrice($event)"
-                                @setQuantity="setQuantity($event)"
-                                @setName="setName($event)"
-                                @setUserID="setUserID($event)"
-                                @setItem="setItem"
-                                @setDishID="setDishID"/>
-                    <div class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
-                        <a class="postcard__img_link" href="#">
-                            <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
-                            <img v-else src="/storage/uploads/default/default_dish.jpg" class="postcard__img" :alt="dish.name">
-                        </a>
-                        <div class="postcard__text t-dark">
-                            <div class="d-flex align-items-center">
-                                <h1 class="postcard__title red">{{ dish.name }}</h1>
-                                
-                                <div class="postcard__tagbox ms-2">
-                                    <div v-if="dish.vegan" class="tag__item"><i class="fa-solid fa-leaf mr-2"></i></div>
-                                    <div v-if="dish.spicy" class="tag__item"><i class="fa-solid fa-pepper-hot mr-2"></i></div>
-                                </div>
-                            </div>
-                            <div class="postcard__bar"></div>
-                            <div class="postcard__preview-txt">{{ shortDescription(dish.description) }}</div>
-                            <div class="postcard__preview-txt">{{ dish.price.toFixed(2) }} &euro;</div>
+    <div class="app-main">
+        <div class="app-main__outer p-0">
+            <div class="row g-4">
+                <div class="col p-0 m-0">
+                    <div class="rounded-0 card d-flex flex-row">
+                        <img v-if="user.image != null" :src="'/storage/'+user.image" class="card-img-top w-25" :alt="user.name">
+                        <img v-else src="/storage/uploads/default/default_user.jpg" class="card-img-top w-25" :alt="user.name">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ user.name }}</h5>
+                            <!-- <p class="card-text">{{ user.category.name }}</p> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col col-md-4">
-                <div class="card m-0 ms-4">
-                    <div class="row">
-                        <div class="col-md-12 cart">
-                            <div class="title">
-                                <div class="row">
-                                    <div class="col d-flex justify-content-between align-items-center">
-                                        <h4 class="cart-title"><b>Carrello</b></h4>
-                                        <span @click="emptyCart" role="button"><i class="fa-solid fa-trash"></i></span>
+            <div class="app-main__inner">
+                <div class="row g-4">
+                    <div class="col col-md-8">
+                        <div v-for="(dish, index) in dishes" :key="index">
+                            <AddDish
+                                        :dish="dish"
+                                        @setPrice="setPrice($event)"
+                                        @setQuantity="setQuantity($event)"
+                                        @setName="setName($event)"
+                                        @setUserID="setUserID($event)"
+                                        @setItem="setItem"
+                                        @setDishID="setDishID"/>
+                            <div class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
+                                <a class="postcard__img_link" href="#">
+                                    <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
+                                    <img v-else src="/storage/uploads/default/default_dish.jpg" class="postcard__img" :alt="dish.name">
+                                </a>
+                                <div class="postcard__text t-dark">
+                                    <div class="d-flex align-items-center">
+                                        <h1 class="postcard__title red">{{ dish.name }}</h1>
+                                        
+                                        <div class="postcard__tagbox ms-2">
+                                            <div v-if="dish.vegan" class="tag__item"><i class="fa-solid fa-leaf mr-2"></i></div>
+                                            <div v-if="dish.spicy" class="tag__item"><i class="fa-solid fa-pepper-hot mr-2"></i></div>
+                                        </div>
                                     </div>
+                                    <div class="postcard__bar"></div>
+                                    <div class="postcard__preview-txt">{{ shortDescription(dish.description) }}</div>
+                                    <div class="postcard__preview-txt">{{ dish.price.toFixed(2) }} &euro;</div>
                                 </div>
                             </div>
-                            <div v-if="cartTotal == user.shipment_price || cartTotal == 0">
-                                <div class="row border-top border-bottom">
-                                    <div class="row main align-items-center">
-                                        Il carrello &egrave; vuoto
-                                    </div>
-                                </div>
-                            </div>
-                            <div v-else>
-                                <div class="row border-top border-bottom" v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
-                                    <div class="row main align-items-center">
-                                        <div class="col">
-                                            <div class="row">{{ cartDish.name }}</div>
-                                        </div>
-                                        <div class="col">
-                                            <span @click="removeItem(cartDish)" role="button">-</span>
-                                            <span class="d-inline-block border">{{ cartDish.quantity }}</span>
-                                            <span @click="addItem(cartDish)" role="button">+</span>
-                                        </div>
-                                        <div class="col">&euro; {{ cartDish.price.toFixed(2) }}
-                                            <span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
+                        </div>
+                    </div>
+                    <div class="col col-md-4">
+                        <div class="card m-0 ms-4">
+                            <div class="row">
+                                <div class="col-md-12 cart">
+                                    <div class="title">
+                                        <div class="row">
+                                            <div class="col d-flex justify-content-between align-items-center">
+                                                <h4 class="cart-title"><b>Carrello</b></h4>
+                                                <span @click="emptyCart" role="button"><i class="fa-solid fa-trash"></i></span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div v-if="cartTotal == user.shipment_price || cartTotal == 0">
+                                        <div class="row border-top border-bottom">
+                                            <div class="row main align-items-center">
+                                                Il carrello &egrave; vuoto
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class="row border-top border-bottom" v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
+                                            <div class="row main align-items-center">
+                                                <div class="col">
+                                                    <div class="row">{{ cartDish.name }}</div>
+                                                </div>
+                                                <div class="col">
+                                                    <span @click="removeItem(cartDish)" role="button">-</span>
+                                                    <span class="d-inline-block border">{{ cartDish.quantity }}</span>
+                                                    <span @click="addItem(cartDish)" role="button">+</span>
+                                                </div>
+                                                <div class="col">&euro; {{ cartDish.price.toFixed(2) }}
+                                                    <span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                            <div class="col">Costo di consegna</div>
+                                            <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div>
+                                        </div>
+                                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                            <div class="col">TOTALE</div>
+                                            <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div>
+                                        </div>
+                                        <router-link class="btn" :to="{ name: 'checkout'}"> 
+                                            CHECKOUT
+                                        </router-link>
+                                    </div>
                                 </div>
-                                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                                    <div class="col">Costo di consegna</div>
-                                    <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div>
-                                </div>
-                                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                                    <div class="col">TOTALE</div>
-                                    <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div>
-                                </div>
-                                <router-link class="btn" :to="{ name: 'checkout'}"> 
-                                    CHECKOUT
-                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -98,7 +101,6 @@
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -364,6 +366,11 @@ a, a:hover {
 }
 
 /* Cards */
+
+// .full-width {
+//     width: 100% !important;
+//     max-width: 100%;
+// }
 .postcard {
     flex-wrap: wrap;
     display: flex;
@@ -590,7 +597,6 @@ body {
 
 .card {
     margin: auto;
-    max-width: 950px;
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 1rem;
     border: transparent
