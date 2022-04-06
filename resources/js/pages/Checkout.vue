@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-8">
-        <div class="main-card mb-3 card">
+        <div v-if="paymentForm" class="main-card mb-3 card">
           <div class="card-body">
             <form>
               <div class="position-relative row form-group">
@@ -38,6 +38,18 @@
             </v-braintree>
           </div>
         </div>
+        <div v-else class="main-card mb-3 card">
+          <div class="card-body">
+            <div class="confirmation">
+              <img class="img-fluid" src="../../img/orderConfirmed.gif" alt="">
+              <h4 class="header-title mb-3">Il tuo ordine arriver&agrave; per le {{ getDate() }}</h4>
+            </div>
+            <div class="mt-5">
+              <h3>Ottime notizie! {{ user.name }} ha confermato il tuo ordine.</h3>
+              <p>Ti &egrave; appena arrivata una mail all'indirizzo {{ form.email }}.</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col col-md-4">
           <div class="card m-0 ms-4">
@@ -46,7 +58,8 @@
                       <div class="title">
                           <div class="row">
                               <div class="col d-flex justify-content-between align-items-center">
-                                  <h4 class="cart-title"><b>Carrello</b></h4>
+                                  <h4 class="cart-title" v-if="paymentForm"><strong>Carrello</strong></h4>
+                                  <h4 class="cart-title" v-else><strong>Riepilogo dell'ordine</strong></h4>
                               </div>
                           </div>
                       </div>
@@ -89,6 +102,7 @@ export default {
     return {
       user: [],
       userID: 0,
+      paymentForm: true,
       form: {
         customer_name:'',
         email:'',
@@ -130,7 +144,9 @@ export default {
     onSuccess (payload) {
       let nonce = payload.nonce;
       this.sendOrder();
-      console.log('successo', nonce);
+      // this.sendMail();
+      this.paymentForm = false;
+      localStorage.clear();
     },
     onError (error) {
       let message = error.message;
@@ -147,10 +163,28 @@ export default {
         info: this.form 
       }})
         .then((result) => {
-          console.log(result.data, result.status );  // HTTP status //  // binary representation of the file
+          console.log(result.data, result.status );
         })
       .catch(error => console.log(error));
-    }
+    },
+    getDate(){
+      let oldDateObj = new Date();
+      let diff = 30;
+      let newDateObj = new Date(oldDateObj.getTime() + diff*60000);
+      return newDateObj.getHours() + ":" + (newDateObj.getMinutes()<10?'0':'') + newDateObj.getMinutes();
+      
+    },
+    // sendMail(){
+    //   const url = "http://127.0.0.1:8000/api/v1/mail";
+
+    //   Axios.post(url, {params: {
+    //     info: this.form 
+    //   }})
+    //     .then((result) => {
+    //       console.log(result);
+    //     })
+    //   .catch(error => console.log(error));
+    // }
   }
 }
 </script>
@@ -247,9 +281,9 @@ a {
     font-size: 0.7rem
 }
 
-img {
-    width: 3.5rem
-}
+// img {
+//     width: 3.5rem
+// }
 
 .back-to-shop {
     margin-top: 4.5rem
@@ -342,5 +376,14 @@ a:hover {
 .cart-title {
     line-height: 0.8em;
     margin: 0;
+}
+
+.confirmation {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
 }
 </style>

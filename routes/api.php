@@ -26,5 +26,6 @@ Route::get('v1/search', 'Api\UserController@search')->middleware('api.auth');
 Route::get('v1/{id}', 'Api\UserController@show')->middleware('api.auth');
 Route::get("v1/orders", "Api\OrderController@orderDatas")->middleware('api.auth');
 Route::post('v1/orders/checkout', 'Api\OrderController@sendOrder');
+// Route::post('v1/mail', 'Api\MailController@store');
 
 

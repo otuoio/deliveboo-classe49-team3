@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Model\Order;
 use App\Model\Dish;
+use App\User;
 use Carbon\Carbon;
+use App\Mail\SendNewMail;
+use App\Mail\SendNewRestaurantMail;
+use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
     public function orderDatas(){
@@ -22,8 +27,15 @@ class OrderController extends Controller
         $userCart = $request->params['info']['cartDishes'];
         // $dishes = Dish::all();
 
+        $validator = Validator::make($orderInfo, [
+            'customer_name' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required',
+            'address' => 'required',
+        ]);
+
         $todayIstance = new Carbon();
-        $today = $todayIstance->now();
+        $today = $todayIstance->now()->setTimezone('Europe/Rome');
         $todayDate = $today->format('Y-m-d');
         $todayTime = $today->format('H:i:s');
         
@@ -37,10 +49,29 @@ class OrderController extends Controller
         $newOrder->date = $todayDate;
         $newOrder->time = $todayTime;
         $newOrder->save();
-
+    
+    
         foreach ($userCart as $element) {
             $newOrder->dishes()->attach($element['id'], ['qty' => $element['quantity']]);
         }
+
+
+        $dish = Dish::where('id', $userCart[0]['id'])->first();
+
+        $restaurant = User::where('id', $dish->user_id)->first();
+        $arrivalTime = $todayTime;
+
+        $dataCustomer = [
+            'orderInfo' => $orderInfo,
+            'restaurantName' => $restaurant->name,
+            'arrivalTime' => $arrivalTime,
+        ];
+
+        Mail::to($orderInfo['email'])->send(new SendNewMail($dataCustomer));
+
+
+
+        Mail::to($restaurant->email)->send(new SendNewRestaurantMail($dataCustomer));
 
         return response()->json([
             "success" => true,

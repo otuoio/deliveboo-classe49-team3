@@ -1765,9 +1765,9 @@ class DishSeeder extends Seeder
                 'user_id' => 13,
             ],
             [
-                'name' => 'Pastrami MEDIUM”',
+                'name' => 'Pastrami MEDIUM',
                 'image' => 'steack.jpg',
-                'description' => 'Puro Black Angus USA nel Pan de Cristal “di Barcellona',
+                'description' => 'Puro Black Angus USA nel Pan de Cristal di Barcellona',
                 'price' => 10,
                 'visible' => 1,
                 'vegan' => 0,
@@ -1775,9 +1775,9 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Pastrami LARGE”',
+                'name' => 'Pastrami LARGE',
                 'image' => 'steack.jpg',
-                'description' => 'Puro Black Angus USA nel Pan de Cristal “di Barcellona',
+                'description' => 'Puro Black Angus USA nel Pan de Cristal di Barcellona',
                 'price' => 15,
                 'visible' => 1,
                 'vegan' => 0,
@@ -1785,7 +1785,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Black Bao”',
+                'name' => 'Black Bao',
                 'image' => 'deluxesteack.jpg',
                 'description' => 'Bistecca condita con Pluma di Pata Negra e salsa tonkatsu',
                 'price' => 14,
@@ -1795,7 +1795,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Fiori saporiti”',
+                'name' => 'Fiori saporiti',
                 'image' => 'fioridizucca.jpg',
                 'description' => 'Fiori di zucchine con stracciatella e acciughe cantabriche',
                 'price' => 10,
@@ -1805,7 +1805,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Midollo raffinato”',
+                'name' => 'Midollo raffinato',
                 'image' => 'midollo.jpg',
                 'description' => 'Midollo di bue con pane caldo',
                 'price' => 17,
@@ -1815,7 +1815,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Gran Crudo”',
+                'name' => 'Gran Crudo',
                 'image' => 'tartaredifassona.jpg',
                 'description' => '10 piccole tartare di Fassona Piemontese, con vari condimenti',
                 'price' => 32,
@@ -1825,7 +1825,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Japan Piemonte”',
+                'name' => 'Japan Piemonte',
                 'image' => 'sashimidivitella.jpg',
                 'description' => 'Sashimi di Vitella Piemontese',
                 'price' => 14,
@@ -1835,7 +1835,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'USA Asado”',
+                'name' => 'USA Asado',
                 'image' => 'steack.jpg',
                 'description' => 'Asado di Black Angus USA Prime',
                 'price' => 33,
@@ -1845,7 +1845,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Black Angus Steak”',
+                'name' => 'Black Angus Steak',
                 'image' => 'deluxesteack.jpg',
                 'description' => 'New York Steak di Black Angus USA Prime',
                 'price' => 35,
@@ -1855,7 +1855,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Big Tomahawk”',
+                'name' => 'Big Tomahawk',
                 'image' => 'steack.jpg',
                 'description' => 'Tomahawk di Black Angus U.S.A',
                 'price' => 60,
@@ -1865,7 +1865,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Crocchette perfette”',
+                'name' => 'Crocchette perfette',
                 'image' => 'crocchetteperfette.jpg',
                 'description' => 'Crocchette basche di jamon iberico “Sagartoki Vitoria” e tartufo nero',
                 'price' => 10,
@@ -1875,7 +1875,7 @@ class DishSeeder extends Seeder
                 'user_id' => 14,
             ],  
             [
-                'name' => 'Pinchos”',
+                'name' => 'Pinchos',
                 'image' => 'pinchos.jpg',
                 'description' => 'Tre pinchos baschi fatti con sfoglia di patate, uovo con bacon, uovo con chorizo e uovo con tartufo nero “Sagartoki Vitoria”',
                 'price' => 14,
