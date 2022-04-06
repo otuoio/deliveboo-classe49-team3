@@ -125,6 +125,28 @@ class UserSeeder extends Seeder
                 'minimum_order' => 8.00,
                 'image' => 'elhombredelatorre.jpeg',
             ],
+            [
+                'name' => "Shri Ganesh",
+                'email' => 'info@shriganesh.it',
+                'password' => '12345678',
+                'address' => 'Via Elia Lombardini, 8',
+                'p_iva' => '10222435676',
+                'phone_number' => '0818339934',
+                'shipment_price' => 4.50,
+                'minimum_order' => 12.00,
+                'image' => 'shriganesh.jpg',
+            ],
+            [
+                'name' => "La Griglia di Varrone",
+                'email' => 'info@lagrigliadivarrone.it',
+                'password' => '12345678',
+                'address' => 'Via Alessio di Tocqueville, 7',
+                'p_iva' => '10222435676',
+                'phone_number' => '0818339934',
+                'shipment_price' => 6.50,
+                'minimum_order' => 20.00,
+                'image' => 'lagrigliadivarrone.jpg',
+            ],
         ];
 
         foreach ($users as $user){
