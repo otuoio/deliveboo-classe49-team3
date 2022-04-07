@@ -9,10 +9,11 @@ use App\User;
 
 class DishController extends Controller
 {
-    public function index($id)
+    public function index(Request $request)
     {
-        $user = User::find($id);
-        $dishes = Dish::where('user_id', $user->id)->get();
+        $data = $request->all();
+
+        $dishes = Dish::select('dishes.*')->join('users', 'users.id','=', 'dishes.user_id')->where('users.slug', $data['slug'])->get();
 
         return response()->json([
             'response' => true,

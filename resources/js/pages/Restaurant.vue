@@ -12,7 +12,7 @@
                                 <div>
                                     <span>15-30 min</span> · 
                                     <span v-if="user.shipment_price == 0">Consegna gratuita</span>
-                                    <span v-else>Costo di consegna: &euro; {{ user.shipment_price.toFixed(2)}}</span>
+                                    <span v-else>Costo di consegna: &euro; {{ user.shipment_price.toFixed(2) }}</span>
                                 </div>
                                 <div class="mt-2">
                                     <span>{{ user.address}}</span> · 
@@ -28,9 +28,9 @@
                     </div>
                 </div>
             </div>
-            <div class="app-main__inner">
-                <div class="row g-4">
-                    <div class="col col-md-8">
+            <div class="app-main__inner container">
+                <div class="row g-4 justify-content-end">
+                    <div class="col col-xxl-8 col-12 order-xxl-1 order-2">
                         <div v-for="(dish, index) in dishes" :key="index">
                             <AddDish
                                         :dish="dish"
@@ -61,8 +61,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col col-md-4">
-                        <div class="card m-0 ms-4">
+                    <div class="col col-xxl-4 col-12 col-xl-5 order-xxl-2 order-1">
+                        <div class="card m-0 ms-4" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                             <div class="row">
                                 <div class="col-md-12 cart">
                                     <div class="title">
@@ -123,7 +123,7 @@ import AddDish from '../components/AddDish';
 
 export default {
     name: "Home",
-    props: ['id'],
+    props: ['slug'],
     components: {
         AddDish
     },
@@ -147,9 +147,6 @@ export default {
         const url = "http://127.0.0.1:8000/api/v1/";
         this.getUser(url);
         this.getDishes(url);
-        // setTimeout(() => {
-            
-        // }, 500);
 
     },
     methods: {
@@ -168,31 +165,6 @@ export default {
         setUserID(value){
             this.userID = value;
         },
-        // addDishestoArray(){
-        //     let obj = {
-        //         name: this.name,
-        //         price: this.price,
-        //         quantity: this.quantity,
-        //         userID: this.userID,
-        //     };
-        //     if(this.cartDishes.length == 0){
-        //         this.cartTotal = this.price + this.user.shipment_price;
-        //         this.cartDishes.push(obj);
-        //     }else{
-        //         this.cartTotal += this.price;
-        //         this.cartDishes.forEach((dish, index) => {
-        //             if(dish.name == obj.name){
-        //                 obj['price'] = dish.price + this.price;
-        //                 obj['quantity'] = dish.quantity + this.quantity;
-        //                 this.cartDishes.splice(index, 1);
-        //             }
-        //         });
-        //         this.cartDishes.push(obj);
-        //     };
-        //     this.dishPrice = (obj['price'] / obj['quantity']);
-        //     localStorage.setItem('cartDishes', JSON.stringify(this.cartDishes));
-        //     console.log(this.dishPrice);
-        // },
         shortDescription(string) {
             if (string.length > 60) {
                 return string.substring(0, 60) + '...';
@@ -201,11 +173,11 @@ export default {
             }
         },
         getUser(url){
-            Axios.get(url + this.id,
-            {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}
+            Axios.get(url + this.slug + '?slug=' + this.slug,
+            {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}},
             ).then(
                 (result) => {
-                    this.user = result.data.results.data;
+                    this.user = result.data.results.data[0];
                     if (localStorage.length > 0) {
                         let key = localStorage.key(0);
                         this.userID = JSON.parse(localStorage.getItem(key)).userID;
@@ -226,7 +198,7 @@ export default {
             );
         },
         getDishes(url){
-            Axios.get(url + this.id + "/dishes",
+            Axios.get(url + this.slug + "/dishes?slug=" + this.slug,
             {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}
             ).then(
                 (result) => {
@@ -249,7 +221,6 @@ export default {
             console.log(localStorage);
             // assegno l'array temporaneo al cartDishes array che stampa i piatti nel carrello
             this.cartDishes = array;
-            console.log(this.cartTotal);
         },
         setItem() {
             // creo key e value per il local storage
@@ -388,14 +359,15 @@ a, a:hover {
 .postcard {
     flex-wrap: wrap;
     display: flex;
-    box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
-    border-radius: 10px;
+    // box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
+    // border-radius: 10px;
     margin: 0 0 2rem 0;
     overflow: hidden;
     position: relative;
     color: #ffffff;
+    box-shadow: 8px 9px 12px -5px rgb(0 0 0 / 6%);
 	&.light {
-		background-color: #e1e5ea;
+		background-color: #fff;
 	}
 	
 	.t-dark {
@@ -425,7 +397,7 @@ a, a:hover {
         height: 10px;
         margin: 10px 0;
         border-radius: 5px;
-        background-color: #424242;
+        background-color: #CB3F5A;
         transition: width 0.2s ease;
     }
 
@@ -469,9 +441,9 @@ a, a:hover {
         right: 0;
         bottom: 0;
         left: 0;
-        background-image: linear-gradient(-70deg, #424242, transparent 50%);
+        // background-image: linear-gradient(-70deg, #424242, transparent 50%);
         opacity: 1;
-        border-radius: 10px;
+        // border-radius: 10px;
     }
 
     &:hover .postcard__bar {
@@ -560,7 +532,7 @@ a, a:hover {
   }
 	.postcard.light {
 		.postcard__text:before {
-			background: #e1e5ea;
+			background: #fff;
 		}
   }
 }
@@ -571,13 +543,13 @@ a, a:hover {
 	background: $main-red;
 }
 .red .postcard__title:hover {
-	color: $main-red;
+	color: #CB3F5A;
 }
 .red .postcard__bar {
-	background-color: $main-red;
+	// background-color: $main-red;
 }
 .red::before {
-	background-image: linear-gradient(30deg, $main-red-rgb-015, transparent 50%);
+	// background-image: linear-gradient(30deg, $main-red-rgb-015, transparent 50%);
 }
 // .red:nth-child(2n)::before {
 // 	background-image: linear-gradient(30deg, $main-red-rgb-015, transparent 50%);
@@ -586,7 +558,7 @@ a, a:hover {
 @media screen and (min-width: 769px) {
 
 	.red::before {
-		background-image: linear-gradient(80deg, $main-red-rgb-015, transparent 50%);
+		// background-image: linear-gradient(80deg, $main-red-rgb-015, transparent 50%);
 	}
 	// .red:nth-child(2n)::before {
 	// 	background-image: linear-gradient(80deg, $main-red-rgb-015, transparent 50%);
@@ -607,6 +579,10 @@ body {
 
 .title {
     margin-bottom: 5vh
+}
+
+.rounded-0.card {
+    box-shadow: 8px 9px 12px -5px rgba(0,0,0,0.03);
 }
 
 .card {
@@ -668,6 +644,10 @@ body {
     margin: 0;
     padding: 2vh 0;
     width: 100%
+}
+
+.app-main .app-main__inner {
+    max-width: 2000px;
 }
 
 .col-2,
@@ -766,12 +746,20 @@ a:hover {
 }
 
 .fa-xmark {
-    color: rgb(163, 0, 0);
+    color: #DB0D36;
     cursor: pointer;
     font-size: 1.5em;
 }
 .fa-trash {
     font-size: 1.5em;
+}
+
+.fa-leaf {
+    color: #008F18;
+}
+
+.fa-pepper-hot {
+    color: #DB0D36;
 }
 
 

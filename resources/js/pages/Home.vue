@@ -36,13 +36,20 @@
             <!-- /sidebar -->
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-4">
-                        <div v-for="(user, index) in cards.users"
+                    <div class="row gx-3 h-100 align-items-center">
+                        <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5 h-100" v-for="(user, index) in cards.users"
                         :key="index">
                             <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
                             <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
                         </div>
                     </div>
+                    <!-- <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-4">
+                        <div v-for="(user, index) in cards.users"
+                        :key="index">
+                            <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
+                            <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -221,6 +228,16 @@ export default {
 
     label {
         font-size: 1rem;
+    }
+
+    .form-check-input:checked {
+        background-color: #01678F;
+        border-color: #01678F;
+    }  
+    
+    .form-check-input:focus{
+        box-shadow: none;
+        border-color: rgba(0, 0, 0, 0.25);
     }
 }
 

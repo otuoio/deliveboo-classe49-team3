@@ -21,9 +21,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $user = User::find($id);
+        $data = $request->all();
+
+        $user = User::where('slug', $data['slug'])->get();
 
         return response()->json([
             'response' => true,

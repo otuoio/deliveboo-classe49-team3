@@ -51,7 +51,7 @@
               </v-braintree>
             </div>
           </div>
-          <div v-else class="main-card mb-3 card">
+          <div v-else class="main-card mb-3 card  text-center">
             <div class="card-body">
               <div class="confirmation">
                 <img class="img-fluid" src="../../img/orderConfirmed.gif" alt="">

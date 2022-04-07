@@ -1,5 +1,22 @@
 <template>
-    <div class="col w-100 p-0">
+    <router-link class="text-decoration-none text-black" :to="{ name: 'restaurant', params: { slug: user.slug }}">
+        <div class="card card-span h-100 rounded-3">
+            <img v-if="user.image" :src="'/storage/'+user.image" class="img-fluid rounded-3 h-100" :alt="user.name">
+            <img v-else src="/storage/uploads/default/default_user.jpg" class="img-fluid rounded-3 h-100" :alt="user.name">
+            <div class="card-body px-2 py-2">
+            <h5 class="text-1000 text-truncate mb-1">
+                {{ user.name }}</h5>
+            <p class="text-1000 text-truncate mb-1"><i class="fa-solid fa-location-dot pe-1"></i>
+                {{ user.address}}
+            </p>
+            <p class="shipment text-1000 text-truncate mb-1">Consegna: &euro; {{ user.shipment_price.toFixed(2) }}</p>
+            </div>
+            <div class="d-grid gap-2">
+                <!-- <router-link class="btn btn-lg btn-primary" :to="{ name: 'restaurant', params: { id: user.id }}">Ordina ora</router-link> -->
+            </div>
+        </div>
+    </router-link>
+    <!-- <div class="col w-100 p-0">
         <router-link class="text-decoration-none text-black" :to="{ name: 'restaurant', params: { id: user.id }}">
             <div class="card h-100 text-white card-has-bg click-col" :style="(user.image) ? {backgroundImage: `url(/storage/${user.image})`} : {backgroundImage:'url(/storage/uploads/default/default_user.jpg)'}">
                 <img v-if="user.image" :src="'/storage/'+user.image" class="card-img" :alt="user.name">
@@ -11,7 +28,7 @@
                 </div>
             </div>
         </router-link>
-    </div>
+    </div> -->
 </template>
 
 <script>
@@ -37,9 +54,12 @@ export default {
     border: none;
     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
     overflow:hidden;
+    // border-bottom: 1px solid #01678F;
     // min-width: 290px;
     border-radius:20px;
-    box-shadow: 0 0 12px 0 rgba(0,0,0,0.2);
+    background-color: #fff;
+    box-shadow: none;
+    box-shadow: 8px 9px 12px -5px rgba(0,0,0,0.03);
 
     @media (max-width: 768px) {
     min-height:250px;
@@ -87,12 +107,28 @@ export default {
     }
     .card-meta{color:orange}
     .card-body{ 
-    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        p {
+            color: #01678F;
+            font-size: 0.9em;
+        }
+
+        .shipment {
+            color:rgb(111, 111, 111);
+        }
     }
     &:hover {
     .card-body{
-        margin-top:30px;
+        margin-top:0px;
         transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+
+        p {
+            color: #01678F;
+        }
+
+        .shipment {
+        color:rgb(111, 111, 111);
+        }
     }
     cursor: pointer;
     transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
