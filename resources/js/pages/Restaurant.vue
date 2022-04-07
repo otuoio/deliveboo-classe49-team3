@@ -6,8 +6,23 @@
                     <div class="rounded-0 card d-flex flex-row">
                         <img v-if="user.image != null" :src="'/storage/'+user.image" class="card-img-top w-25" :alt="user.name">
                         <img v-else src="/storage/uploads/default/default_user.jpg" class="card-img-top w-25" :alt="user.name">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ user.name }}</h5>
+                        <div class="card-body restaurant-info d-flex flex-column justify-content-center">
+                            <h2 class="card-title">{{ user.name }}</h2>
+                            <div class="mt-4">
+                                <div>
+                                    <span>15-30 min</span> · 
+                                    <span v-if="user.shipment_price == 0">Consegna gratuita</span>
+                                    <span v-else>Costo di consegna: &euro; {{ user.shipment_price.toFixed(2)}}</span>
+                                </div>
+                                <div class="mt-2">
+                                    <span>{{ user.address}}</span> · 
+                                    <span>Distanza: 1.5 km</span>
+                                </div>
+                                <div class="mt-2">
+                                    <span><i class="fa-solid fa-phone"></i> {{ user.phone_number}}</span> · 
+                                    <span><a :href="`tel:${user.phone_number}`">Chiama il ristorante</a></span>
+                                </div>
+                            </div>
                             <!-- <p class="card-text">{{ user.category.name }}</p> -->
                         </div>
                     </div>
@@ -71,25 +86,24 @@
                                                 <div class="col">
                                                     <div class="row">{{ cartDish.name }}</div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col text-center">
                                                     <span @click="removeItem(cartDish)" role="button">-</span>
                                                     <span class="d-inline-block border">{{ cartDish.quantity }}</span>
                                                     <span @click="addItem(cartDish)" role="button">+</span>
                                                 </div>
-                                                <div class="col">&euro; {{ cartDish.price.toFixed(2) }}
-                                                    <span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
+                                                <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}<span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                             <div class="col">Costo di consegna</div>
-                                            <div class="col offset-4 text-right">&euro; {{ user.shipment_price.toFixed(2) }}</div>
+                                            <div class="col text-end">&euro; {{ user.shipment_price.toFixed(2) }}<span class="invisible close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span></div>
                                         </div>
                                         <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                             <div class="col">TOTALE</div>
-                                            <div class="col offset-4 text-right">&euro; {{cartTotal.toFixed(2)}}</div>
+                                            <div class="col text-end">&euro; {{cartTotal.toFixed(2)}}<span class="invisible close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span></div>
                                         </div>
-                                        <router-link class="btn" :to="{ name: 'checkout'}"> 
+                                        <router-link class="btn btn-myblue" :to="{ name: 'checkout'}"> 
                                             CHECKOUT
                                         </router-link>
                                     </div>
@@ -341,13 +355,13 @@ export default {
 $main-red: #bd150b !default;
 $main-red-rgb-015: rgba(189, 21, 11, 0.1) !default;
 /* This pen */
-body {
-	font-family: "Baloo 2", cursive;
-	font-size: 16px;
-	color: #ffffff;
-	text-rendering: optimizeLegibility;
-	font-weight: initial;
-}
+// body {
+// 	font-family: "Baloo 2", cursive;
+// 	font-size: 16px;
+// 	color: #ffffff;
+// 	text-rendering: optimizeLegibility;
+// 	font-weight: initial;
+// }
 
 .light {
 	background: #f3f5f7;
@@ -713,8 +727,6 @@ input:focus::-webkit-input-placeholder {
 }
 
 .btn {
-    background-color: #000;
-    border-color: #000;
     color: white;
     width: 100%;
     font-size: 0.7rem;
@@ -762,8 +774,28 @@ a:hover {
     font-size: 1.5em;
 }
 
+
+
 .cart-title {
     line-height: 0.8em;
     margin: 0;
+}
+
+.restaurant-info {
+    .card-title {
+        font-weight: bold;
+    }
+    .fa-phone {
+        color: #01678F;
+    }
+
+    a {
+        color: #01678F;
+    }
+
+    span {
+        font-size: 1rem;
+    }
+
 }
 </style>

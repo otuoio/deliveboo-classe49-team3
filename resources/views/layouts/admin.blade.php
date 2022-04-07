@@ -21,58 +21,8 @@
     <title>@yield('documentTitle')</title>
 </head>
 <body>
-
-    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-        <div class="app-header header-shadow">
-            <div class="app-header__logo">
-                
-                <div class="header__pane">
-                    <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="app-header__content">
-                <div class="app-header-left">
-                </div>
-                <div class="app-header-right">
-                    <div class="header-btn-lg pe-0">
-                        <div class="widget-content p-0">
-                            <div class="widget-content-wrapper d-flex">
-                                <div class="widget-content-left header-user-info">
-                                    <div class="widget-heading">
-                                        {{ Auth::user()->name }}
-                                    </div>
-                                </div>
-                                <div class="widget-content-left ms-3">
-                                    <div class="btn-group">
-                                        <a data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="{{ asset('storage/' . Auth::user()->image )}}" alt="">
-                                            <i class="fa fa-angle-down ms-2 opacity-8"></i>
-                                        </a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
-                                            {{ __('Esci') }}
-                                            </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="app-container body-tabs-shadow fixed-sidebar fixed-header">
+        @include('partials.navbarAdmin')
         
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
@@ -127,13 +77,6 @@
                                     <i class="metismenu-icon fa-solid fa-cart-shopping"></i>
                                 Ordini
                                 </a>
-                            </li>
-                            <li class="app-sidebar__heading">Tema</li>
-                            <li class="switch">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                                </div>
                             </li>
                         </ul>
                     </div>
@@ -195,27 +138,6 @@
     }, true);
 
     document.addEventListener('DOMContentLoaded', function(event) {
-        let win = document.body.clientWidth;
-        // if (localStorage.getItem("dark-mode") === "false") {
-        //     appHeader.classList.remove('bg-dark');
-        //     appHeader.classList.remove('header-text-light');
-        //     appContainer.classList.remove('bg-grey');
-        //     sideBar.classList.remove('bg-dark');
-        //     dropdownMenu.classList.remove('bg-dark');
-        //     sideBar.classList.remove('sidebar-text-light');
-        //     switchInput.checked = false;
-        //     switchLabel.textContent = "Chiaro";
-        // }else{
-        //     appHeader.classList.add('bg-dark');
-        //     appHeader.classList.add('header-text-light');
-        //     appContainer.classList.add('bg-grey');
-        //     sideBar.classList.add('bg-dark');
-        //     sideBar.classList.add('sidebar-text-light');
-        //     dropdownMenu.classList.add('bg-dark');
-        //     switchInput.checked = true;
-        //     switchLabel.textContent = "Scuro";
-        // };
-
         if (win < 1250) {
             appContainer.classList.add('closed-sidebar-mobile');
             appContainer.classList.add('closed-sidebar');
@@ -224,31 +146,6 @@
             appContainer.classList.remove('closed-sidebar');
         }
     });
-
-
-    switchInput.addEventListener("input", function () {
-        if(appHeader.classList.contains('bg-dark') && sideBar.classList.contains('bg-dark')){
-            appHeader.classList.remove('bg-dark');
-            appHeader.classList.remove('header-text-light');
-            appContainer.classList.remove('bg-grey');
-            sideBar.classList.remove('bg-dark');
-            dropdownMenu.classList.remove('bg-dark');
-            sideBar.classList.remove('sidebar-text-light');
-            // localStorage.setItem("dark-mode", "false");
-            switchLabel.textContent = "Chiaro";
-        }else{
-            appHeader.classList.add('bg-dark');
-            appHeader.classList.add('header-text-light');
-            appContainer.classList.add('bg-grey');
-            sideBar.classList.add('bg-dark');
-            sideBar.classList.add('sidebar-text-light');
-            dropdownMenu.classList.add('bg-dark');
-            // localStorage.setItem("dark-mode", "true");
-            switchLabel.textContent = "Scuro";
-        }
-    });
-
-
 </script>
 </body>
 </html>

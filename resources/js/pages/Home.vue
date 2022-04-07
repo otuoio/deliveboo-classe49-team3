@@ -2,7 +2,7 @@
     <div>
         <div class="header__pane">
             <div>
-                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" @click="getSelector()">
+                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" @click="getSidebar()">
                     <span class="hamburger-box">
                         <span class="hamburger-inner"></span>
                     </span>
@@ -17,7 +17,7 @@
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu metismenu">
                             <li class="app-sidebar__heading">Categorie</li>
-                            <li v-for="(category, index) in categories" :key="'category-'+index" class="form-check p-0">
+                            <li v-for="(category, index) in categories" :key="'category-'+index" class="form-check p-0 pb-1">
                                 <input class="form-check-input mx-1" type="checkbox" name="categories[]" :value="category.name" :id="category.name" v-model="form.categories" @change="search">
                                     <label class="form-check-label text-capitalize" :for="category.name">
                                         {{ category.name }}
@@ -36,10 +36,12 @@
             <!-- /sidebar -->
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <div class="row row-cols-1 row-cols-md-4 g-4">
-                        <RestaurantCard :user="user"
-                        v-for="(user, index) in cards.users" 
-                        :key="index"/>
+                    <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-4">
+                        <div v-for="(user, index) in cards.users"
+                        :key="index">
+                            <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
+                            <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,7 +69,8 @@ export default {
             differentUserID: false,
             storage: '',
             storageBoh: '',
-            userID: ''
+            userID: '',
+            sidebar: '',
         }
     },
     props: [
@@ -124,6 +127,15 @@ export default {
                 return this.differentUserID = false;
             }
         },
+        getSidebar(){
+            this.sidebar = document.querySelector('.app-sidebar');
+            console.log(this.sidebar);
+            if(this.sidebar.classList.contains('mobile-in')){
+                this.sidebar.classList.remove('mobile-in');
+            }else{
+                this.sidebar.classList.add('mobile-in');
+            }
+        }
     },
     watch: {
         // storage:function(value){
@@ -163,13 +175,52 @@ export default {
     }
 }
 
-.app-sidebar__heading {
-    color: #01678F;
+@media (max-width: 991.98px) {
+    .app-sidebar {
+        transform: translateX(-280px);
+    }
+    .mobile-in {
+        transform: translateX(0);
+    }
 }
 
 @media (min-width: 991.98px) {
     .header__pane {
         display: none;
+    }
+}
+
+.fixed-sidebar .app-main .app-main__outer {
+    z-index: 9;
+    padding-left: 250px;
+    width: 100vw;
+}
+
+.app-sidebar {
+    width: 250px;
+    display: flex;
+    z-index: 11;
+    overflow: hidden;
+    min-width: 250px;
+    // position: relative;
+    flex: 0 0 250px;
+    margin-top: -60px;
+    padding-top: 60px;
+    transition: all .2s;
+
+    .app-sidebar__heading {
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin: 0.75rem 0;
+    color: #01678F;
+    font-weight: 700;
+    white-space: nowrap;
+    position: relative;
+    }
+
+
+    label {
+        font-size: 1rem;
     }
 }
 

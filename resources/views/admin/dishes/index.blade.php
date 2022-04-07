@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="d-inline-block table-div">
                                                 @if (Auth::user()->id === $dish->user_id)
-                                                    <a class="btn btn-warning"
+                                                    <a class="btn btn-show"
                                                         href="{{ route('admin.dishes.edit', $dish->slug) }}">Modifica</a>
                                                 @endif
                                             </div>

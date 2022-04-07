@@ -1,6 +1,6 @@
 <template>
-    <div class="col-md-4">
-        <div class="card h-100 text-white card-has-bg click-col" :style="(user.image) ? {backgroundImage: `url(/storage/${user.image})`} : {backgroundImage:'/storage/uploads/default/default_user.jpg'}">
+    <div class="col w-100 p-0">
+        <div class="card h-100 text-white card-has-bg click-col" :style="(user.image) ? {backgroundImage: `url(/storage/${user.image})`} : {backgroundImage:'url(/storage/uploads/default/default_user.jpg)'}">
             <img v-if="user.image" :src="'/storage/'+user.image" class="card-img" :alt="user.name">
             <img v-else src="/storage/uploads/default/default_user.jpg" class="card-img" :alt="user.name">
             <div class="card-img-overlay d-flex flex-column">
@@ -54,6 +54,7 @@ export default {
     border: none;
     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
     overflow:hidden;
+    // min-width: 290px;
     border-radius:20px;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.2);
 
@@ -115,7 +116,7 @@ export default {
     }
     .card-img-overlay {
     transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-    background: rgba(119, 119, 119, 0.349);
+    background: rgb(119 119 119 / 66%);
     // background: linear-gradient(0deg, rgba(35,79,109,0.3785889355742297) 0%, rgba(69,95,113,1) 100%);
     }
     }

@@ -23,19 +23,19 @@
                         </figcaption>
                     </div>
                     <div class="bottom-wrap">
-                        <div class="row">
-                            <div class="col col-md-2">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col col-md-2 text-center">
                                 <div class="btn btn-primary rounded-circle" @click="removeItem(dish.price.toFixed(2))">&minus;</div>
                             </div>
-                            <div class="col col-md-2">
+                            <div class="col col-md-1 p-0 text-center">
                                 <div class="">{{ qty }}</div>
                             </div>
-                            <div class="col col-md-2">
+                            <div class="col col-md-2 text-center">
                                 <div class="btn btn-primary rounded-circle" @click="addItem(dish.price.toFixed(2))">&plus;</div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col text-center">
                                 <h3>{{cartP(dish.price.toFixed(2), qty)}} &euro;</h3>
                                 <button class="btn btn-primary" @click="toCart(dish.price.toFixed(2), qty, dish.name, dish.user_id, dish.id)" data-bs-dismiss="modal">Aggiungi al carrello</button>
                             </div>

@@ -1,12 +1,14 @@
 <template>
-  <div class="container">
-    <div class="row">
+<div class="app-main">
+  <div class="app-main__outer p-0 pt-5">
+    <div class="container">
+      <div class="row">
       <div class="col col-ms-12 col-lg-8">
         <div v-if="loading">
           <div class="main-card mb-3 card">
-            <div class="card-body">
+            <div class="card-body text-center">
               <div class="confirmation p-4">
-                <i class="fas fa-circle-notch fa-spin fs-7"></i>
+                <i class="fs5 fas fa-circle-notch fa-spin py-4"></i>
                 <h4 class="header-title mb-3">Pagamento in corso</h4>
               </div>
             </div>
@@ -59,6 +61,7 @@
                 <h3>Ottime notizie! {{ user.name }} ha confermato il tuo ordine.</h3>
                 <p>Ti &egrave; appena arrivata una mail all'indirizzo {{ form.email }}.</p>
               </div>
+              <router-link class="btn btn-show py-2 px-3 mt-4" :to="{ name: 'home' }">Torna ai ristoranti</router-link>
             </div>
           </div>
         </div>
@@ -81,20 +84,20 @@
                                   <div class="col">
                                       <div class="row">{{ cartDish.name }}</div>
                                   </div>
-                                  <div class="col">
+                                  <div class="col text-center">
                                       <span class="d-inline-block border">{{ cartDish.quantity }}</span> 
                                   </div>
-                                  <div class="col">&euro; {{ cartDish.price.toFixed(2) }}
+                                  <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}
                                   </div>
                               </div>
                           </div>
                           <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                               <div class="col">Costo di consegna</div>
-                              <div v-if="user.shipment_price" class="col offset-4 text-right">&euro; {{user.shipment_price.toFixed(2) }}</div>
+                              <div v-if="user.shipment_price" class="col text-end">&euro; {{user.shipment_price.toFixed(2) }}</div>
                           </div>
                           <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                               <div class="col"> <b>TOTALE</b> </div>
-                              <div class="col offset-4 text-right">&euro; {{form.cartTotal.toFixed(2)}}</div>
+                              <div class="col text-end">&euro; {{form.cartTotal.toFixed(2)}}</div>
                           </div>
                       </div>
                   </div>
@@ -102,7 +105,9 @@
           </div>
       </div>
     </div>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -212,8 +217,12 @@ body {
     margin: auto;
     max-width: 950px;
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 1rem;
+    border-radius: 0;
     border: transparent
+}
+
+.main-card {
+  border-radius: 0;
 }
 
 @media(max-width:767px) {
@@ -326,39 +335,39 @@ input:focus::-webkit-input-placeholder {
     color: transparent
 }
 
-.btn {
-    background-color: #000;
-    border-color: #000;
-    color: white;
-    width: 100%;
-    font-size: 0.7rem;
-    margin-top: 4vh;
-    padding: 1vh;
-    border-radius: 0
-}
+// .btn {
+//     // background-color: #000;
+//     // border-color: #000;
+//     // color: white;
+//     width: 100%;
+//     font-size: 0.7rem;
+//     margin-top: 4vh;
+//     padding: 1vh;
+//     border-radius: 0
+// }
 
-.btn:focus {
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none
-}
+// .btn:focus {
+//     box-shadow: none;
+//     outline: none;
+//     box-shadow: none;
+//     color: white;
+//     -webkit-box-shadow: none;
+//     -webkit-user-select: none;
+//     transition: none
+// }
 
-.btn:hover {
-    color: white
-}
+// .btn:hover {
+//     color: white
+// }
 
-a {
-    color: black
-}
+// a {
+//     // color: black
+// }
 
-a:hover {
-    color: black;
-    text-decoration: none
-}
+// a:hover {
+//     // color: black;
+//     text-decoration: none
+// }
 
 #code {
     background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
@@ -376,8 +385,9 @@ a:hover {
     font-size: 1.5em;
 }
 
-.fs-7 {
-  font-size: 7em;
+.fs5 {
+  font-size: 5em;
+  color: #CB3F5A;
 }
 
 .cart-title {

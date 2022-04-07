@@ -17,7 +17,8 @@
             <div class="longfazers">
                 <span></span>
                 <span></span>
-                
+                <span></span>
+                <span></span>
             </div>
             <h1>Deliveboo</h1>
         </router-link>
@@ -44,6 +45,7 @@ export default {
 .app-header {
   background-color: #CB3F5A;
   overflow: hidden;
+  z-index: 12;
 }
 
 h1 {
@@ -242,6 +244,8 @@ font-family: 'Lato', sans-serif;
 
 .longfazers {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 
@@ -249,28 +253,28 @@ font-family: 'Lato', sans-serif;
     position: absolute;
     height: 2px;
     width: 20%;
-    background: white;
+    background: rgba(255, 255, 255, 0.5);
 
     &:nth-child(1) {
       top: 20%;
-      animation: lf .6s linear infinite;
+      animation: lf .8s linear infinite;
       animation-delay: -5s;
     }
 
     &:nth-child(2) {
       top: 40%;
-      animation: lf2 .8s linear infinite;
+      animation: lf2 1s linear infinite;
       animation-delay: -1s;
     }
 
     &:nth-child(3) {
       top: 60%;
-      animation: lf3 .6s linear infinite;
+      animation: lf3 .8s linear infinite;
     }
 
     &:nth-child(4) {
       top: 80%;
-      animation: lf4 .5s linear infinite;
+      animation: lf4 1s linear infinite;
       animation-delay: -3s;
     }
   }

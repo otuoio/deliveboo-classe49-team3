@@ -66,7 +66,7 @@
                                             <button class="btn btn-primary">Torna alla lista dei piatti</button>
                                         </a>
                                         <a href="{{ route('admin.dishes.edit', $dish) }}" class="ms-3">
-                                            <button class="btn btn-warning">Modifica</button>
+                                            <button class="btn btn-show">Modifica</button>
                                         </a>
                                     </div>
                                 </div>
