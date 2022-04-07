@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('p_iva', 15);
             $table->string('phone_number', 20);
             $table->float('shipment_price', 4, 2)->nullable();
-            $table->float('minimum_order', 4, 2)->nullable();
             $table->string('image', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();

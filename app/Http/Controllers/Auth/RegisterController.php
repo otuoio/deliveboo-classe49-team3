@@ -60,7 +60,6 @@ class RegisterController extends Controller
             'p_iva' => ['required', 'numeric'],
             'phone_number' => ['required', 'numeric'],
             'shipment_price' => ['numeric', 'min:0.00', 'nullable'],
-            'minimum_order' => ['numeric', 'min:0.00', 'nullable'],
             'categories' => ['required', 'min:1'],
             'image' => ['image', 'nullable'],
         ]);
@@ -105,7 +104,6 @@ class RegisterController extends Controller
             'p_iva' => $data['p_iva'],
             'phone_number' => $data['phone_number'],
             'shipment_price' => $data['shipment_price'],
-            'minimum_order' => $data['minimum_order'],
             'image' => $data['image'],
         ]);
 

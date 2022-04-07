@@ -22,8 +22,7 @@ class UserSeeder extends Seeder
                 'address' => 'Via Isonzo, 61',
                 'p_iva' => '10214930967',
                 'phone_number' => '0810031567',
-                'shipment_price' => 2.50,
-                'minimum_order' => 13.00,
+                'shipment_price' => 2.50,      
                 'image' => 'lunarossa.jpg',
             ],
             [
@@ -34,7 +33,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10215430998',
                 'phone_number' => '0810034567',
                 'shipment_price' => 1.50,
-                'minimum_order' => 7.00,
                 'image' => 'perlanera.jpg',
             ],
             [
@@ -45,7 +43,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10215430555',
                 'phone_number' => '0810013675',
                 'shipment_price' => 0.50,
-                'minimum_order' => 5.00,
                 'image' => 'ocuoppeciruzz.jpg',
             ],
             [
@@ -56,7 +53,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10215433655',
                 'phone_number' => '0810435675',
                 'shipment_price' => 1.50,
-                'minimum_order' => 5.00,
                 'image' => 'itrescugnizzi.jpg',
             ],
             [
@@ -67,7 +63,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10222433655',
                 'phone_number' => '0818165675',
                 'shipment_price' => 2.50,
-                'minimum_order' => 15.00,
                 'image' => 'saosushi.jpg',
             ],
             [
@@ -78,7 +73,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10222111655',
                 'phone_number' => '0818161175',
                 'shipment_price' => 1.50,
-                'minimum_order' => 3.00,
                 'image' => 'toymochi.jpg',
             ],
             [
@@ -89,7 +83,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10222112345',
                 'phone_number' => '0818123475',
                 'shipment_price' => 2.50,
-                'minimum_order' => 10.00,
                 'image' => 'umbriapoke.jpg',
             ],
             [
@@ -99,8 +92,7 @@ class UserSeeder extends Seeder
                 'address' => 'Via Fredda, 1',
                 'p_iva' => '10222666776',
                 'phone_number' => '0818121234',
-                'shipment_price' => 2.50,
-                'minimum_order' => 10.00,
+                'shipment_price' => 2.50,   
                 'image' => 'settimogelo.jpg',
             ],
             [
@@ -111,7 +103,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10222367776',
                 'phone_number' => '0818333234',
                 'shipment_price' => 2.50,
-                'minimum_order' => 5.00,
                 'image' => 'ilfiorediloto.jpg',
             ],
             [
@@ -122,7 +113,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '10222435676',
                 'phone_number' => '0818339934',
                 'shipment_price' => 3.50,
-                'minimum_order' => 8.00,
                 'image' => 'elhombredelatorre.jpeg',
             ],
             [
@@ -133,7 +123,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '14284292409',
                 'phone_number' => '3315762346',
                 'shipment_price' => 1.50,
-                'minimum_order' => 5.00,
                 'image' => 'elkbakery.jpg',
             ],
             [
@@ -144,7 +133,6 @@ class UserSeeder extends Seeder
                 'p_iva' => '15825820242',
                 'phone_number' => '3356678981',
                 'shipment_price' => 2.50,
-                'minimum_order' => 10.00,
                 'image' => 'aniellos.jpg',
             ],
             [
@@ -154,8 +142,7 @@ class UserSeeder extends Seeder
                 'address' => 'Via Elia Lombardini, 8',
                 'p_iva' => '10222435676',
                 'phone_number' => '0818339934',
-                'shipment_price' => 4.50,
-                'minimum_order' => 12.00,
+                'shipment_price' => 4.50,        
                 'image' => 'shriganesh.jpg',
             ],
             [
@@ -166,8 +153,27 @@ class UserSeeder extends Seeder
                 'p_iva' => '10222435676',
                 'phone_number' => '0818339934',
                 'shipment_price' => 6.50,
-                'minimum_order' => 20.00,
                 'image' => 'lagrigliadivarrone.jpg',
+            ],
+            [
+                'name' => 'DolceVita',
+                'email' => 'info@dolcevita.it',
+                'password' => '12345678',
+                'address' => 'Via G. Ungaretti, 8',
+                'p_iva' => '30535305242',
+                'phone_number' => '3934956712',
+                'shipment_price' => 1.50,
+                'image' => 'dolcevita.jpg',
+            ],
+            [
+                'name' => 'Ai Piedi dell\'Etna',
+                'email' => 'info@aipiedidelletna.it',
+                'password' => '12345678',
+                'address' => 'Via G. Perlasca, 27',
+                'p_iva' => '82094910931',
+                'phone_number' => '3412856743',
+                'shipment_price' => 1.50,
+                'image' => 'aipiedidelletna.jpg',
             ],
         ];
 
@@ -181,7 +187,6 @@ class UserSeeder extends Seeder
             $newUser->p_iva = $user['p_iva'];
             $newUser->phone_number = $user['phone_number'];
             $newUser->shipment_price = $user['shipment_price'];
-            $newUser->minimum_order = $user['minimum_order'];
             $newUser->image = 'uploads/' . $user['image'];
             $newUser->save();
         }

@@ -151,20 +151,6 @@
                                     </div>
 
                                     <div class="form-group row mb-2">
-                                        <label for="minimum_order" class="col-md-4 col-form-label text-md-right">{{ __('Ordine minimo') }}</label>
-
-                                        <div class="col-md-6">
-                                            <input id="minimum_order" type="number" step="0.01" class="form-control @error('minimum_order') is-invalid @enderror" name="minimum_order" value="{{ old('minimum_order') }}" required autocomplete="minimum_order" autofocus>
-
-                                            @error('minimum_order')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-2">
                                         <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Immagine') }}</label>
 
                                         <div class="col-md-6">
