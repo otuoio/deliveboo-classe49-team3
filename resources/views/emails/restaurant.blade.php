@@ -4,268 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
     <title>Document</title>
-    {{-- <style>
-        /* CARRELLO */
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
         body {
-            background: #ddd;
-            min-height: 100vh;
-            vertical-align: middle;
+            font-family: 'Lato', sans-serif;
+        }
+        .navbar {
+            height: 60px;
+            background-color: #CB3F5A;
             display: flex;
-            font-family: sans-serif;
-            font-size: 0.8rem;
-            font-weight: bold
+            justify-content: center;
+            align-items: center;
         }
-
-        .title {
-            margin-bottom: 5vh
-        }
-
-        .card {
-            margin: auto;
-            max-width: 950px;
-            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-radius: 1rem;
-            border: transparent
-        }
-
-        @media(max-width:767px) {
-            .card {
-                margin: 3vh auto
-            }
-        }
-
-        .cart {
-            background-color: #fff;
-            padding: 4vh 5vh;
-        }
-
-        @media(max-width:767px) {
-            .cart {
-                padding: 4vh;
-            }
-        }
-
-        .summary {
-            background-color: #ddd;
-            border-top-right-radius: 1rem;
-            border-bottom-right-radius: 1rem;
-            padding: 4vh;
-            color: rgb(65, 65, 65)
-        }
-
-        @media(max-width:767px) {
-            .summary {
-                border-top-right-radius: unset;
-                border-bottom-left-radius: 1rem
-            }
-        }
-
-        .summary .col-2 {
-            padding: 0
-        }
-
-        .summary .col-10 {
-            padding: 0
-        }
-
-        .row {
-            margin: 0
-        }
-
-        .title b {
-            font-size: 1.5rem
-        }
-
-        .main {
-            margin: 0;
-            padding: 2vh 0;
-            width: 100%
-        }
-
-        .col-2,
-        .col {
-            padding: 0 1vh
-        }
-
-        a {
-            padding: 0 1vh
-        }
-
-        .close {
-            margin-left: auto;
-            font-size: 0.7rem
-        }
-
-         /* img {
-             width: 3.5rem
-         } */
-
-        .back-to-shop {
-            margin-top: 4.5rem
-        }
-
-        h5 {
-            margin-top: 4vh
-        }
-
-        hr {
-            margin-top: 1.25rem
-        }
-
-        form {
-            padding: 2vh 0
-        }
-
-        select {
-            border: 1px solid rgba(0, 0, 0, 0.137);
-            padding: 1.5vh 1vh;
-            margin-bottom: 4vh;
-            outline: none;
+        .logo {
             width: 100%;
-            background-color: rgb(247, 247, 247)
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
-
-        input {
-            border: 1px solid rgba(0, 0, 0, 0.137);
-            padding: 1vh;
-            margin-bottom: 4vh;
-            outline: none;
-            width: 100%;
-            background-color: rgb(247, 247, 247)
-        }
-
-        input:focus::-webkit-input-placeholder {
-            color: transparent
-        }
-
-        .btn {
-            background-color: #000;
-            border-color: #000;
+        .logo h1 {
             color: white;
+            margin-left: 4em;
+            font-style: italic;
+        }
+        .general-container {
+            width: 70%;
+            margin: 3em auto 0 auto; 
+        }
+        .container {
             width: 100%;
-            font-size: 0.7rem;
-            margin-top: 4vh;
-            padding: 1vh;
-            border-radius: 0
+            padding: 2em;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        h3 {
+            margin-bottom: 1em;
+            font-size: 1.3em;
+        }
+        h4 {
+            margin-bottom: 0.5em;
+            font-size: 1.3em;
+        }
+        .name {
+            font-size: 1.2em;
+            margin: 1em 0 0.5em 0;
+        }
+        .address {
+            font-size: 1.1em;
+        }
+        .email {
+            margin: 0.3em 0;
+        }
+        .phone-number {
+            margin-bottom: 1.3em;
+        }
+        .table {
+            width: 100%;
+            border-color: #dee2e6;
+            border-collapse: collapse;
+        }
+        .table td {
+            padding: 0.55rem;
+            border-top: 1px solid #e9ecef;
+        }
+        .table th {
+            padding: 0.55rem;
+            border-top: 1px solid #e9ecef;
+        }
+        .table .b-none {
+            border-top: transparent;
+        }
+        .table-light {
+            background-color: #f8f9fa;
+        }
+        .table-light th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #e9ecef;
+        }
+        /* logo */
+        .body {
+            position: absolute;
+            top: 50%;
+            margin-left: -145px;
+            left: 50%;
+        }
+        .body > span {
+            height: 5px;
+            width: 35px;
+            background: white;
+            position: absolute;
+            top: -19px;
+            left: 60px;
+            border-radius: 2px 10px 1px 0;
+        }
+        .base span {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-right: 100px solid white;
+            border-bottom: 6px solid transparent;
+        }
+        .base span:before {
+            content: "";
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+            right: -110px;
+            top: -16px;
         }
 
-        .btn:focus {
-            box-shadow: none;
-            outline: none;
-            box-shadow: none;
-            color: white;
-            -webkit-box-shadow: none;
-            -webkit-user-select: none;
-            transition: none
+        .base span:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 0 solid transparent;
+            border-right: 55px solid white;
+            border-bottom: 16px solid transparent;
+            top: -16px;
+            right: -98px;
         }
-
-        .btn:hover {
-            color: white
+        .face {
+            position: absolute;
+            height: 12px;
+            width: 20px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            transform: rotate(-40deg);
+            right: -125px;
+            top: -15px;
         }
-
-        a {
-            color: black
+        .face:after {
+            content: "";
+            height: 12px;
+            width: 12px;
+            background: white;
+            right: 4px;
+            top: 7px;
+            position: absolute;
+            transform: rotate(40deg);
+            transform-origin: 50% 50%;
+            border-radius: 0 0 0 2px;
         }
-
-        a:hover {
-            color: black;
-            text-decoration: none
+        @media (max-width:768px) {
+            .general-container {
+                width: 100%;
+            }
         }
-
-        #code {
-            background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
-            background-repeat: no-repeat;
-            background-position-x: 95%;
-            background-position-y: center
-        }
-
-        .fa-xmark {
-            color: rgb(163, 0, 0);
-            cursor: pointer;
-            font-size: 1.5em;
-        }
-
-        .fa-trash {
-            font-size: 1.5em;
-        }
-
-        .cart-title {
-            line-height: 0.8em;
-            margin: 0;
-        }
-
-        .confirmation {
-            width: 50%;
-            margin: auto;
+        .center {
             text-align: center;
-            border: 2px solid black;
-            border-radius: 10px;
-            overflow: hidden;
         }
-    </style> --}}
+        .order-title {
+            margin-bottom: 2em;
+        }
+    </style> 
 </head>
 <body>
-    <div class="row">
-        <div class="col">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="confirmation">
-                        {{-- <img class="img-fluid" src="https://cdn.dribbble.com/users/338126/screenshots/14926319/media/20b64b8c929f2cad121aae5f0d02e08c.gif" alt=""> --}}
-                        <h4 class="header-title mb-3">Hai ricevuto un nuovo ordine, dovr&agrave; essere consegnato per le {{ $lead['arrivalTime']}}</h4>
-                    </div>
+    <div class="navbar">
+        <div class="logo">
+            <div class="body">
+                <span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <div class="base">
+                    <span></span>
+                    <div class="face"></div>
                 </div>
             </div>
+            <h1>Deliveboo</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col col-md-4">
-            <div class="card m-0 ms-4">
-                <div class="row">
-                    <div class="col">
-                        <div class="card-body">
-                            <h4 class="header-title mb-3">Informazioni del cliente</h4>
-                            <h5>{{ $lead['orderInfo']['customer_name']}}</h5>
-                            <address class="mb-0 font-14 address-lg">
-                                {{ $lead['orderInfo']['address']}} <br>
-                                <div class="mt-2">
-                                    Email: {{ $lead['orderInfo']['email']}} <br>
-                                    Telefono: {{ $lead['orderInfo']['phone_number']}}
-                                </div>
-                            </address>
-                        </div>
-                    </div>
-                    <div class="col-md-12 cart">
-                        <div class="title">
-                            <div class="row">
-                                <div class="col d-flex justify-content-between align-items-center">
-                                    <h4 class="cart-title"><strong>Riepilogo dell'ordine</strong></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            @foreach ($lead['orderInfo']['cartDishes'] as $dish)
-                            <div class="row border-top border-bottom">
-                                <div class="row main align-items-center">
-                                    <div class="col">
-                                        <div class="row">{{$dish['name']}}</div>
-                                    </div>
-                                    <div class="col">
-                                        <span class="d-inline-block border">{{$dish['quantity']}}</span> 
-                                    </div>
-                                    <div class="col">&euro; {{ number_format($dish['price'], 2, ',', '.') }} &euro;
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                                <div class="col"> <b>TOTALE</b> </div>
-                                <div class="col offset-4 text-right">&euro; {{ number_format($lead['orderInfo']['cartTotal'], 2, ',', '.') }}</div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="general-container">
+        <div class="container">
+            <h4 class="order-title">Hai ricevuto un nuovo ordine, dovr&agrave; essere consegnato per le {{ $lead['arrivalTime']}}</h4>
+            <h4 class="header-title mb-3">Informazioni del cliente: </h4>
+            <div class="name">{{ $lead['orderInfo']['customer_name']}}</div>
+            <div class="address">
+                {{ $lead['orderInfo']['address']}}
+            </div>
+            <div class="contact">
+                <div class="email">
+                Email: {{ $lead['orderInfo']['email']}}
                 </div>
+                <div class="phone-number">
+                Telefono: {{ $lead['orderInfo']['phone_number']}}
+                </div>
+            </div>
+            <h4><strong>Riepilogo dell'ordine:</strong></h4>
+            <div class="container-table">
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="center">Prodotto</th>
+                            <th class="center">Quantità</th>
+                            <th class="center">Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($lead['orderInfo']['cartDishes'] as $dish)
+                        <tr>
+                            <td class="b-none center">{{$dish['name']}}</td>
+                            <td class="b-none center">{{$dish['quantity']}} </td>
+                            <td class="b-none center"> {{ number_format($dish['price'], 2, ',', '.') }} &euro;</td>
+                        </tr>
+                        @endforeach
+                        <tr class="table-light">
+                            <td></td>
+                            <td class="center"><strong>Totale ordine</strong></td>
+                            <td class="center"><strong>{{ number_format($lead['orderInfo']['cartTotal'], 2, ',', '.') }} &euro;</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
