@@ -18,29 +18,49 @@
           <div v-if="paymentForm">
             <div v-if="showPayment == false" class="main-card mb-3 card">
               <div class="card-body">
-                <form @submit="sendToPay()" id="myform">
+                <form @submit.prevent="sendToPay()" id="myform">
                   <div class="position-relative row form-group">
                     <label for="customer_name" class="col-sm-2 col-form-label">Nome</label>
                     <div class="col-sm-10">
-                      <input id="customer_name" name="customer_name" placeholder="Inserisci il nome completo" required type="text" class="form-control" autofocus v-model="customer_name">
+                      <input id="customer_name" required name="customer_name" placeholder="Inserisci il nome completo" type="text" class="form-control" autofocus v-model="customer_name">
+                    </div>
+                    <div>
+                      <p class="alert alert-danger" v-for="(error, index) in errors.customer_name" :key="index">
+                          {{ error }}
+                      </p>
                     </div>
                   </div>
                   <div class="position-relative row form-group">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                      <input id="email" name="email" placeholder="Inserisci la tua mail" required type="email" class="form-control" v-model="email">
+                      <input id="email" name="email" required placeholder="Inserisci la tua mail" type="email" class="form-control" v-model="email">
+                    </div>
+                    <div>
+                      <p class="alert alert-danger" v-for="(error, index) in errors.email" :key="index">
+                          {{ error }}
+                      </p>
                     </div>
                   </div>
                   <div class="position-relative row form-group">
                     <label for="phone_number" class="col-sm-2 col-form-label">Numero di telefono</label>
                     <div class="col-sm-10">
-                      <input id="phone_number" type="text" pattern="[0-9]{8,12}" class="form-control" name="phone_number" value="" required autocomplete="phone_number" v-model="phone_number">
+                      <input id="phone_number" required type="text" pattern="[0-9]{8,12}" class="form-control" name="phone_number" value="" autocomplete="phone_number" v-model="phone_number">
+                    </div>
+                    <div>
+                      <p class="alert alert-danger" v-for="(error, index) in errors.phone_number" :key="index">
+                          {{ error }}
+                      </p>
                     </div>
                   </div>
                   <div class="position-relative row form-group">
                     <label for="address" class="col-sm-2 col-form-label">Indirizzo di consegna</label>
                     <div class="col-sm-10">
-                      <input id="address" type="text" class="form-control" name="address" value="" required autocomplete="address" autofocus v-model="address">
+                      <input id="address" type="text" required class="form-control" name="address" value="" autocomplete="address" autofocus v-model="address">
+                    </div>
+                    <div>
+                      <p class="alert alert-danger" v-for="(error, index) in errors.address" :key="index">
+                          {{ error }}
+                      </p>
                     </div>
                   </div>
                   <button class="btn btn-primary" type="submit">
@@ -130,6 +150,7 @@ export default {
     return {
       user: [],
       userID: 0,
+      slug: '',
       paymentForm: true,
       loading: false,
       customer_name: '',
@@ -137,6 +158,8 @@ export default {
       phone_number: '',
       address: '',
       showPayment: false,
+      errors: {},
+      success: false,
       form: {
         customer_name:'',
         email:'',
@@ -161,15 +184,17 @@ export default {
         array.push(obj);
         this.form.cartTotal += obj.price;
         this.userID = obj.userID;
+        this.slug = obj.userSlug;
+
       }
       this.form.cartDishes = array;
     },
     getUser(){
-      Axios.get("http://127.0.0.1:8000/api/v1/" + this.userID,
+      Axios.get("http://127.0.0.1:8000/api/v1/" + this.slug + '?slug=' + this.slug,
       {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}
       ).then(
         (result) => {
-          this.user = result.data.results.data;
+          this.user = result.data.results.data[0];
           console.log(this.user);
           this.form.cartTotal += this.user.shipment_price;
         }
@@ -209,12 +234,38 @@ export default {
       return newDateObj.getHours() + ":" + (newDateObj.getMinutes()<10?'0':'') + newDateObj.getMinutes();
     },
     sendToPay(){
-      
-      this.showPayment = true;
-      this.form.customer_name = this.customer_name;
-      this.form.phone_number = this.phone_number;
-      this.form.email = this.email;
-      this.form.address = this.address;
+      this.success = false;
+      const url = "http://127.0.0.1:8000/api/v1/orders/checkout/validation";
+      Axios.post(url, {params: {
+        info: {
+          'customer_name' : this.customer_name,
+          'phone_number' : this.phone_number,
+          'email' : this.email,
+          'address' : this.address,
+        }
+      }})
+        .then((result) => {
+          if(result.data.success == true){
+            this.showPayment = true;
+            this.success = true;
+            this.errors = {};
+            this.form.customer_name = this.customer_name;
+            this.form.phone_number = this.phone_number;
+            this.form.email = this.email;
+            this.form.address = this.address;
+          }else{
+            this.success = false;
+            this.errors = result.data.errors;
+            // let customerNameError = document.getElementById('customer-name-error');
+            // let emailError = document.getElementById('email-error');
+            // let phoneNumberError = document.getElementById('phone-number-error');
+            // let addressError = document.getElementById('address-error');
+
+            console.log(result.data.errors);
+
+          }
+        })
+      .catch(error => console.log(error));
     }
   }
 }

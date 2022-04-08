@@ -289,7 +289,8 @@ export default {
                 id: this.dish_id,
                 price: this.price,
                 quantity: this.quantity,
-                userID: this.userID
+                userID: this.userID,
+                userSlug: this.slug,
             }
             // controllo se il piatto ancora non è nello storage
             if (localStorage.getItem(name) != null) {
@@ -299,7 +300,8 @@ export default {
                     id: this.dish_id,
                     price: JSON.parse(localStorage.getItem(name)).price + this.price,
                     quantity: JSON.parse(localStorage.getItem(name)).quantity + this.quantity,
-                    userID: this.userID
+                    userID: this.userID,
+                    userSlug: this.slug,
                 };
                 localStorage.setItem(name, JSON.stringify(dish));
 
@@ -325,7 +327,8 @@ export default {
                 id: obj.id,
                 price: JSON.parse(localStorage.getItem(name)).price + this.dishPrice,
                 quantity: JSON.parse(localStorage.getItem(name)).quantity + 1,
-                userID: obj.userID
+                userID: obj.userID,
+                userSlug: obj.slug,
             }
 
             // salvo il nuovo oggetto nello storage
@@ -351,7 +354,8 @@ export default {
                     id: obj.id,
                     price: JSON.parse(localStorage.getItem(name)).price - this.dishPrice,
                     quantity: JSON.parse(localStorage.getItem(name)).quantity - 1,
-                    userID: obj.userID
+                    userID: obj.userID,
+                    userSlug: obj.slug,
                 }
 
                 // salvo il nuovo oggetto nello storage

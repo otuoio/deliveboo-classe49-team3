@@ -27,13 +27,6 @@ class OrderController extends Controller
         $userCart = $request->params['info']['cartDishes'];
         // $dishes = Dish::all();
 
-        $validator = Validator::make($orderInfo, [
-            'customer_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'phone_number' => 'required|numeric',
-            'address' => 'required|string|max:255',
-        ]);
-
         $todayIstance = new Carbon();
         $today = $todayIstance->now()->setTimezone('Europe/Rome');
         $arrivalTime = $todayIstance->addMinutes(30);
@@ -79,5 +72,27 @@ class OrderController extends Controller
             "success" => true,
             "results" => $newOrder,
         ]);
+    }
+
+    public function sendValidation(Request $request){
+        $orderInfo = $request->params['info'];
+
+        $validator = Validator::make($orderInfo, [
+            'customer_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'phone_number' => 'required|numeric',
+            'address' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ]);
+        }else{
+            return response()->json([
+                'success' => true
+            ]);
+        }
     }
 }
