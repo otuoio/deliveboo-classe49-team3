@@ -36,7 +36,7 @@
             <!-- /sidebar -->
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <div class="row gx-3 h-100 align-items-center">
+                    <div class="row gx-3 h-100">
                         <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5" v-for="(user, index) in cards.users"
                         :key="index">
                             <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
