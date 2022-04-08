@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,17 +21,19 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>@yield('documentTitle')</title>
 </head>
+
 <body>
     <div class="app-container body-tabs-shadow fixed-sidebar fixed-header">
         @include('partials.navbarAdmin')
-        
+
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
                     <div class="logo-src"></div>
                     <div class="header__pane ml-auto">
                         <div>
-                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" control-id="ControlID-17">
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                                data-class="closed-sidebar" control-id="ControlID-17">
                                 <span class="hamburger-box">
                                     <span class="hamburger-inner"></span>
                                 </span>
@@ -49,33 +52,37 @@
                 </div>
                 <div class="app-header__menu">
                     <span>
-                        <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <button type="button"
+                            class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
                             <span class="btn-icon-wrapper">
                                 <i class="fa fa-ellipsis-v fa-w-6"></i>
                             </span>
                         </button>
                     </span>
-                </div> 
+                </div>
                 <div class="scrollbar-sidebar ps">
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu metismenu">
                             <li class="app-sidebar__heading">Amministrazione</li>
                             <li>
-                                <a href="{{route('admin.home')}}" class="{{ 'admin.home' === Route::currentRouteName() ? 'mm-active' : '' }}">
+                                <a href="{{ route('admin.home') }}"
+                                    class="{{ 'admin.home' === Route::currentRouteName() ? 'mm-active' : '' }}">
                                     <i class=" metismenu-icon fa-solid fa-chart-line"></i>
-                                Statistiche
+                                    Statistiche
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('admin.dishes.index')}}" class="{{ 'admin.dishes.index' === Route::currentRouteName() ? 'mm-active' : '' }}">
+                                <a href="{{ route('admin.dishes.index') }}"
+                                    class="{{ 'admin.dishes.index' === Route::currentRouteName() ? 'mm-active' : '' }}">
                                     <i class="metismenu-icon fa-solid fa-burger"></i>
-                                Piatti
+                                    Piatti
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('admin.orders.index')}}" class="{{ 'admin.orders.index'  === Route::currentRouteName() ? 'mm-active' : '' }}">
+                                <a href="{{ route('admin.orders.index') }}"
+                                    class="{{ 'admin.orders.index' === Route::currentRouteName() ? 'mm-active' : '' }}">
                                     <i class="metismenu-icon fa-solid fa-cart-shopping"></i>
-                                Ordini
+                                    Ordini
                                 </a>
                             </li>
                         </ul>
@@ -92,60 +99,59 @@
         </div>
         <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
     </div>
-    @if ('admin.orders.index'  === Route::currentRouteName())
-    @yield('ordersPopup')
-    @elseif ('admin.dishes.index'  === Route::currentRouteName())
+    @if ('admin.orders.index' === Route::currentRouteName())
+        @yield('ordersPopup')
+    @elseif ('admin.dishes.index' === Route::currentRouteName())
         @yield('dishesPopup')
     @endif
 
 
 
-<script>
-    let collapseBtn = document.querySelectorAll('.hamburger--elastic');
-    let appContainer = document.querySelector('.app-container');
-    let appHeader = document.querySelector('.app-header');
-    let dropdownMenu = document.querySelector('.dropdown-menu');
-    let sideBar = document.querySelector('.app-sidebar');
-    let switchLabel = document.querySelector(".form-switch label");
-    let switchInput = document.querySelector('.form-check-input');
-    
-    /*TOGGLE HEADER STATE*/
-    collapseBtn.forEach(element => {
-        element.addEventListener("click", function () {
-            if(appContainer.classList.contains('closed-sidebar')){
+    <script>
+        let collapseBtn = document.querySelector('.hamburger--elastic');
+        let appContainer = document.querySelector('.app-container');
+        let appHeader = document.querySelector('.app-header');
+        let dropdownMenu = document.querySelector('.dropdown-menu');
+        let sideBar = document.querySelector('.app-sidebar');
+
+        /*TOGGLE HEADER STATE*/
+        collapseBtn.addEventListener("click", function() {
+            if (appContainer.classList.contains('closed-sidebar')) {
                 appContainer.classList.remove('closed-sidebar');
             } else {
                 appContainer.classList.add('closed-sidebar');
             };
-            if(document.body.clientWidth < 992 && appContainer.classList.contains('sidebar-mobile-open')){
+            if (document.body.clientWidth < 992 && appContainer.classList.contains(
+                    'sidebar-mobile-open')) {
                 appContainer.classList.remove('sidebar-mobile-open');
             } else if (document.body.clientWidth < 992) {
                 appContainer.classList.add('sidebar-mobile-open');
             }
 
         });
-    });
 
-    window.addEventListener('resize', function(event) {
-        let win = document.body.clientWidth;
-        if (win < 1250) {
-            appContainer.classList.add('closed-sidebar-mobile');
-            appContainer.classList.add('closed-sidebar');
-        } else {
-            appContainer.classList.remove('closed-sidebar-mobile');
-            appContainer.classList.remove('closed-sidebar');
-        }
-    }, true);
+        window.addEventListener('resize', function(event) {
+            let win = document.body.clientWidth;
+            if (win < 1250) {
+                appContainer.classList.add('closed-sidebar-mobile');
+                appContainer.classList.add('closed-sidebar');
+            } else {
+                appContainer.classList.remove('closed-sidebar-mobile');
+                appContainer.classList.remove('closed-sidebar');
+            }
+        }, true);
 
-    document.addEventListener('DOMContentLoaded', function(event) {
-        if (win < 1250) {
-            appContainer.classList.add('closed-sidebar-mobile');
-            appContainer.classList.add('closed-sidebar');
-        } else {
-            appContainer.classList.remove('closed-sidebar-mobile');
-            appContainer.classList.remove('closed-sidebar');
-        }
-    });
-</script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+            let win = document.body.clientWidth;
+            if (win < 1250) {
+                appContainer.classList.add('closed-sidebar-mobile');
+                appContainer.classList.add('closed-sidebar');
+            } else {
+                appContainer.classList.remove('closed-sidebar-mobile');
+                appContainer.classList.remove('closed-sidebar');
+            }
+        });
+    </script>
 </body>
+
 </html>

@@ -1,8 +1,8 @@
 <template>
     <router-link class="text-decoration-none text-black" :to="{ name: 'restaurant', params: { slug: user.slug }}">
-        <div class="card card-span h-100 rounded-3">
-            <img v-if="user.image" :src="'/storage/'+user.image" class="img-fluid rounded-3 h-100" :alt="user.name">
-            <img v-else src="/storage/uploads/default/default_user.jpg" class="img-fluid rounded-3 h-100" :alt="user.name">
+        <div class="card card-span rounded-3">
+            <img v-if="user.image" :src="'/storage/'+user.image" class="img-fluid rounded-3" :alt="user.name">
+            <img v-else src="/storage/uploads/default/default_user.jpg" class="img-fluid rounded-3" :alt="user.name">
             <div class="card-body px-2 py-2">
             <h5 class="text-1000 text-truncate mb-1">
                 {{ user.name }}</h5>

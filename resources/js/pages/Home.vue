@@ -10,9 +10,9 @@
             </div>
         </div>
         <Jumbotron></Jumbotron>
-        <div class="app-main">
+        <div class="app-main d-flex p-0">
             <!-- Sidebar -->
-            <div class="app-sidebar sidebar-shadow">
+            <div class="app-sidebar sidebar-shadow p-0">
                 <div class="scrollbar-sidebar ps">
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu metismenu">
@@ -37,7 +37,7 @@
             <div class="app-main__outer">
                 <div class="app-main__inner">
                     <div class="row gx-3 h-100 align-items-center">
-                        <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5 h-100" v-for="(user, index) in cards.users"
+                        <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5" v-for="(user, index) in cards.users"
                         :key="index">
                             <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
                             <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
@@ -218,9 +218,16 @@ export default {
 @media (max-width: 991.98px) {
     .app-sidebar {
         transform: translateX(-280px);
+        position: fixed !important;
+        padding-top: 60px !important;
     }
     .mobile-in {
         transform: translateX(0);
+    }
+
+    .app-main__outer{
+        width: calc(100% + 250px) !important;
+        padding: 0 !important;
     }
 }
 
@@ -228,6 +235,14 @@ export default {
     .header__pane {
         display: none;
     }
+
+    .app-sidebar {
+        position: sticky !important;
+        top: 60px !important;
+        padding-top: 0 !important;
+        height: 100vh;
+    }
+    
 }
 
 @media (min-width: 768px){
@@ -245,13 +260,14 @@ export default {
 .app-sidebar {
     width: 250px;
     display: flex;
-    z-index: 11;
+    top: 0;
+    left: 0;
+    z-index: 10;
     overflow: hidden;
     min-width: 250px;
     // position: relative;
     flex: 0 0 250px;
-    margin-top: -60px;
-    padding-top: 60px;
+    margin-top: 0;
     transition: all .2s;
 
     .app-sidebar__heading {
@@ -278,6 +294,11 @@ export default {
         box-shadow: none;
         border-color: rgba(0, 0, 0, 0.25);
     }
+}
+
+.app-main__outer{
+    padding: 0 !important;
+    z-index: auto !important;
 }
 
 </style>

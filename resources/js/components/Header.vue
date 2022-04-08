@@ -41,11 +41,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap');
 .app-header {
   background-color: #CB3F5A;
   overflow: hidden;
-  z-index: 12;
+  z-index: 11;
 }
 
 h1 {

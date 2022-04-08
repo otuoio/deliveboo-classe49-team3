@@ -1,5 +1,5 @@
 <div class="app-header header-shadow">
-    <div class="app-header__logo">
+    <div class="app-header__logo second-index">
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="app-header__content text-white">
+    <div class="app-header__content text-white first-index">
         <div class="app-header-left">
         </div>
         <div class="app-header-right">
@@ -29,7 +29,7 @@
                 </div>
                 <h1 class="upper-index">Deliveboo</h1>
             </a>
-            <div class="longfazers">
+            <div class="longfazers first-index">
                 <span></span>
                 <span></span>
                 <span></span>
