@@ -28,11 +28,11 @@
                 <div class="card mb-3 widget-content bg-midnight-bloom">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
-                            <div class="widget-heading">Total Orders</div>
-                            <div class="widget-subheading">Last year expenses</div>
+                            <div class="widget-heading">Vendite Totali</div>
+                            <div class="widget-subheading"></div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>1896</span></div>
+                            <div class="widget-numbers text-white"><span id="totalSells"></span></div>
                         </div>
                     </div>
                 </div>
@@ -41,11 +41,11 @@
                 <div class="card mb-3 widget-content bg-arielle-smile">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
-                            <div class="widget-heading">Clients</div>
-                            <div class="widget-subheading">Total Clients Profit</div>
+                            <div class="widget-heading">Ordini/Mese</div>
+                            <div class="widget-subheading">Totale ordini di questo mese</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>$ 568</span></div>
+                            <div class="widget-numbers text-white"><span id="orderMonth"></span></div>
                         </div>
                     </div>
                 </div>
@@ -54,24 +54,24 @@
                 <div class="card mb-3 widget-content bg-grow-early">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
-                            <div class="widget-heading">Followers</div>
-                            <div class="widget-subheading">People Interested</div>
+                            <div class="widget-heading">Ordini/Anno</div>
+                            <div class="widget-subheading">Totale ordini di quest'anno</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>46%</span></div>
+                            <div class="widget-numbers text-white"><span id="orderYear"></span></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
+            <div class="d-lg-block col-md-6 col-xl-4">
                 <div class="card mb-3 widget-content bg-premium-dark">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
-                            <div class="widget-heading">Products Sold</div>
-                            <div class="widget-subheading">Revenue streams</div>
+                            <div class="widget-heading">Vendite/Mese</div>
+                            <div class="widget-subheading">Totale vendite del mese corrente</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-warning"><span>$14M</span></div>
+                            <div class="widget-numbers text-warning"><span id="totalSellsThisMonth"></span></div>
                         </div>
                     </div>
                 </div>
@@ -90,6 +90,72 @@
     </div>
 </div>
 <script>
+    let ordersData = ({!! json_encode($ordersData->toArray()) !!}).data;
+
+    let dataOrdersNumbers = [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ];
+    let totalSells = 0;
+    let totalSellsMonth = 0;
+
+    let today = new Date();
+    let totalOrdersCurrentMonth = 0;
+    let totalOrdersCurrentYear = 0;
+
+
+    ordersData.forEach(element => {
+        
+        // ad ogni elemento aggiorno il totale delle vendite
+        totalSells += element.total;
+
+        let orderDate = new Date(element.date);
+        let monthIndex = orderDate.getMonth();
+        let year = orderDate.getYear();
+
+        // numero ordini per mese per l'anno corrente
+        if ((orderDate.getYear()+1900) == (today.getYear()+1900)) {
+            for (let i = 0; i < 11; i++) {
+                // riempimento dell'array per i dati del grafico vendite per mese   
+                if (monthIndex == i) {
+                    dataOrdersNumbers[i]++;
+                }
+            }  
+        }
+
+        if (today.getMonth() == monthIndex) {
+            // reimpimento del total order per month
+            totalOrdersCurrentMonth++;
+            //riempimento totale per mese
+            totalSellsMonth += element.total
+        }
+
+        // reimpimento del total order per year
+        if (today.getYear() == year) {
+            totalOrdersCurrentYear++;
+        }
+    });
+
+    const orderMonth = document.getElementById('orderMonth');
+    const orderYear = document.getElementById('orderYear');
+    const totalSellsSpan = document.getElementById('totalSells');
+    const totalSellsThisMonth = document.getElementById('totalSellsThisMonth');
+
+    orderMonth.innerHTML = totalOrdersCurrentMonth;
+    orderYear.innerHTML = totalOrdersCurrentYear;
+    totalSellsSpan.innerHTML = "&euro;" + totalSells.toFixed(2);
+    totalSellsThisMonth.innerHTML = "&euro;" + totalSellsMonth.toFixed(2);
+
     const ctx = document.getElementById('myChart').getContext('2d');
     const xlabels = [];
     const myChart = new Chart(ctx, {
@@ -110,7 +176,7 @@
                 'Dicembre'],
             datasets: [{
                 label: 'Numero di ordini ',
-                data: [12, 19, 3, 5, 2, 3],
+                data: dataOrdersNumbers,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -138,28 +204,5 @@
             }
         }
     });
-    // const labels = [
-    //         'Gennaio',
-    //         'Febbraio',
-    //         'Marzo',
-    //         'Aprile',
-    //         'Maggio',
-    //         'Giugno',
-    //         'Luglio',
-    //         'Agosto',
-    //         'Settembre',
-    //         'Ottobre',
-    //         'Novembre',
-    //         'Dicembre'
-    //     ];
-    // let dataOrders = [];
-    // axios.get("http://127.0.0.1:8000/api/v1/orders", {
-    //             headers: {
-    //                 'Authorization': 'Bearer dkfsajksdfj432dskj'
-    //             }
-    //         }).then({})
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
 </script>
 @endsection
