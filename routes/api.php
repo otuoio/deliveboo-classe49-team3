@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('v1/', 'Api\UserController@index')->middleware('api.auth');
+Route::get('v1/popular', 'Api\UserController@popular')->middleware('api.auth');
 Route::get('v1/{slug}/dishes', 'Api\DishController@index')->middleware('api.auth');
 Route::get('v1/categories', 'Api\CategoryController@index')->middleware('api.auth');
 Route::get('v1/search', 'Api\UserController@search')->middleware('api.auth');

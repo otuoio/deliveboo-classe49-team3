@@ -21,6 +21,23 @@ class UserController extends Controller
         ]);
     }
 
+    public function popular()
+    {
+        // $populars = User::all();
+        $populars = User::select('users.id', 'users.name', 'users.email', 'users.password', 'users.slug', 'users.address', 'users.p_iva', 'users.phone_number', 'users.shipment_price', 'users.image', 'orders.id as orderID', 'orders.date', 'orders.time', 'orders.customer_name', 'orders.phone_number', 'orders.address', 'orders.email', 'orders.updated_at', 'orders.total')
+        ->distinct()
+            ->join('dishes', 'dishes.user_id', '=', 'users.id')
+            ->join('dish_order', 'dishes.id', '=', 'dish_order.dish_id')
+            ->join('orders', 'dish_order.order_id', '=', 'orders.id')->get();
+
+        return response()->json([
+            'response' => true,
+            'results' => [
+                'data' => $populars,
+            ]
+        ]);
+    }
+
     public function show(Request $request)
     {
         $data = $request->all();

@@ -80,6 +80,7 @@ export default {
             storageBoh: '',
             userID: '',
             sidebar: '',
+            mostPopular: []
         }
     },
     props: [
@@ -88,6 +89,7 @@ export default {
     ],
     created() {
         this.getCategories('http://127.0.0.1:8000/api/v1/categories');
+        this.getPopular()
         // this.storage = JSON.parse(localStorage.getItem('cartDishes'));
         // this.storageBoh = localStorage;
         // console.log(this.storageBoh);
@@ -102,6 +104,40 @@ export default {
         }
     },
     methods: {
+        getPopular(){
+            axios.get('http://127.0.0.1:8000/api/v1/popular', {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}}).then(
+                (result) => {
+                    // array che contiene i dati degli ordini con annessi dati utente
+                    let populars = result.data.results.data;
+                    
+                    let popularsRanked = [];
+
+                    populars.forEach((element) => {
+                        let count = 0
+                        for (let i = 0; i < populars.length; i++) {
+                            if (element.id == populars[i].id) {
+                                count++;
+                            }
+                        }
+                        element['rank'] = count;
+                        popularsRanked.push(element);
+                    });
+
+                    // array che contiene tutti gli ogetti con id e rank (senza duplicati)
+                    let uniquePopularsRanked = [...popularsRanked.reduce((map, obj) => map.set(obj.id, obj), new Map()).values()];
+
+                    // array ordinato per rank decrescente
+                    let mostPopularObjs = uniquePopularsRanked.sort((a, b) => b.rank-a.rank);
+
+                    // array che contiene i 4 rist più popolari
+                    this.mostPopular = mostPopularObjs.slice(0, 4);;
+                    console.log(this.mostPopular);
+                    
+
+                }
+            );
+                
+        },
         getCategories(url) {
             axios.get(url, {headers: {'Authorization': 'Bearer dkfsajksdfj432dskj'}})
             .then((result) => {
