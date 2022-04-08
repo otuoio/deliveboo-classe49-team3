@@ -118,6 +118,8 @@ export default {
         }
     }
     &:hover {
+        box-shadow: rgb(0 0 0 / 7%) 0px 3px 6px, rgb(0 0 0 / 7%) 0px 3px 6px;
+    
     .card-body{
         margin-top:0px;
         transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);

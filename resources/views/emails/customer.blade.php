@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -206,18 +207,20 @@
         }
     </style> --}}
 </head>
+
 <body>
     <div class="row">
         <div class="col">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                <div class="confirmation">
-                    {{-- <img class="img-fluid" src="https://cdn.dribbble.com/users/338126/screenshots/14926319/media/20b64b8c929f2cad121aae5f0d02e08c.gif" alt=""> --}}
-                    <h4 class="header-title mb-3">Il tuo ordine arriver&agrave; per le {{ $lead['arrivalTime']}}</h4>
-                </div>
-                <div class="mt-5">
-                    <h3>Ottime notizie! {{ $lead['restaurantName']}} ha confermato il tuo ordine.</h3>
-                </div>
+                    <div class="confirmation">
+                        {{-- <img class="img-fluid" src="https://cdn.dribbble.com/users/338126/screenshots/14926319/media/20b64b8c929f2cad121aae5f0d02e08c.gif" alt=""> --}}
+                        <h4 class="header-title mb-3">Il tuo ordine arriver&agrave; per le {{ $lead['arrivalTime'] }}
+                        </h4>
+                    </div>
+                    <div class="mt-5">
+                        <h3>Ottime notizie! {{ $lead['restaurantName'] }} ha confermato il tuo ordine.</h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -236,22 +239,24 @@
                         </div>
                         <div>
                             @foreach ($lead['orderInfo']['cartDishes'] as $dish)
-                            <div class="row border-top border-bottom">
-                                <div class="row main align-items-center">
-                                    <div class="col">
-                                        <div class="row">{{$dish['name']}}</div>
-                                    </div>
-                                    <div class="col">
-                                        <span class="d-inline-block border">{{$dish['quantity']}}</span> 
-                                    </div>
-                                    <div class="col">&euro; {{ number_format($dish['price'], 2, ',', '.') }} &euro;
+                                <div class="row border-top border-bottom">
+                                    <div class="row main align-items-center">
+                                        <div class="col">
+                                            <div class="row">{{ $dish['name'] }}</div>
+                                        </div>
+                                        <div class="col">
+                                            <span class="d-inline-block border">{{ $dish['quantity'] }}</span>
+                                        </div>
+                                        <div class="col">&euro;
+                                            {{ number_format($dish['price'], 2, ',', '.') }} &euro;
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                 <div class="col"> <b>TOTALE</b> </div>
-                                <div class="col offset-4 text-right">&euro; {{ number_format($lead['orderInfo']['cartTotal'], 2, ',', '.') }}</div>
+                                <div class="col offset-4 text-right">&euro;
+                                    {{ number_format($lead['orderInfo']['cartTotal'], 2, ',', '.') }}</div>
                             </div>
                         </div>
                     </div>
@@ -260,4 +265,5 @@
         </div>
     </div>
 </body>
+
 </html>

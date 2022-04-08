@@ -15,40 +15,49 @@
           </div>
         </div>
         <div v-else>
-          <div v-if="paymentForm" class="main-card mb-3 card">
-            <div class="card-body">
-              <form>
-                <div class="position-relative row form-group">
-                  <label for="customer_name" class="col-sm-2 col-form-label">Nome</label>
-                  <div class="col-sm-10">
-                    <input id="customer_name" name="customer_name" placeholder="Inserisci il nome completo" required type="text" class="form-control" autofocus v-model="form.customer_name">
+          <div v-if="paymentForm">
+            <div v-if="showPayment == false" class="main-card mb-3 card">
+              <div class="card-body">
+                <form @submit="sendToPay()" id="myform">
+                  <div class="position-relative row form-group">
+                    <label for="customer_name" class="col-sm-2 col-form-label">Nome</label>
+                    <div class="col-sm-10">
+                      <input id="customer_name" name="customer_name" placeholder="Inserisci il nome completo" required type="text" class="form-control" autofocus v-model="customer_name">
+                    </div>
                   </div>
-                </div>
-                <div class="position-relative row form-group">
-                  <label for="email" class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-10">
-                    <input id="email" name="email" placeholder="Inserisci la tua mail" required type="email" class="form-control" v-model="form.email">
+                  <div class="position-relative row form-group">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input id="email" name="email" placeholder="Inserisci la tua mail" required type="email" class="form-control" v-model="email">
+                    </div>
                   </div>
-                </div>
-                <div class="position-relative row form-group">
-                  <label for="phone_number" class="col-sm-2 col-form-label">Numero di telefono</label>
-                  <div class="col-sm-10">
-                    <input id="phone_number" type="text" minlength="8" class="form-control" name="phone_number" value="" required autocomplete="phone_number" v-model="form.phone_number">
+                  <div class="position-relative row form-group">
+                    <label for="phone_number" class="col-sm-2 col-form-label">Numero di telefono</label>
+                    <div class="col-sm-10">
+                      <input id="phone_number" type="text" pattern="[0-9]{8,12}" class="form-control" name="phone_number" value="" required autocomplete="phone_number" v-model="phone_number">
+                    </div>
                   </div>
-                </div>
-                <div class="position-relative row form-group">
-                  <label for="address" class="col-sm-2 col-form-label">Indirizzo di consegna</label>
-                  <div class="col-sm-10">
-                    <input id="address" type="text" class="form-control" name="address" value="" required autocomplete="address" autofocus v-model="form.address">
+                  <div class="position-relative row form-group">
+                    <label for="address" class="col-sm-2 col-form-label">Indirizzo di consegna</label>
+                    <div class="col-sm-10">
+                      <input id="address" type="text" class="form-control" name="address" value="" required autocomplete="address" autofocus v-model="address">
+                    </div>
                   </div>
-                </div>
-              </form>
-              <v-braintree 
-                authorization="sandbox_x6p9dcjd_7nfbkpdgq66q9h4g"
-                @success="onSuccess"
-                @error="onError"
-              >
-              </v-braintree>
+                  <button class="btn btn-primary" type="submit">
+                    Procedi al pagamento
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div v-else class="main-card mb-3 card">
+              <div class="card-body">
+                <v-braintree 
+                  authorization="sandbox_x6p9dcjd_7nfbkpdgq66q9h4g"
+                  @success="onSuccess"
+                  @error="onError"
+                >
+                </v-braintree>
+              </div>
             </div>
           </div>
           <div v-else class="main-card mb-3 card  text-center">
@@ -112,6 +121,8 @@
 
 <script>
 import Axios from 'axios';
+import { time } from 'console';
+import { timeout } from 'q';
 
 export default {
   name: 'Checkout',
@@ -121,6 +132,11 @@ export default {
       userID: 0,
       paymentForm: true,
       loading: false,
+      customer_name: '',
+      email: '',
+      phone_number: '',
+      address: '',
+      showPayment: false,
       form: {
         customer_name:'',
         email:'',
@@ -191,8 +207,15 @@ export default {
       let diff = 30;
       let newDateObj = new Date(oldDateObj.getTime() + diff*60000);
       return newDateObj.getHours() + ":" + (newDateObj.getMinutes()<10?'0':'') + newDateObj.getMinutes();
-      
     },
+    sendToPay(){
+      
+      this.showPayment = true;
+      this.form.customer_name = this.customer_name;
+      this.form.phone_number = this.phone_number;
+      this.form.email = this.email;
+      this.form.address = this.address;
+    }
   }
 }
 </script>

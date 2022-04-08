@@ -28,6 +28,7 @@
         "@fortawesome/vue-fontawesome": "^2.0.6",
         "bootstrap-icons": "^1.8.1",
         "chart.js": "^3.7.1",
+        "console": "^0.7.2",
         "vue-braintree": "^2.1.0",
         "vue-router": "^3.5.3"
     }

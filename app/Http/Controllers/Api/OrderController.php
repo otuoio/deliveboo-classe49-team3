@@ -28,10 +28,10 @@ class OrderController extends Controller
         // $dishes = Dish::all();
 
         $validator = Validator::make($orderInfo, [
-            'customer_name' => 'required',
-            'email' => 'required|email',
-            'phone_number' => 'required',
-            'address' => 'required',
+            'customer_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'phone_number' => 'required|numeric',
+            'address' => 'required|string|max:255',
         ]);
 
         $todayIstance = new Carbon();

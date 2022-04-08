@@ -1,36 +1,41 @@
 <template>
     <div class="app-main">
         <div class="app-main__outer p-0">
-            <div class="row g-4">
-                <div class="col p-0 m-0">
-                    <div class="rounded-0 card d-flex flex-row">
-                        <img v-if="user.image != null" :src="'/storage/'+user.image" class="card-img-top w-25" :alt="user.name">
-                        <img v-else src="/storage/uploads/default/default_user.jpg" class="card-img-top w-25" :alt="user.name">
+            <div class="row jumbo-container g-4">
+                <div class="col p-0 m-0 col-lg-8 col-12">
+                    <div class="jumbo-image" :style="(user.image) ? {backgroundImage: `url(/storage/${user.image})`} : {backgroundImage:'/storage/uploads/default/default_user.jpg'}">
+                        <!-- <img v-if="user.image != null" :src="'/storage/'+user.image" class="" :alt="user.name">
+                        <img v-else src="/storage/uploads/default/default_user.jpg" class="" :alt="user.name"> -->
+                    </div>
+                </div>
+                <div class="col p-0 m-0 col-lg-4 col-12 d-flex align-items-center">
                         <div class="card-body restaurant-info d-flex flex-column justify-content-center">
                             <h2 class="card-title">{{ user.name }}</h2>
-                            <div class="mt-4">
+                            <div class="mt-3">
                                 <div>
-                                    <span>15-30 min</span> · 
+                                    <span><i class="fa-solid fa-bicycle"></i>15-30 min</span> · 
                                     <span v-if="user.shipment_price == 0">Consegna gratuita</span>
                                     <span v-else>Costo di consegna: &euro; {{ user.shipment_price.toFixed(2) }}</span>
                                 </div>
                                 <div class="mt-2">
-                                    <span>{{ user.address}}</span> · 
+                                    <span><i class="fa-solid fa-location-dot"></i>{{ user.address}}</span> · 
                                     <span>Distanza: 1.5 km</span>
                                 </div>
                                 <div class="mt-2">
-                                    <span><i class="fa-solid fa-phone"></i> {{ user.phone_number}}</span> · 
+                                    <span><i class="fa-solid fa-phone"></i>{{ user.phone_number}}</span> · 
                                     <span><a :href="`tel:${user.phone_number}`">Chiama il ristorante</a></span>
+                                </div>
+                                <div class="mt-2">
+                                    <span><i class="fa-solid fa-envelope"></i><a class="px-0" :href="`mailto:${user.email}`">Invia un'e-mail al ristorante</a></span>
                                 </div>
                             </div>
                             <!-- <p class="card-text">{{ user.category.name }}</p> -->
                         </div>
-                    </div>
                 </div>
             </div>
             <div class="app-main__inner container">
                 <div class="row g-4 justify-content-end">
-                    <div class="col col-xxl-8 col-12 order-xxl-1 order-2">
+                    <div class="col col-xxl-8 col-12 ">
                         <div v-for="(dish, index) in dishes" :key="index">
                             <AddDish
                                         :dish="dish"
@@ -47,7 +52,7 @@
                                 </a>
                                 <div class="postcard__text t-dark">
                                     <div class="d-flex align-items-center">
-                                        <h1 class="postcard__title red">{{ dish.name }}</h1>
+                                        <h1 class="postcard__title mb-0 red">{{ dish.name }}</h1>
                                         
                                         <div class="postcard__tagbox ms-2">
                                             <div v-if="dish.vegan" class="tag__item"><i class="fa-solid fa-leaf mr-2"></i></div>
@@ -56,13 +61,13 @@
                                     </div>
                                     <div class="postcard__bar"></div>
                                     <div class="postcard__preview-txt">{{ shortDescription(dish.description) }}</div>
-                                    <div class="postcard__preview-txt">{{ dish.price.toFixed(2) }} &euro;</div>
+                                    <div class="postcard__preview-txt mt-2">{{ dish.price.toFixed(2) }} &euro;</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col col-xxl-4 col-12 col-xl-5 order-xxl-2 order-1">
-                        <div class="card m-0 ms-4" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                    <div class="col col-xxl-4 col-12 d-none d-xxl-block">
+                        <div class="card mycard m-0 ms-4 position-sticky" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                             <div class="row">
                                 <div class="col-md-12 cart">
                                     <div class="title">
@@ -86,10 +91,10 @@
                                                 <div class="col">
                                                     <div class="row">{{ cartDish.name }}</div>
                                                 </div>
-                                                <div class="col text-center">
-                                                    <span @click="removeItem(cartDish)" role="button">-</span>
-                                                    <span class="d-inline-block border">{{ cartDish.quantity }}</span>
-                                                    <span @click="addItem(cartDish)" role="button">+</span>
+                                                <div class="col text-center d-flex justify-content-center">
+                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="removeItem(cartDish)"><span>-</span></button>
+                                                    <span  style="width: 50px;" class="d-inline-block px-2">{{ cartDish.quantity }}</span>
+                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="addItem(cartDish)"><span>+</span></button>
                                                 </div>
                                                 <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}<span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>
@@ -112,6 +117,58 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="cart mycart-container bg-transparent position-fixed w-100 d-xl-block d-xxl-none">
+                <div class="card d-none mycart m-0 mb-2 bg-transparent" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                    <div class="overlay-cart"></div>
+                    <div class="z-index-2 row">
+                        <div class="col-md-8 col-lg-7 col-sm-12 cart">
+                            <div class="title">
+                                <div class="row">
+                                    <div class="col d-flex justify-content-between align-items-center">
+                                        <h4 class="cart-title"><b>Carrello</b></h4>
+                                        <span @click="emptyCart" role="button"><i class="fa-solid fa-trash"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="cartTotal == user.shipment_price || cartTotal == 0">
+                                <div class="row border-top border-bottom">
+                                    <div class="row main align-items-center">
+                                        Il carrello &egrave; vuoto
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="row border-top border-bottom" v-for="(cartDish, index) in cartDishes" :key="'cartDish' + index">
+                                    <div class="row main align-items-center">
+                                        <div class="col">
+                                            <div class="row">{{ cartDish.name }}</div>
+                                        </div>
+                                        <div class="col text-center d-flex justify-content-center">
+                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="removeItem(cartDish)"><span>-</span></button>
+                                                    <span  style="width: 50px;" class="d-inline-block px-2">{{ cartDish.quantity }}</span>
+                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="addItem(cartDish)"><span>+</span></button>
+                                                </div>
+                                        <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}<span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                    <div class="col">Costo di consegna</div>
+                                    <div class="col text-end">&euro; {{ user.shipment_price.toFixed(2) }}<span class="invisible close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span></div>
+                                </div>
+                                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                    <div class="col">TOTALE</div>
+                                    <div class="col text-end">&euro; {{cartTotal.toFixed(2)}}<span class="invisible close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span></div>
+                                </div>
+                                <router-link class="btn btn-myblue" :to="{ name: 'checkout'}"> 
+                                    CHECKOUT
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="z-index-2 btnmobilecart btn btn-myblue m-0 text-uppercase" @click="showCartMobile()"><i class="fa-solid fa-cart-shopping"></i></button>
             </div>
         </div>
     </div>
@@ -140,7 +197,9 @@ export default {
             dishPrice: 0,
             storage: '',
             showC: false,
-            dish_id:''
+            dish_id:'',
+            cart: '',
+            btnblue: '',
         }
     },
     created(){
@@ -314,7 +373,14 @@ export default {
             localStorage.clear();
             this.cartTotal = this.user.shipment_price;
             this.showCart();
-
+        },
+        showCartMobile(){
+            this.cart = document.querySelector('.mycart');
+            if(this.cart.classList.contains('d-none')){
+                this.cart.classList.remove('d-none');
+            }else{
+                this.cart.classList.add('d-none');
+            }
         },
     }
 
@@ -333,6 +399,82 @@ $main-red-rgb-015: rgba(189, 21, 11, 0.1) !default;
 // 	text-rendering: optimizeLegibility;
 // 	font-weight: initial;
 // }
+
+.jumbo-container {
+    box-shadow: 8px 9px 12px -5px rgb(0 0 0 / 6%);
+    background-color: #FFF6F7;
+
+    .jumbo-image {
+        background-position: center;
+        background-size: cover;
+        height: 350px;
+    }
+
+    .restaurant-info {
+        .card-title {
+            font-weight: bold;
+        }
+        i {
+            color: #01678F;
+            width: 2em;
+            text-align: center;
+        }
+
+        a {
+            color: #01678F;
+        }
+
+        span {
+            font-size: 1rem;
+        }
+
+    }
+
+    .card-title {
+        font-size: 2.3rem;
+    }
+
+    span {
+        font-size: 1rem;
+    }
+
+    .card-body {
+        
+    }
+}
+.z-index-2 {
+    z-index: 2;
+}
+.overlay-cart{
+    position: fixed;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
+
+.quantity-btn {
+    width: 25px !important;
+    height: 25px !important;
+    margin-top: 0 !important;
+
+}
+.btnmobilecart{
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.2em !important;
+    border-radius: 100% !important;
+}
+.mycard {
+    top: 100px;
+}
+
+
+.w-35 {
+    width: 35%;
+}
 
 .light {
 	background: #f3f5f7;
@@ -394,7 +536,7 @@ a, a:hover {
 
     .postcard__bar {
         width: 50px;
-        height: 10px;
+        height: 2px;
         margin: 10px 0;
         border-radius: 5px;
         background-color: #CB3F5A;
@@ -412,7 +554,7 @@ a, a:hover {
         overflow: hidden;
         text-overflow: ellipsis;
         text-align: justify;
-        height: 100%;
+        // height: 100%;
     }
 
     .postcard__tagbox {
@@ -484,6 +626,16 @@ a, a:hover {
       width: 55px;
     }
 
+    .postcard__text:before {
+      content: "";
+      position: absolute;
+      display: block;
+      background: #fff;
+      top: -20%;
+      height: 130%;
+      width: 55px;
+    }
+
     // &>* {
     //     flex-direction: row-reverse;
     //     right: -12px !important;
@@ -513,16 +665,6 @@ a, a:hover {
 @media screen and (min-width: 1024px){
 		.postcard__text {
       padding: 2rem 3.5rem;
-    }
-		
-		.postcard__text:before {
-      content: "";
-      position: absolute;
-      display: block;
-      
-      top: -20%;
-      height: 130%;
-      width: 55px;
     }
 	
   .postcard.dark {
@@ -769,21 +911,15 @@ a:hover {
     margin: 0;
 }
 
-.restaurant-info {
-    .card-title {
-        font-weight: bold;
-    }
-    .fa-phone {
-        color: #01678F;
-    }
+.mycart-container {
+    bottom: 0;
+    left: 0;
+    padding: 3vh 2.5vh;
 
-    a {
-        color: #01678F;
+    .mycart {
+        max-height: calc(100vh - 160px);
+        overflow: scroll;
+        border-radius: 0;
     }
-
-    span {
-        font-size: 1rem;
-    }
-
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Ciao sono il footer
+    <div class="container-fluid">
+        
     </div>
 </template>
 
@@ -11,5 +11,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.container-fluid {
+    height: 150px;
+    background-color: #2F4858;
+    color: white;
+    z-index: 20;
+}
 </style>
