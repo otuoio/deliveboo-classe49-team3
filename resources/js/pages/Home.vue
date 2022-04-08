@@ -9,7 +9,7 @@
                 </button>
             </div>
         </div>
-
+        <Jumbotron></Jumbotron>
         <div class="app-main">
             <!-- Sidebar -->
             <div class="app-sidebar sidebar-shadow">
@@ -35,19 +35,6 @@
             </div>
             <!-- /sidebar -->
             <div class="app-main__outer">
-                <section class="jumbotron overflow-hidden bg-primary">
-                    <div class="container">
-                        <div class="row flex-center">
-                            <div class="col-md-7 col-lg-6 pt-5 pt-md-0 text-md-start text-center d-flex flex-column justify-content-center">
-                                <h1 class="fs-md-5 fs-xl-6 text-light">Non ci vedi pi&ugrave; dalla fame?</h1>
-                                <h1 class="text-800 fs-4">Trova i ristoranti vicino a te <br class="d-none d-xxl-block">con un solo click</h1>
-                            </div>
-                            <div class="col-md-5 col-lg-6 pt-5 img-container">
-                                <img class="img-fluid" src="https://technext.github.io/foodwagon/v1.0.0/assets/img/gallery/hero-header.png" alt="hero-header">
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 <div class="app-main__inner">
                     <div class="row gx-3 h-100 align-items-center">
                         <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5 h-100" v-for="(user, index) in cards.users"
@@ -72,11 +59,13 @@
 <script>
 import RestaurantCard from '../components/RestaurantCard.vue';
 import RestaurantCardModal from '../components/RestaurantCardModal.vue';
+import Jumbotron from '../components/Jumbotron.vue';
 import axios from 'axios';
 
 export default {
     name: "Home",
     components: {
+    Jumbotron,
     RestaurantCard,
     RestaurantCardModal,
 },
@@ -184,19 +173,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.jumbotron {
-    height: 400px;
-
-    h1.text-light{
-        font-weight: 700;
-        color: #F9FAFD !important;
-    }
-
-    .img-container {
-        height: 400px;
-    }
-}
 
 .py-8 {
     padding-top: 7.5rem !important;
