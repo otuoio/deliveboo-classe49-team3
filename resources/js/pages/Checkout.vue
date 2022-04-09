@@ -75,6 +75,8 @@
                   authorization="sandbox_x6p9dcjd_7nfbkpdgq66q9h4g"
                   @success="onSuccess"
                   @error="onError"
+                  :locale="locale"
+                  btnText="Paga"
                 >
                 </v-braintree>
               </div>
@@ -149,6 +151,7 @@ export default {
   data() {
     return {
       user: [],
+      locale: 'it_IT',
       userID: 0,
       slug: '',
       paymentForm: true,
