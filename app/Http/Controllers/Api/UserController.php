@@ -21,9 +21,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function popular()
+    public function popular() //chiamata per prendere i dati degli users associati all'ordine
     {
-        // $populars = User::all();
         $populars = User::select('users.id', 'users.name', 'users.email', 'users.password', 'users.slug', 'users.address', 'users.p_iva', 'users.phone_number', 'users.shipment_price', 'users.image', 'orders.id as orderID')
         ->distinct()
             ->join('dishes', 'dishes.user_id', '=', 'users.id')
@@ -79,25 +78,4 @@ class UserController extends Controller
             ]
         ]);
     }
-
-    // SEARCHBAR
-    // public function searchName(Request $request)
-    // {
-    //     $data = $request->all();
-
-    //     //apriamo una chiamata eloquent senza chiuderla
-    //     $users = User::where('id', '>=', 1);
-
-    //     if (array_key_exists('inputSearch', $data)) {
-    //         $users->where('name','like','%'. $data['inputSearch'].'%');
-    //     }
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'count' =>  $users->count(),
-    //         'results' => [
-    //             'data' => $users->get()
-    //         ]
-    //     ]);
-    // }
 }

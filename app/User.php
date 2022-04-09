@@ -38,22 +38,6 @@ class User extends Authenticatable
         return 'slug';
     }
 
-    // public function createSlug($name)
-    // {
-    //     $slug = Str::slug($name, '-');
-
-    //     $oldUser = User::where('slug', $slug)->first();
-
-    //     $counter = 0;
-    //     while ($oldUser) {
-    //         $newSlug = $slug . '-' . $counter;
-    //         $oldUser = User::where('slug', $newSlug)->first();
-    //         $counter++;
-    //     }
-
-    //     return (empty($newSlug)) ? $slug : $newSlug;
-    // }
-
     public function dishes()
     {
         return $this->hasMany('App\Model\Dish');

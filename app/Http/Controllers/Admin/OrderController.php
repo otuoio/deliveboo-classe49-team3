@@ -33,7 +33,12 @@ class OrderController extends Controller
         return view('admin.orders.index', $data);
     }
 
-    public function statistics()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function statistics() //passa alla admin home i dati degli ordini da manipolare per le statistiche
     {
         $ordersData = Order::select('orders.id', 'orders.date', 'orders.time', 'orders.customer_name', 'orders.phone_number', 'orders.address', 'orders.email', 'orders.updated_at', 'orders.total')
         ->distinct()
@@ -41,7 +46,7 @@ class OrderController extends Controller
             ->join('dishes', 'dishes.id', '=', 'dish_order.dish_id')
             ->where('user_id', Auth::user()->id)
             ->orderBy('orders.updated_at', 'desc')
-            ->paginate(20);
+            ->paginate(100);
 
 
         $data = [

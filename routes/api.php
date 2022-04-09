@@ -23,11 +23,9 @@ Route::get('v1/popular', 'Api\UserController@popular')->middleware('api.auth');
 Route::get('v1/{slug}/dishes', 'Api\DishController@index')->middleware('api.auth');
 Route::get('v1/categories', 'Api\CategoryController@index')->middleware('api.auth');
 Route::get('v1/search', 'Api\UserController@search')->middleware('api.auth');
-// Route::get('v1/searchName', 'Api\UserController@searchName')->middleware('api.auth'); -- SEARCHBAR
 Route::get('v1/{slug}', 'Api\UserController@show')->middleware('api.auth');
-Route::get("v1/orders", "Api\OrderController@orderDatas")->middleware('api.auth');
-Route::post('v1/orders/checkout', 'Api\OrderController@sendOrder');
 Route::post('v1/orders/checkout/validation', 'Api\OrderController@sendValidation');
+Route::post('v1/orders/checkout', 'Api\OrderController@sendOrder');
 
 
 

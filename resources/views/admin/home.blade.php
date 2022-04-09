@@ -90,6 +90,7 @@
     </div>
 </div>
 <script>
+    // recupero i dati degli ordini passando il dato php in js
     let ordersData = ({!! json_encode($ordersData->toArray()) !!}).data;
 
     let dataOrdersNumbers = [

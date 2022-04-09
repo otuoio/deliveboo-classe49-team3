@@ -119,7 +119,7 @@ class UserSeeder extends Seeder
                 'name' => "Elk Bakery",
                 'email' => 'info@elkbakery.it',
                 'password' => '12345678',
-                'address' => 'Via Tal dei Tali',
+                'address' => 'Via Tal dei Tali, 11',
                 'p_iva' => '14284292409',
                 'phone_number' => '3315762346',
                 'shipment_price' => 1.50,

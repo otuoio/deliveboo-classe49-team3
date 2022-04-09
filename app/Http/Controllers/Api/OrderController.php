@@ -14,15 +14,32 @@ use App\Mail\SendNewRestaurantMail;
 use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
-    public function orderDatas(){
-        $orders = Order::all();
-        
-        return response()->json([
-            "success" => true,
-            "results" => $orders,
+
+    public function sendValidation(Request $request) //validazione dei dati del customer inviati nel form di checkout
+    {
+        $orderInfo = $request->params['info'];
+
+        $validator = Validator::make($orderInfo, [
+            'customer_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'phone_number' => 'required|numeric',
+            'address' => 'required|string|max:255',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ]);
+        } else {
+            return response()->json([
+                'success' => true
+            ]);
+        }
     }
-    public function sendOrder(Request $request) {
+
+    public function sendOrder(Request $request) //invio al db dei dati relativi all'ordine e invio mail
+    {
         $orderInfo = $request->params['info'];
         $userCart = $request->params['info']['cartDishes'];
         // $dishes = Dish::all();
@@ -62,10 +79,8 @@ class OrderController extends Controller
             'arrivalTime' => $arrivalTimeFormat,
         ];
 
+        // gestione mail
         Mail::to($orderInfo['email'])->send(new SendNewMail($dataCustomer));
-
-
-
         Mail::to($restaurant->email)->send(new SendNewRestaurantMail($dataCustomer));
 
         return response()->json([
@@ -74,25 +89,4 @@ class OrderController extends Controller
         ]);
     }
 
-    public function sendValidation(Request $request){
-        $orderInfo = $request->params['info'];
-
-        $validator = Validator::make($orderInfo, [
-            'customer_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'phone_number' => 'required|numeric',
-            'address' => 'required|string|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ]);
-        }else{
-            return response()->json([
-                'success' => true
-            ]);
-        }
-    }
 }
