@@ -3,7 +3,7 @@
   <div class="app-main__outer p-0 pt-5 pb-5">
     <div class="container">
       <div class="row">
-      <div class="col col-md-12 col-lg-7 col-xl-8">
+      <div class="col-md-12 col-lg-7 col-xl-8">
         <div v-if="loading">
           <div class="main-card mb-3 card">
             <div class="card-body text-center">
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-      <div class="col col-md-12 col-lg-5 col-xl-4">
+      <div class="col-md-12 col-lg-5 col-xl-4">
           <div class="card m-0 ms-0 ms-lg-4">
               <div class="row">
                   <div class="col-md-12 cart">
