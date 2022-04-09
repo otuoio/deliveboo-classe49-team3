@@ -24,7 +24,7 @@ class UserController extends Controller
     public function popular()
     {
         // $populars = User::all();
-        $populars = User::select('users.id', 'users.name', 'users.email', 'users.password', 'users.slug', 'users.address', 'users.p_iva', 'users.phone_number', 'users.shipment_price', 'users.image', 'orders.id as orderID', 'orders.date', 'orders.time', 'orders.customer_name', 'orders.phone_number', 'orders.address', 'orders.email', 'orders.updated_at', 'orders.total')
+        $populars = User::select('users.id', 'users.name', 'users.email', 'users.password', 'users.slug', 'users.address', 'users.p_iva', 'users.phone_number', 'users.shipment_price', 'users.image', 'orders.id as orderID')
         ->distinct()
             ->join('dishes', 'dishes.user_id', '=', 'users.id')
             ->join('dish_order', 'dishes.id', '=', 'dish_order.dish_id')

@@ -24,14 +24,14 @@
                     </div>
                     <div class="bottom-wrap">
                         <div class="row justify-content-center align-items-center">
-                            <div class="col col-md-2 text-center">
-                                <div class="btn btn-primary rounded-circle" @click="removeItem(dish.price.toFixed(2))">&minus;</div>
+                            <div class="col col-md-2 d-flex justify-content-center">
+                                <div class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center" style="height: 40px; width: 40px;" @click="removeItem(dish.price.toFixed(2))"><span>&minus;</span></div>
                             </div>
-                            <div class="col col-md-1 p-0 text-center">
-                                <div class="">{{ qty }}</div>
+                            <div class="col col-md-1 p-0 d-flex justify-content-center">
+                                <div class="text-center">{{ qty }}</div>
                             </div>
-                            <div class="col col-md-2 text-center">
-                                <div class="btn btn-primary rounded-circle" @click="addItem(dish.price.toFixed(2))">&plus;</div>
+                            <div class="col col-md-2 d-flex justify-content-center">
+                                <div class="btn btn-primary rounded-circle d-flex justify-content-center align-items-center" style="height: 40px; width: 40px;" @click="addItem(dish.price.toFixed(2))"><span>&plus;</span></div>
                             </div>
                         </div>
                         <div class="row">

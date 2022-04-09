@@ -1,9 +1,9 @@
 <template>
 <div class="app-main">
-  <div class="app-main__outer p-0 pt-5">
+  <div class="app-main__outer p-0 pt-5 pb-5">
     <div class="container">
       <div class="row">
-      <div class="col col-ms-12 col-lg-8">
+      <div class="col col-md-12 col-lg-7 col-xl-8">
         <div v-if="loading">
           <div class="main-card mb-3 card">
             <div class="card-body text-center">
@@ -17,11 +17,11 @@
         <div v-else>
           <div v-if="paymentForm">
             <div v-if="showPayment == false" class="main-card mb-3 card">
-              <div class="card-body">
+              <div class="card-body p-4">
                 <form @submit.prevent="sendToPay()" id="myform">
                   <div class="position-relative row form-group">
-                    <label for="customer_name" class="col-sm-2 col-form-label">Nome</label>
-                    <div class="col-sm-10">
+                    <label for="customer_name" class="col-sm-2 col-md-3 col-form-label p-0">Nome</label>
+                    <div class="col-sm-10 col-md-9">
                       <input id="customer_name" required name="customer_name" placeholder="Inserisci il nome completo" type="text" class="form-control" autofocus v-model="customer_name">
                     </div>
                     <div>
@@ -31,8 +31,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
+                    <label for="email" class="col-sm-2 col-md-3 col-form-label p-0">Email</label>
+                    <div class="col-sm-10 col-md-9">
                       <input id="email" name="email" required placeholder="Inserisci la tua mail" type="email" class="form-control" v-model="email">
                     </div>
                     <div>
@@ -42,8 +42,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="phone_number" class="col-sm-2 col-form-label">Numero di telefono</label>
-                    <div class="col-sm-10">
+                    <label for="phone_number" class="col-sm-2 col-md-3 col-form-label p-0">Numero di telefono</label>
+                    <div class="col-sm-10 col-md-9">
                       <input id="phone_number" required type="text" pattern="[0-9]{8,12}" class="form-control" name="phone_number" value="" autocomplete="phone_number" v-model="phone_number">
                     </div>
                     <div>
@@ -53,8 +53,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="address" class="col-sm-2 col-form-label">Indirizzo di consegna</label>
-                    <div class="col-sm-10">
+                    <label for="address" class="col-sm-2 col-md-3 col-form-label p-0">Indirizzo di consegna</label>
+                    <div class="col-sm-10 col-md-9">
                       <input id="address" type="text" required class="form-control" name="address" value="" autocomplete="address" autofocus v-model="address">
                     </div>
                     <div>
@@ -95,8 +95,8 @@
           </div>
         </div>
       </div>
-      <div class="col col-ms-12 col-lg-4">
-          <div class="card m-0 ms-4">
+      <div class="col col-md-12 col-lg-5 col-xl-4">
+          <div class="card m-0 ms-0 ms-lg-4">
               <div class="row">
                   <div class="col-md-12 cart">
                       <div class="title">
@@ -125,8 +125,8 @@
                               <div v-if="user.shipment_price" class="col text-end">&euro; {{user.shipment_price.toFixed(2) }}</div>
                           </div>
                           <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                              <div class="col"> <b>TOTALE</b> </div>
-                              <div class="col text-end">&euro; {{form.cartTotal.toFixed(2)}}</div>
+                              <div class="col fw-bold">TOTALE</div>
+                              <div class="col text-end fw-bold">&euro; {{form.cartTotal.toFixed(2)}}</div>
                           </div>
                       </div>
                   </div>

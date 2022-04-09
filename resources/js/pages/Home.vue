@@ -36,20 +36,28 @@
             <!-- /sidebar -->
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <div class="row gx-3 h-100">
+                    <!-- I RISTORANTI PIU POPOLARI  -->
+                    <div class="row gx-3">
+                        <span class="row-title">
+                            I ristoranti pi&ugrave; popolari
+                        </span>
+                        <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5" v-for="(user, index) in mostPopular"
+                        :key="index">
+                            <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
+                            <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
+                        </div>
+                    </div>
+                    <!-- TUTTI I RISTORANTI -->
+                    <div class="row gx-3">
+                        <span class="row-title">
+                            Tutti i ristoranti
+                        </span>
                         <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5" v-for="(user, index) in cards.users"
                         :key="index">
                             <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
                             <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
                         </div>
                     </div>
-                    <!-- <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-4">
-                        <div v-for="(user, index) in cards.users"
-                        :key="index">
-                            <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
-                            <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -210,30 +218,6 @@ export default {
 
 <style lang="scss" scoped>
 
-.py-8 {
-    padding-top: 7.5rem !important;
-    padding-bottom: 7.5rem !important;
-}
-
-
-.text-800 {
-    color: white !important;
-    font-weight: 400;
-}
-
-
-.fs-4 {
-    font-size: 2.0736rem !important;
-}
-
-.bg-primary {
-    background-color: #FFB30E !important;
-}
-
-.fs-md-5 {
-    font-size: 2.48832rem;
-}
-
 .header__pane {
     position: fixed;
     z-index: 20;
@@ -335,6 +319,18 @@ export default {
 .app-main__outer{
     padding: 0 !important;
     z-index: auto !important;
+}
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    background-color: #CB3F5A;
+}
+
+.row-title {
+    font-size: 1.5rem;
+    font-weight:700;
+    padding-left: 15px;
+    color: #CB3F5A;
+    margin-bottom: 1em;
 }
 
 </style>

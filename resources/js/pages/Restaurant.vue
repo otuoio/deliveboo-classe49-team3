@@ -92,9 +92,9 @@
                                                     <div class="row">{{ cartDish.name }}</div>
                                                 </div>
                                                 <div class="col text-center d-flex justify-content-center">
-                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="removeItem(cartDish)"><span>-</span></button>
+                                                    <button class="btn rounded-circle btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="removeItem(cartDish)"><span>-</span></button>
                                                     <span  style="width: 50px;" class="d-inline-block px-2">{{ cartDish.quantity }}</span>
-                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="addItem(cartDish)"><span>+</span></button>
+                                                    <button class="btn rounded-circle btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="addItem(cartDish)"><span>+</span></button>
                                                 </div>
                                                 <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}<span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
                                                 </div>

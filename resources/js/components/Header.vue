@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 // @import url('https://fonts.googleapis.com/css2?family=Lato:ital@0;1&display=swap');
 .app-header {
-  background-color: #CB3F5A;
+  background-color: white;
   overflow: hidden;
   z-index: 11;
 }
@@ -59,7 +59,7 @@ font-family: 'Lato', sans-serif;
   top: 50%;
   transform: translateY(-50%);
   margin-left: -5px;
-  color: white;
+  color: #CB3F5A;
 }
 
 .body {
@@ -72,7 +72,7 @@ font-family: 'Lato', sans-serif;
   > span {
     height: 5px;
     width: 35px;
-    background: white;
+    background: #CB3F5A;
     position: absolute;
     top: -19px;
     left: 60px;
@@ -86,7 +86,7 @@ font-family: 'Lato', sans-serif;
     width: 0;
     height: 0;
     border-top: 6px solid transparent;
-    border-right: 100px solid white;
+    border-right: 100px solid #CB3F5A;
     border-bottom: 6px solid transparent;
 
     &:before {
@@ -94,7 +94,7 @@ font-family: 'Lato', sans-serif;
       height: 22px;
       width: 22px;
       border-radius: 50%;
-      background: white;
+      background: #CB3F5A;
       position: absolute;
       right: -110px;
       top: -16px;
@@ -106,7 +106,7 @@ font-family: 'Lato', sans-serif;
       width: 0;
       height: 0;
       border-top: 0 solid transparent;
-      border-right: 55px solid white;
+      border-right: 55px solid #CB3F5A;
       border-bottom: 16px solid transparent;
       top: -16px;
       right: -98px;
@@ -118,7 +118,7 @@ font-family: 'Lato', sans-serif;
   position: absolute;
   height: 12px;
   width: 20px;
-  background: white;
+  background: #CB3F5A;
   border-radius: 20px 20px 0 0;
   transform: rotate(-40deg);
   right: -125px;
@@ -128,7 +128,7 @@ font-family: 'Lato', sans-serif;
     content: "";
     height: 12px;
     width: 12px;
-    background: white;
+    background: #CB3F5A;
     right: 4px;
     top: 7px;
     position: absolute;
@@ -144,7 +144,7 @@ font-family: 'Lato', sans-serif;
 .body > span > span:nth-child(4) {
   width: 30px;
   height: 1px;
-  background: white;
+  background: #CB3F5A;
   position: absolute;
   animation: fazer1 .2s linear infinite;
 }
@@ -253,7 +253,7 @@ font-family: 'Lato', sans-serif;
     position: absolute;
     height: 2px;
     width: 20%;
-    background: rgba(255, 255, 255, 0.5);
+    background: #CB3F5A;
 
     &:nth-child(1) {
       top: 20%;
