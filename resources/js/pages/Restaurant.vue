@@ -3,7 +3,7 @@
         <div class="app-main__outer p-0">
             <div class="row jumbo-container g-4">
                 <div class="col p-0 m-0 col-lg-8 col-12">
-                    <div class="jumbo-image" :style="(user.image) ? {backgroundImage: `url(/storage/${user.image})`} : {backgroundImage:'/storage/uploads/default/default_user.jpg'}">
+                    <div class="jumbo-image" :style="(user.image) ? {backgroundImage: `url(/storage/${user.image})`} : {backgroundImage:'url(/storage/uploads/default/default_user.jpg)'}">
                         <!-- <img v-if="user.image != null" :src="'/storage/'+user.image" class="" :alt="user.name">
                         <img v-else src="/storage/uploads/default/default_user.jpg" class="" :alt="user.name"> -->
                     </div>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col col-xxl-4 col-12 d-none d-xxl-block">
+                    <div class="col col-xxl-4 col-12 d-none d-xxl-block mb-4">
                         <div class="card mycard m-0 ms-4 position-sticky" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                             <div class="row">
                                 <div class="col-md-12 cart">
@@ -328,7 +328,7 @@ export default {
                 price: JSON.parse(localStorage.getItem(name)).price + this.dishPrice,
                 quantity: JSON.parse(localStorage.getItem(name)).quantity + 1,
                 userID: obj.userID,
-                userSlug: obj.slug,
+                userSlug: this.slug,
             }
 
             // salvo il nuovo oggetto nello storage
@@ -355,7 +355,7 @@ export default {
                     price: JSON.parse(localStorage.getItem(name)).price - this.dishPrice,
                     quantity: JSON.parse(localStorage.getItem(name)).quantity - 1,
                     userID: obj.userID,
-                    userSlug: obj.slug,
+                    userSlug: this.slug,
                 }
 
                 // salvo il nuovo oggetto nello storage
@@ -757,6 +757,10 @@ body {
 @media(max-width:767px) {
     .cart {
         padding: 4vh;
+    }
+
+    .mycart-container {
+        padding: 0 1rem 1rem 1rem !important;
     }
 }
 

@@ -14,14 +14,14 @@
                     <div class="face"></div>
                 </div>
             </div>
+            <h1>Deliveboo</h1>
+        </a>
             <div class="longfazers">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <h1>Deliveboo</h1>
-        </a>
     </div>
 </template>
 
@@ -59,6 +59,7 @@ font-family: 'Lato', sans-serif;
   top: 50%;
   transform: translateY(-50%);
   margin-left: -5px;
+  z-index: 20;
   color: #CB3F5A;
 }
 
@@ -67,6 +68,7 @@ font-family: 'Lato', sans-serif;
   top: 50%;
   margin-left: -145px;
   left: 50%;
+  z-index: 20;
   animation: speeder 1s linear infinite;
 
   > span {
@@ -248,6 +250,7 @@ font-family: 'Lato', sans-serif;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 12;
 
   span {
     position: absolute;

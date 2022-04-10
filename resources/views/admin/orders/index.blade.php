@@ -6,7 +6,7 @@
 @endsection
 
 @section('documentTitle')
-    {{$name}}
+    {{ $name }}
 @endsection
 
 @section('content')
@@ -38,7 +38,6 @@
                             <table class="mb-0 table table-hover" style="min-width: 600px;">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">#</th>
                                         <th class="text-center">Data</th>
                                         <th class="text-center">Ora</th>
                                         <th class="text-center">Nome Cliente</th>
@@ -48,25 +47,27 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                    <tr>
-                                        <th class="align-middle text-center" scope="row">{{ $order->id }}</th>
-                                        <td class="align-middle text-center">{{ $order->date }}</td>
-                                        <td class="align-middle text-center">{{ $order->time }}</td>
-                                        <td class="align-middle text-center">{{ $order->customer_name }}</td>
-                                        <td class="align-middle text-center">{{ number_format($order->total, 2, ',', '.') }} &euro;</td>
-                                        <td class="text-center">
-                                            {{-- @if (Auth::user()->id === $dish->user_id) --}}
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#ModalShow{{$order->id}}" class="btn btn-primary text-white">
-                                                {{__('Visualizza')}}
-                                            </a>
-                                            {{-- @endif --}}
-                                        </td>
-                                        @section('ordersPopup')
-                                            @foreach($orders as $order)
-                                                @include('partials.orderShowPopup')
-                                            @endforeach
-                                        @endsection
-                                    </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">{{ $order->date }}</td>
+                                            <td class="align-middle text-center">{{ $order->time }}</td>
+                                            <td class="align-middle text-center">{{ $order->customer_name }}</td>
+                                            <td class="align-middle text-center">
+                                                {{ number_format($order->total, 2, ',', '.') }} &euro;</td>
+                                            <td class="text-center">
+                                                {{-- @if (Auth::user()->id === $dish->user_id) --}}
+                                                <a href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#ModalShow{{ $order->id }}"
+                                                    class="btn btn-primary text-white">
+                                                    {{ __('Visualizza') }}
+                                                </a>
+                                                {{-- @endif --}}
+                                            </td>
+                                            @section('ordersPopup')
+                                                @foreach ($orders as $order)
+                                                    @include('partials.orderShowPopup')
+                                                @endforeach
+                                            @endsection
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

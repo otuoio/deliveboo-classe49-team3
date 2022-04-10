@@ -607,7 +607,7 @@ a:not([href]):not([tabindex]) {
 }
 
 .ps {
-    overflow: hidden !important;
+    overflow: scroll !important;
     overflow-anchor: none;
     touch-action: auto;
 }

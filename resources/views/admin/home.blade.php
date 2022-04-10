@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xxl-3">
                     <div class="card mb-3 widget-content bg-midnight-bloom">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xxl-3">
                     <div class="card mb-3 widget-content bg-arielle-smile">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xxl-3">
                     <div class="card mb-3 widget-content bg-grow-early">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-lg-block col-md-6 col-xl-3">
+                <div class="d-lg-block col-md-6 col-xxl-3">
                     <div class="card mb-3 widget-content bg-premium-dark">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">

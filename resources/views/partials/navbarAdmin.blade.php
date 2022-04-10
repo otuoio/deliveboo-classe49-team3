@@ -27,7 +27,7 @@
                         <div class="face"></div>
                     </div>
                 </div>
-                <h1 class="upper-index">Deliveboo</h1>
+                <h1 class="upper-index  d-none d-md-block">Deliveboo</h1>
             </a>
             <div class="longfazers first-index">
                 <span></span>

@@ -185,8 +185,12 @@ export default {
             console.log(this.sidebar);
             if(this.sidebar.classList.contains('mobile-in')){
                 this.sidebar.classList.remove('mobile-in');
+                setTimeout(() => {
+                    this.sidebar.classList.remove('transition');
+                }, 300);
             }else{
                 this.sidebar.classList.add('mobile-in');
+                this.sidebar.classList.add('transition');
             }
         }
     },
@@ -238,6 +242,16 @@ export default {
         font-size: 2.98598rem;
     }
 }
+
+.transition {
+    transition: all .2s !important;
+}
+
+// @media (max-width: 990.98px){
+//     .app-sidebar{
+//         transition: all .2s !important;
+//     }
+// }
 
 @media (max-width: 991.98px) {
     .app-sidebar {
@@ -292,7 +306,7 @@ export default {
     // position: relative;
     flex: 0 0 250px;
     margin-top: 0;
-    transition: all .2s;
+    transition: none;
     height: calc(100vh - 60px);
 
     .app-sidebar__heading {

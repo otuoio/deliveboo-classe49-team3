@@ -63,9 +63,10 @@
                       </p>
                     </div>
                   </div>
-                  <button class="btn btn-primary" type="submit">
+                  <button class="btn btn-primary mt-2" type="submit">
                     Vai al pagamento
                   </button>
+                  <router-link class="btn btn-show mt-2 ms-0 ms-sm-3" :to="{ name: 'home' }">Torna ai ristoranti</router-link>
                 </form>
               </div>
             </div>
@@ -359,9 +360,6 @@ body {
     padding: 0 0;
 }
 
-a {
-    padding: 0 1vh
-}
 
 .close {
     margin-left: auto;

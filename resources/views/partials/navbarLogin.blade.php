@@ -25,7 +25,7 @@
                         <div class="face"></div>
                     </div>
                 </div>
-                <h1 class="upper-index">Deliveboo</h1>
+                <h1 class="upper-index d-none d-md-block">Deliveboo</h1>
             </a>
             <div class="longfazers">
                 <span></span>
@@ -50,7 +50,7 @@
                     <li class="nav-item me-1">
                         <a class="nav-link text-white" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                        document.getElementById('logout-form').submit();">
+                                                                                                document.getElementById('logout-form').submit();">
                             {{ __('Esci') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
