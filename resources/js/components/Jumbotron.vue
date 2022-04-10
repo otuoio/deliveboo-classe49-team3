@@ -161,7 +161,7 @@ span:before {
   font-weight:bold;
 //   padding-top:200px;  
 //   position:fixed;
-  width:100%;
+//   width:100%;
 //   bottom:45%;
 }
 

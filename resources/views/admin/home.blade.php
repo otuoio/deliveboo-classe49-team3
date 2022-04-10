@@ -28,8 +28,8 @@
                     <div class="card mb-3 widget-content bg-midnight-bloom">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
-                                <div class="widget-heading">Vendite totali</div>
-                                <div class="widget-subheading"></div>
+                                <div class="widget-heading fw-normal">Vendite totali</div>
+                                {{-- <div class="widget-subheading"></div> --}}
                             </div>
                             <div class="widget-content-right">
                                 <div class="widget-numbers text-white"><span id="totalSells"></span></div>
@@ -41,7 +41,7 @@
                     <div class="card mb-3 widget-content bg-arielle-smile">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
-                                <div class="widget-heading">Ordini del mese</div>
+                                <div class="widget-heading fw-normal">Ordini del mese</div>
                                 {{-- <div class="widget-subheading">Totale ordini di questo mese</div> --}}
                             </div>
                             <div class="widget-content-right">
@@ -54,7 +54,7 @@
                     <div class="card mb-3 widget-content bg-grow-early">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
-                                <div class="widget-heading">Ordini di quest'anno</div>
+                                <div class="widget-heading fw-normal">Ordini di quest'anno</div>
                                 {{-- <div class="widget-subheading">Totale ordini di quest'anno</div> --}}
                             </div>
                             <div class="widget-content-right">
@@ -67,11 +67,11 @@
                     <div class="card mb-3 widget-content bg-premium-dark">
                         <div class="widget-content-wrapper text-white">
                             <div class="widget-content-left">
-                                <div class="widget-heading">Vendite del mese</div>
+                                <div class="widget-heading fw-normal">Vendite del mese</div>
                                 {{-- <div class="widget-subheading">Vendite del mese corrente</div> --}}
                             </div>
                             <div class="widget-content-right">
-                                <div class="widget-numbers text-warning"><span id="totalSellsThisMonth"></span></div>
+                                <div class="widget-numbers text-white"><span id="totalSellsThisMonth"></span></div>
                             </div>
                         </div>
                     </div>

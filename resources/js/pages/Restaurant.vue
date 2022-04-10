@@ -100,11 +100,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 0.5rem 0;">
                                             <div class="col">Costo di consegna</div>
                                             <div class="col text-end">&euro; {{ user.shipment_price.toFixed(2) }}<span class="invisible close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span></div>
                                         </div>
-                                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 0.5rem 0;">
                                             <div class="col">TOTALE</div>
                                             <div class="col text-end">&euro; {{cartTotal.toFixed(2)}}<span class="invisible close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span></div>
                                         </div>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cart mycart-container bg-transparent position-fixed w-100 d-xl-block d-xxl-none">
+            <div class="cart mycart-container bg-transparent position-sticky w-100 d-xl-block d-xxl-none">
                 <div class="card d-none mycart m-0 mb-2 bg-transparent" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                     <div class="overlay-cart"></div>
                     <div class="z-index-2 row">
@@ -145,9 +145,9 @@
                                             <div class="row">{{ cartDish.name }}</div>
                                         </div>
                                         <div class="col text-center d-flex justify-content-center">
-                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="removeItem(cartDish)"><span>-</span></button>
+                                                    <button class="btn rounded-circle btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="removeItem(cartDish)"><span>-</span></button>
                                                     <span  style="width: 50px;" class="d-inline-block px-2">{{ cartDish.quantity }}</span>
-                                                    <button class="btn rounded-3 btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="addItem(cartDish)"><span>+</span></button>
+                                                    <button class="btn rounded-circle btn-primary quantity-btn d-flex justify-content-center align-items-center" @click="addItem(cartDish)"><span>+</span></button>
                                                 </div>
                                         <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}<span class="close ms-3 align-middle" @click="removeDish(cartDish)"><i class="fa-solid fa-xmark"></i></span>
                                         </div>
@@ -463,6 +463,11 @@ $main-red-rgb-015: rgba(189, 21, 11, 0.1) !default;
     width: 25px !important;
     height: 25px !important;
     margin-top: 0 !important;
+    padding: 0 !important;
+
+    span {
+        line-height: 25px;
+    }
 
 }
 .btnmobilecart{
@@ -724,7 +729,7 @@ body {
 }
 
 .title {
-    margin-bottom: 5vh
+    margin-bottom: 1.5rem
 }
 
 .rounded-0.card {
@@ -746,7 +751,7 @@ body {
 
 .cart {
     background-color: #fff;
-    padding: 4vh 5vh;
+    padding: 1.5rem 1.5rem;
 }
 
 @media(max-width:767px) {
@@ -788,7 +793,7 @@ body {
 
 .main {
     margin: 0;
-    padding: 2vh 0;
+    padding: 0.7rem 0;
     width: 100%
 }
 
@@ -798,7 +803,7 @@ body {
 
 .col-2,
 .col {
-    padding: 0 1vh
+    padding: 0 0
 }
 
 a {
@@ -856,9 +861,10 @@ input:focus::-webkit-input-placeholder {
     color: white;
     width: 100%;
     font-size: 0.7rem;
-    margin-top: 4vh;
-    padding: 1vh;
-    border-radius: 0
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0;
+    line-height: 1 !important;
 }
 
 .btn:focus {
@@ -918,7 +924,7 @@ a:hover {
 .mycart-container {
     bottom: 0;
     left: 0;
-    padding: 3vh 2.5vh;
+    padding: 0 0 1rem 1rem;
 
     .mycart {
         max-height: calc(100vh - 160px);

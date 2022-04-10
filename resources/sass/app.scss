@@ -440,6 +440,7 @@ button,
     width: 100%;
     position: relative;
     align-items: center;
+    justify-content: space-between;
 }
 
 .btn-group,
@@ -854,7 +855,8 @@ a {
 }
 
 .bg-premium-dark {
-    background-image: linear-gradient(to right, #434343 0%, black 100%) !important;
+    background-image: linear-gradient(to right, #076c40 0%,
+            #298266 100%) !important;
 }
 
 
@@ -868,12 +870,12 @@ a {
 }
 
 .widget-content .widget-content-right {
-    margin-left: auto;
+    // margin-left: auto;
 }
 
 .widget-content .widget-numbers {
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     display: block;
 }
 

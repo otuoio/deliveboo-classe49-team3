@@ -20,8 +20,8 @@
               <div class="card-body p-4">
                 <form @submit.prevent="sendToPay()" id="myform">
                   <div class="position-relative row form-group">
-                    <label for="customer_name" class="col-3 col-form-label p-0">Nome e cognome</label>
-                    <div class="col-9">
+                    <label for="customer_name" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Nome e cognome</label>
+                    <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="customer_name" required name="customer_name" type="text" class="form-control" autofocus v-model="customer_name">
                     </div>
                     <div>
@@ -31,8 +31,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="email" class="col-3 col-form-label p-0">Indirizzo e-mail</label>
-                    <div class="col-9">
+                    <label for="email" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Indirizzo e-mail</label>
+                    <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="email" name="email" required type="email" class="form-control" v-model="email">
                     </div>
                     <div>
@@ -42,8 +42,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="phone_number" class="col-3 col-form-label p-0">Numero di telefono</label>
-                    <div class="col-9">
+                    <label for="phone_number" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Numero di telefono</label>
+                    <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="phone_number" required type="text" pattern="[0-9]{8,12}" class="form-control" name="phone_number" value="" autocomplete="phone_number" v-model="phone_number">
                     </div>
                     <div>
@@ -53,8 +53,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="address" class="col-3 col-form-label p-0">Indirizzo di consegna</label>
-                    <div class="col-9">
+                    <label for="address" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Indirizzo di consegna</label>
+                    <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="address" type="text" required class="form-control" name="address" value="" autocomplete="address" autofocus v-model="address">
                     </div>
                     <div>
@@ -64,7 +64,7 @@
                     </div>
                   </div>
                   <button class="btn btn-primary" type="submit">
-                    Procedi al pagamento
+                    Vai al pagamento
                   </button>
                 </form>
               </div>
@@ -76,7 +76,7 @@
                   @success="onSuccess"
                   @error="onError"
                   :locale="locale"
-                  btnText="Paga"
+                  btnText="Conferma ordine"
                 >
                 </v-braintree>
               </div>
@@ -110,7 +110,7 @@
                           </div>
                       </div>
                       <div>
-                          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;" v-for="(cartDish, index) in form.cartDishes" :key="'cartDish' + index">
+                          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 0.5rem 0;" v-for="(cartDish, index) in form.cartDishes" :key="'cartDish' + index">
                               <div class="col">
                                   <span class="me-2">{{ cartDish.quantity }}x</span><span>{{ cartDish.name }}</span>
                               </div>
@@ -120,11 +120,11 @@
                               <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}
                               </div>
                           </div>
-                          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 0.5rem 0;">
                               <div class="col">Costo di consegna</div>
                               <div v-if="user.shipment_price" class="col text-end">&euro; {{user.shipment_price.toFixed(2) }}</div>
                           </div>
-                          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 0.5rem 0;">
                               <div class="col fw-bold">TOTALE</div>
                               <div class="col text-end fw-bold">&euro; {{form.cartTotal.toFixed(2)}}</div>
                           </div>
@@ -285,7 +285,7 @@ body {
 }
 
 .title {
-    margin-bottom: 5vh
+    margin-bottom: 1.5rem;
 }
 
 .card {
@@ -308,12 +308,12 @@ body {
 
 .cart {
     background-color: #fff;
-    padding: 4vh 5vh;
+    padding: 1.5rem 1.5rem;
 }
 
 @media(max-width:767px) {
     .cart {
-        padding: 4vh;
+        padding: 1rem;
     }
 }
 
@@ -356,7 +356,7 @@ body {
 
 .col-2,
 .col {
-    padding: 0 1vh
+    padding: 0 0;
 }
 
 a {
@@ -385,7 +385,7 @@ hr {
 }
 
 form {
-    padding: 2vh 0
+    padding: 0.5rem 0
 }
 
 select {
@@ -477,5 +477,10 @@ input:focus::-webkit-input-placeholder {
   border: 2px solid black;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.form-control {
+    padding: 0.5rem !important;
+    margin-bottom: 1rem !important;
 }
 </style>
