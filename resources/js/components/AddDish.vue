@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- <div class=" d-flex justify-content-center h-100 w-100"> -->
-                <figure class="card card-product-grid card-lg overflow-hidden m-0">
+                <figure class="card-product-grid card-lg overflow-hidden m-0">
                     <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="img-fluid" :alt="dish.name">
                     <img v-else src="/storage/uploads/default/default_dish.jpg" class="img-fluid" :alt="dish.name">
                     <figcaption class="info-wrap">
@@ -305,6 +305,6 @@ a {
 }
 
 .modal-content {
-    border-radius: 23px;
+    border-radius: 0px;
 }
 </style>

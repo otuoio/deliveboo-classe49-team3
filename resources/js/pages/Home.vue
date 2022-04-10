@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="padding-60">
         <div class="header__pane">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" @click="getSidebar()">
@@ -16,7 +16,7 @@
                 <div class="scrollbar-sidebar ps">
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu metismenu">
-                            <li class="app-sidebar__heading">Categorie</li>
+                            <li class="app-sidebar__heading">Tipi di cucina</li>
                             <li v-for="(category, index) in categories" :key="'category-'+index" class="form-check p-0 pb-1">
                                 <input class="form-check-input mx-1" type="checkbox" name="categories[]" :value="category.name" :id="category.name" v-model="form.categories" @change="search">
                                     <label class="form-check-label text-capitalize" :for="category.name">
@@ -218,6 +218,10 @@ export default {
 
 <style lang="scss" scoped>
 
+.padding-60 {
+    padding-top: 60px;
+}
+
 .header__pane {
     position: fixed;
     z-index: 20;
@@ -239,7 +243,7 @@ export default {
     .app-sidebar {
         transform: translateX(-280px);
         position: fixed !important;
-        padding-top: 60px !important;
+        top: 60px !important;
     }
     .mobile-in {
         transform: translateX(0);
@@ -289,6 +293,7 @@ export default {
     flex: 0 0 250px;
     margin-top: 0;
     transition: all .2s;
+    height: calc(100vh - 60px);
 
     .app-sidebar__heading {
     text-transform: uppercase;

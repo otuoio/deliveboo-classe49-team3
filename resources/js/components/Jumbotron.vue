@@ -5,7 +5,7 @@
                 <div class="col-md-6 col-lg-6 pt-5 pt-md-0 text-md-start text-center d-flex flex-column justify-content-center">
                     <div id="container" class="row row-cols-1 row-cols-xl-2 align-items-center">
                         <div class="col col-xl-8">
-                            <h1 class="text-light pe-0 m-0">Hai voglia di</h1>
+                            <h1 class="text-light pe-0 m-0">oggi ho voglia di</h1>
                         </div>
                         <div id=flip class="col col-xl-4 ps-0">
                             <div>
@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 .jumbotron {
     height: 400px;
-    margin-top: 60px;
+    // margin-top: 60px;
 
     h1.text-light{
         font-weight: 700;
@@ -180,10 +180,10 @@ span:before {
   margin-bottom:45px;
   display:inline-block;
 
-  &::after {
-      content: '?';
-      color: white;
-  }
+//   &::after {
+//       content: '?';
+//       color: white;
+//   }
 }
 
 #flip div:first-child {

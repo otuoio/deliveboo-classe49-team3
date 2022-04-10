@@ -1,7 +1,7 @@
 <template>
     <div class="app-header header-shadow">
         <!-- logo -->
-        <router-link :to="{ name: 'home'}">
+        <a href="/">
             <div class="body">
                 <span>
                     <span></span>
@@ -21,7 +21,7 @@
                 <span></span>
             </div>
             <h1>Deliveboo</h1>
-        </router-link>
+        </a>
     </div>
 </template>
 

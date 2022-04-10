@@ -20,9 +20,9 @@
               <div class="card-body p-4">
                 <form @submit.prevent="sendToPay()" id="myform">
                   <div class="position-relative row form-group">
-                    <label for="customer_name" class="col-sm-2 col-md-3 col-form-label p-0">Nome</label>
-                    <div class="col-sm-10 col-md-9">
-                      <input id="customer_name" required name="customer_name" placeholder="Inserisci il nome completo" type="text" class="form-control" autofocus v-model="customer_name">
+                    <label for="customer_name" class="col-3 col-form-label p-0">Nome e cognome</label>
+                    <div class="col-9">
+                      <input id="customer_name" required name="customer_name" type="text" class="form-control" autofocus v-model="customer_name">
                     </div>
                     <div>
                       <p class="alert alert-danger" v-for="(error, index) in errors.customer_name" :key="index">
@@ -31,9 +31,9 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="email" class="col-sm-2 col-md-3 col-form-label p-0">Email</label>
-                    <div class="col-sm-10 col-md-9">
-                      <input id="email" name="email" required placeholder="Inserisci la tua mail" type="email" class="form-control" v-model="email">
+                    <label for="email" class="col-3 col-form-label p-0">Indirizzo e-mail</label>
+                    <div class="col-9">
+                      <input id="email" name="email" required type="email" class="form-control" v-model="email">
                     </div>
                     <div>
                       <p class="alert alert-danger" v-for="(error, index) in errors.email" :key="index">
@@ -42,8 +42,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="phone_number" class="col-sm-2 col-md-3 col-form-label p-0">Numero di telefono</label>
-                    <div class="col-sm-10 col-md-9">
+                    <label for="phone_number" class="col-3 col-form-label p-0">Numero di telefono</label>
+                    <div class="col-9">
                       <input id="phone_number" required type="text" pattern="[0-9]{8,12}" class="form-control" name="phone_number" value="" autocomplete="phone_number" v-model="phone_number">
                     </div>
                     <div>
@@ -53,8 +53,8 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="address" class="col-sm-2 col-md-3 col-form-label p-0">Indirizzo di consegna</label>
-                    <div class="col-sm-10 col-md-9">
+                    <label for="address" class="col-3 col-form-label p-0">Indirizzo di consegna</label>
+                    <div class="col-9">
                       <input id="address" type="text" required class="form-control" name="address" value="" autocomplete="address" autofocus v-model="address">
                     </div>
                     <div>
@@ -110,16 +110,14 @@
                           </div>
                       </div>
                       <div>
-                          <div class="row border-top border-bottom" v-for="(cartDish, index) in form.cartDishes" :key="'cartDish' + index">
-                              <div class="row main align-items-center">
-                                  <div class="col">
-                                      <div class="row">{{ cartDish.name }}</div>
-                                  </div>
-                                  <div class="col text-center">
-                                      <span class="d-inline-block border">{{ cartDish.quantity }}</span> 
-                                  </div>
-                                  <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}
-                                  </div>
+                          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;" v-for="(cartDish, index) in form.cartDishes" :key="'cartDish' + index">
+                              <div class="col">
+                                  <span class="me-2">{{ cartDish.quantity }}x</span><span>{{ cartDish.name }}</span>
+                              </div>
+                              <!-- <div class="col text-center">
+                                  <span class="d-inline-block border">{{ cartDish.quantity }}</span> 
+                              </div> -->
+                              <div class="col text-end">&euro; {{ cartDish.price.toFixed(2) }}
                               </div>
                           </div>
                           <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
