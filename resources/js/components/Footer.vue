@@ -38,9 +38,9 @@
                                 <span>
                                     Sara Grigolin
                                 </span> 
-                                <a target="_blank" href="https://www.linkedin.com/in/mariocoppola91">
+                                <a target="_blank" href="https://www.linkedin.com/in/grigolin-sara">
                                 <i class="px-2 fa-brands fa-linkedin"></i>
-                                </a><a target="_blank" href="https://github.com/otuoio">
+                                </a><a target="_blank" href="https://github.com/saragrigolin">
                                 <i class="pe-2 fa-brands fa-github"></i>
                                 </a>
                             </div>
@@ -50,9 +50,9 @@
                                 <span>
                                     Luca Martinelli
                                 </span>
-                                <a target="_blank" href="https://www.linkedin.com/in/mariocoppola91">
+                                <a target="_blank" href="https://www.linkedin.com/in/martinelliluca">
                                 <i class="px-2 fa-brands fa-linkedin"></i>
-                                </a><a target="_blank" href="https://github.com/otuoio">
+                                </a><a target="_blank" href="https://github.com/luega">
                                 <i class="pe-2 fa-brands fa-github"></i>
                                 </a>
                             </div>
@@ -62,9 +62,9 @@
                                 <span>
                                     Francesco Ostellari
                                 </span>
-                                <a target="_blank" href="https://www.linkedin.com/in/mariocoppola91">
+                                <a target="_blank" href="https://www.linkedin.com/in/francesco-ostellari">
                                 <i class="px-2 fa-brands fa-linkedin"></i>
-                                </a><a target="_blank" href="https://github.com/otuoio">
+                                </a><a target="_blank" href="https://github.com/Francesco-Ostellari">
                                 <i class="pe-2 fa-brands fa-github"></i>
                                 </a>
                             </div>
