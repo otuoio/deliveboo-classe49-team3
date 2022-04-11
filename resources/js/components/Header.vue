@@ -14,7 +14,7 @@
                     <div class="face"></div>
                 </div>
             </div>
-            <h1>Deliveboo</h1>
+            <h1 class="d-none d-md-block">Deliveboo</h1>
         </a>
             <div class="longfazers">
                 <span></span>

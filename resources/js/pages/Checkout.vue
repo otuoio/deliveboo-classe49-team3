@@ -20,7 +20,7 @@
               <div class="card-body p-4">
                 <form @submit.prevent="sendToPay()" id="myform">
                   <div class="position-relative row form-group">
-                    <label for="customer_name" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Nome e cognome</label>
+                    <label for="customer_name" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Nome e cognome*</label>
                     <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="customer_name" required name="customer_name" type="text" class="form-control" autofocus v-model="customer_name">
                     </div>
@@ -31,7 +31,7 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="email" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Indirizzo e-mail</label>
+                    <label for="email" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Indirizzo e-mail*</label>
                     <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="email" name="email" required type="email" class="form-control" v-model="email">
                     </div>
@@ -42,7 +42,7 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="phone_number" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Numero di telefono</label>
+                    <label for="phone_number" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Numero di telefono*</label>
                     <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="phone_number" required type="text" pattern="[0-9]{8,12}" class="form-control" name="phone_number" value="" autocomplete="phone_number" v-model="phone_number">
                     </div>
@@ -53,7 +53,7 @@
                     </div>
                   </div>
                   <div class="position-relative row form-group">
-                    <label for="address" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Indirizzo di consegna</label>
+                    <label for="address" class="col-12 col-md-3 col-form-label p-0 pb-2 pb-md-0">Indirizzo di consegna*</label>
                     <div class="col-12 col-md-9 px-0 px-md-3">
                       <input id="address" type="text" required class="form-control" name="address" value="" autocomplete="address" autofocus v-model="address">
                     </div>
