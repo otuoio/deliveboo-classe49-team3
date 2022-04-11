@@ -38,7 +38,7 @@
             <div class="header-btn-lg pe-0 upper-index">
                 <div class="widget-content p-0">
                     <div class="widget-content-wrapper d-flex">
-                        <div class="widget-content-left header-user-info">
+                        <div class="widget-content-left header-user-info d-none d-md-block">
                             <div class="widget-heading">
                                 {{ Auth::user()->name }}
                             </div>

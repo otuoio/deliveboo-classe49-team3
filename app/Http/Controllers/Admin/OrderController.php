@@ -23,7 +23,7 @@ class OrderController extends Controller
             ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
             ->join('dishes', 'dishes.id', '=', 'dish_order.dish_id')
             ->where('user_id', Auth::user()->id)
-            ->orderBy('orders.updated_at', 'desc')
+            ->orderBy('orders.date', 'desc')
             ->paginate(20);
 
         $data=[

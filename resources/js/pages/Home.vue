@@ -17,8 +17,8 @@
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu metismenu">
                             <li class="app-sidebar__heading">Tipi di cucina</li>
-                            <li v-for="(category, index) in categories" :key="'category-'+index" class="form-check p-0 pb-1">
-                                <input class="form-check-input mx-1" type="checkbox" name="categories[]" :value="category.name" :id="category.name" v-model="form.categories" @change="search">
+                            <li v-for="(category, index) in categories" :key="'category-'+index" class="form-check p-0">
+                                <input class="form-check-input mx-1 me-3" type="checkbox" name="categories[]" :value="category.name" :id="category.name" v-model="form.categories" @change="search">
                                     <label class="form-check-label text-capitalize" :for="category.name">
                                         {{ category.name }}
                                     </label>
@@ -39,12 +39,13 @@
                     <!-- I RISTORANTI PIU POPOLARI  -->
                     <div class="row gx-3">
                         <span class="row-title">
-                            I ristoranti pi&ugrave; popolari
+                            I pi&ugrave; richiesti
                         </span>
                         <div class="col-sm-6 col-xl-4 col-xxl-3 mb-5" v-for="(user, index) in mostPopular"
                         :key="index">
                             <RestaurantCard v-if="storage.length == 0 || userID == user.id" :user="user"/>
                             <RestaurantCardModal v-else :user="user" data-bs-toggle="modal" :data-bs-target="`#exampleModal${user.id}`"/>
+                            <div class="popular-tag">POPULAR</div>
                         </div>
                     </div>
                     <!-- TUTTI I RISTORANTI -->
@@ -221,7 +222,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.popular-tag {
+    padding: 0.3rem;
+    position: absolute;
+    top: 12px;
+    left: -5px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: #01678F;
+    transform: rotate(-45deg);
+    background: rgb(229, 226, 226);
+    border-radius: 15px 0 15px 0;
+    box-shadow: -1px -1px 3px;
+}
 .padding-60 {
     padding-top: 60px;
 }
@@ -322,6 +335,12 @@ export default {
 
     label {
         font-size: 1rem;
+    }
+
+    .form-check {
+        border-bottom: 1px solid #01678f27;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
     }
 
     .form-check-input:checked {

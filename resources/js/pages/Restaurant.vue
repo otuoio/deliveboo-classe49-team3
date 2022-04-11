@@ -45,7 +45,7 @@
                                         @setUserID="setUserID($event)"
                                         @setItem="setItem"
                                         @setDishID="setDishID"/>
-                            <div class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
+                            <div v-if="dish.visible == 1" class="postcard light red" role="button" data-bs-toggle="modal" :data-bs-target="`#exampleModal${dish.id}`">
                                 <a class="postcard__img_link" href="#">
                                     <img v-if="dish.image != null" :src="'/storage/'+dish.image" class="postcard__img" :alt="dish.name">
                                     <img v-else src="/storage/uploads/default/default_dish.jpg" class="postcard__img" :alt="dish.name">
@@ -225,7 +225,7 @@ export default {
             this.userID = value;
         },
         shortDescription(string) {
-            if (string.length > 60) {
+            if (string != null && string.length > 60) {
                 return string.substring(0, 60) + '...';
             } else {
                 return string;
@@ -516,7 +516,7 @@ a, a:hover {
     overflow: hidden;
     position: relative;
     color: #ffffff;
-    box-shadow: 8px 9px 12px -5px rgb(0 0 0 / 6%);
+    box-shadow: -4px 9px 12px -5px rgb(0 0 0 / 6%);
 	&.light {
 		background-color: #fff;
 	}

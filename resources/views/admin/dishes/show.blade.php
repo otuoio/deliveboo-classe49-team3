@@ -5,7 +5,7 @@
 @endsection
 
 @section('documentTitle')
-    {{$name}}
+    {{ $name }}
 @endsection
 
 @section('content')
@@ -47,34 +47,38 @@
                                             <i class="fa-solid fa-check"></i> Vegano
                                         @else
                                             <i class="fa-solid fa-xmark"></i> Vegano
-                                        @endif 
+                                        @endif
                                         @if ($dish->spicy == 1)
                                             <i class="fa-solid fa-check ms-3"></i> Piccante
                                         @else
                                             <i class="fa-solid fa-xmark ms-3"></i> Piccante
-                                        @endif 
+                                        @endif
                                         @if ($dish->visible == 1)
                                             <i class="fa-solid fa-check ms-3"></i> Visibile
                                         @else
                                             <i class="fa-solid fa-xmark ms-3"></i> Visibile
-                                        @endif 
+                                        @endif
                                     </h6>
                                     <p class="mt-3 card-description">{{ $dish->description }}.</p>
-                                    <p class="mt-3 card-description">Prezzo: {{ number_format($dish->price, 2, ',', '.') }} &euro;</p>
+                                    <p class="mt-3 card-description">Prezzo:
+                                        {{ number_format($dish->price, 2, ',', '.') }} &euro;</p>
                                     <div class="button-box">
                                         <a href="{{ route('admin.dishes.index') }}">
                                             <button class="btn btn-primary">Torna alla lista dei piatti</button>
                                         </a>
-                                        <a href="{{ route('admin.dishes.edit', $dish) }}" class="ms-3">
+                                        <a href="{{ route('admin.dishes.edit', $dish) }}" class="ms-0 ms-sm-3">
                                             <button class="btn btn-show">Modifica</button>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5 col-lg-6">
                                     @if ($dish->image)
-                                        <img width="100%" class="img-fluid" src="{{ asset('storage/' . $dish->image)}}" alt="{{ $dish->name }}">
+                                        <img width="100%" class="img-fluid"
+                                            src="{{ asset('storage/' . $dish->image) }}" alt="{{ $dish->name }}">
                                     @else
-                                        <img width="100%" class="img-fluid" src="{{ asset('storage/uploads/default/default_dish.jpg')}}" alt="{{ $dish->name }}">
+                                        <img width="100%" class="img-fluid"
+                                            src="{{ asset('storage/uploads/default/default_dish.jpg') }}"
+                                            alt="{{ $dish->name }}">
                                     @endif
                                 </div>
                             </div>

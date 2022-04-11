@@ -14,7 +14,7 @@ class OrderSeeder extends Seeder
         $orders = [
             [
                 'date' => '2022-01-15',
-                'time' => '18:15:03',
+                'time' => '22:15:03',
                 'customer_name' => 'Giorgio Tognatti',
                 'phone_number' => '3281234567',
                 'email' => 'giorgio@gmail.it',
@@ -23,7 +23,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-01-16',
-                'time' => '18:15:03',
+                'time' => '18:45:03',
                 'customer_name' => 'Simona Flauto',
                 'phone_number' => '3281234567',
                 'email' => 'simona@gmail.it',
@@ -32,7 +32,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-01-19',
-                'time' => '18:15:03',
+                'time' => '12:15:03',
                 'customer_name' => 'Paolo Foggia',
                 'phone_number' => '3281234567',
                 'email' => 'paolo@gmail.it',
@@ -41,7 +41,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-02-15',
-                'time' => '18:15:03',
+                'time' => '14:15:03',
                 'customer_name' => 'Emanuela Candioli',
                 'phone_number' => '3281234567',
                 'email' => 'emanuela@gmail.it',
@@ -50,7 +50,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-02-16',
-                'time' => '18:15:03',
+                'time' => '18:45:03',
                 'customer_name' => 'Riccardo Serpenti',
                 'phone_number' => '3281234567',
                 'email' => 'serpenti@gmail.it',
@@ -59,7 +59,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-02-17',
-                'time' => '18:15:03',
+                'time' => '10:15:03',
                 'customer_name' => 'Fabio Renato',
                 'phone_number' => '3281234567',
                 'email' => 'fr@gmail.it',
@@ -68,7 +68,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-02-18',
-                'time' => '18:15:03',
+                'time' => '08:15:03',
                 'customer_name' => 'Carmine Pasqualicchio',
                 'phone_number' => '3281234567',
                 'email' => 'kionz@gmail.it',
@@ -86,7 +86,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-03-15',
-                'time' => '18:15:03',
+                'time' => '18:34:03',
                 'customer_name' => 'Domenico Grago',
                 'phone_number' => '3281234567',
                 'email' => 'dodo@gmail.it',
@@ -95,8 +95,8 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-03-16',
-                'time' => '18:15:03',
-                'customer_name' => 'Pieraolo Accattello',
+                'time' => '21:15:03',
+                'customer_name' => 'Pierpaolo Accattello',
                 'phone_number' => '3281234567',
                 'email' => 'pier@gmail.it',
                 'total' => 35.50,
@@ -113,7 +113,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-04-16',
-                'time' => '18:15:03',
+                'time' => '09:15:03',
                 'customer_name' => 'Francesca Tinelli',
                 'phone_number' => '3281234567',
                 'email' => 'lafra@gmail.it',
@@ -131,7 +131,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-04-18',
-                'time' => '18:15:03',
+                'time' => '11:15:03',
                 'customer_name' => 'Fiona Serravalle',
                 'phone_number' => '3281234567',
                 'email' => 'fiona@gmail.it',
@@ -140,7 +140,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-04-19',
-                'time' => '18:15:03',
+                'time' => '13:27:03',
                 'customer_name' => 'Giangiacomo Como',
                 'phone_number' => '3281234567',
                 'email' => 'comocomo@gmail.it',
@@ -149,7 +149,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-04-20',
-                'time' => '18:15:03',
+                'time' => '18:57:03',
                 'customer_name' => 'Sergio Passato',
                 'phone_number' => '3281234567',
                 'email' => 'ser@gmail.it',
@@ -158,7 +158,7 @@ class OrderSeeder extends Seeder
             ],
             [
                 'date' => '2022-04-21',
-                'time' => '18:15:03',
+                'time' => '22:15:03',
                 'customer_name' => 'Filippo Girondo',
                 'phone_number' => '3281234567',
                 'email' => 'filippo@gmail.it',

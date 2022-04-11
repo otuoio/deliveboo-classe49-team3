@@ -49,7 +49,9 @@
                                     @foreach ($orders as $order)
                                         <tr>
                                             <td class="align-middle text-center">{{ $order->date }}</td>
-                                            <td class="align-middle text-center">{{ $order->time }}</td>
+                                            <td class="align-middle text-center">
+                                                {{ substr($order->time, 0, 5) }}
+                                            </td>
                                             <td class="align-middle text-center">{{ $order->customer_name }}</td>
                                             <td class="align-middle text-center">
                                                 {{ number_format($order->total, 2, ',', '.') }} &euro;</td>

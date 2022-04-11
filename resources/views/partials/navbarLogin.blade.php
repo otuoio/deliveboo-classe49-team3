@@ -1,6 +1,6 @@
 <div class="app-header header-shadow">
     <div class="app-header__logo">
-        <div class="header__pane ml-auto">
+        {{-- <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
                     <span class="hamburger-box">
@@ -8,7 +8,7 @@
                     </span>
                 </button>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="app-header__content text-white">
         <div class="app-header-right">
@@ -50,7 +50,7 @@
                     <li class="nav-item me-1">
                         <a class="nav-link text-white" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                                document.getElementById('logout-form').submit();">
+                                                                                                    document.getElementById('logout-form').submit();">
                             {{ __('Esci') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
