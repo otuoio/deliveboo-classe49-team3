@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -16,8 +17,36 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'slug',
+        'address',
+        'p_iva',
+        'phone_number',
+        'shipment_price',
+        'image',
     ];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function dishes()
+    {
+        return $this->hasMany('App\Model\Dish');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Model\Category')->withTimestamps();
+    }
 
     /**
      * The attributes that should be hidden for arrays.

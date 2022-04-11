@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('guest.welcome');
+// });
+
+Auth::routes();
+
+Route::middleware('auth')
+    ->namespace('Admin')
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function() {
+        Route::get('/', 'OrderController@statistics')
+            ->name('home');
+        Route::resource('dishes', 'DishController');
+        Route::resource('orders', 'OrderController');
+    });
+
+
+Route::get('{any?}', function ($name = null) {
+    return view('guest.welcome');
+})->where('any', '.*')->name('guest.index');

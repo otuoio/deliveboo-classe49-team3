@@ -1,0 +1,105 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+) !default;
+
+$spacer-lg: 3rem;
+$spacer-sm: 1.5rem;
+
+$layout-spacer-lg: 3rem;
+$layout-spacer-x: 1.5rem;
+
+$app-sidebar-width: 280px;
+$app-sidebar-width-collapsed: 80px;
+
+$logo-height: 23px;
+$logo-width: 97px;
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$app-header-height: 60px;
+$zindex-modal: 1060 !default;
+$modal-dialog-margin: .5rem !default;
+$line-height-base: 1.5 !default;
+$border-width: 1px !default;
+$border-radius:               .25rem !default;
+$border-radius-sm:            .2rem !default;
+$border-radius-lg:            .3rem !default;
+$border-radius-pill:          50rem !default;
+$border-color:                $gray-300 !default;
+$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
+$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+$box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
+
+$modal-inner-padding: $spacer !default;
+
+$modal-footer-margin-between:       .5rem !default;
+
+$modal-dialog-margin:               .5rem !default;
+$modal-dialog-margin-y-sm-up:       1.75rem !default;
+
+$modal-title-line-height:           $line-height-base !default;
+
+$modal-content-color:               null !default;
+$modal-content-bg:                  $white !default;
+$modal-content-border-color:        rgba($black, .2) !default;
+$modal-content-border-width:        $border-width !default;
+$modal-content-border-radius:       $border-radius-lg !default;
+$modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
+$modal-content-box-shadow-xs:       $box-shadow-sm !default;
+$modal-content-box-shadow-sm-up:    $box-shadow !default;
+
+$modal-backdrop-bg:                 $black !default;
+$modal-backdrop-opacity:            .5 !default;
+$modal-header-border-color:         $border-color !default;
+$modal-footer-border-color:         $modal-header-border-color !default;
+$modal-header-border-width:         $modal-content-border-width !default;
+$modal-footer-border-width:         $modal-header-border-width !default;
+$modal-header-padding-y:            $modal-inner-padding !default;
+$modal-header-padding-x:            $modal-inner-padding !default;
+$modal-header-padding:              $modal-header-padding-y $modal-header-padding-x !default; // Keep this for backwards compatibility
+
+$modal-sm:                          300px !default;
+$modal-md:                          500px !default;
+$modal-lg:                          800px !default;
+$modal-xl:                          1140px !default;
+
+$modal-fade-transform:              translate(0, -50px) !default;
+$modal-show-transform:              none !default;
+$modal-transition:                  transform .3s ease-out !default;
+$modal-scale-transform:             scale(1.02) !default;
